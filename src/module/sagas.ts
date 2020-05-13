@@ -1,6 +1,6 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import actions, { ActionTypes } from './actions'
-import { getUser, getAccessToken } from '../utils/api'
+import { getUser, login } from '../utils/api'
 
 function* logoutUser() {
   yield localStorage.removeItem('accessToken')
@@ -22,7 +22,7 @@ function* getUserData({ payload }: ReturnType<typeof actions.getUser>) {
 
 function* loginUser({ payload }: ReturnType<typeof actions.loginRequest>) {
   try {
-    const token = yield call(getAccessToken, payload)
+    const token = yield call(login, payload)
     localStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser(token.accessToken))
   } catch (error) {
