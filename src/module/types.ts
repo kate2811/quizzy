@@ -1,5 +1,6 @@
 export type State = {
-  user: null | { name: string }
+  user: null | UserData
+  isLoading: boolean
 }
 
 export type UserLogin = {
@@ -9,9 +10,5 @@ export type UserLogin = {
 
 export type UserData = {
   id: number
-  name: string
-}
-
-export type Token = {
-  accessToken: string
+  username: string
 }

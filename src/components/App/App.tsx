@@ -1,13 +1,22 @@
 import React from 'react'
 import './App.css'
 import SignInPage from '../SignInPage'
-import {useAccessToken, useUser} from '../../module/hooks'
-import Dashboard from "../Dashboard"
+import { useAccessToken, useIsLoading, useUser } from '../../module/hooks'
+import Loader from 'react-loader-spinner'
+import Dashboard from '../Dashboard'
 
 function App() {
   useAccessToken()
   const isUser = useUser()
-  return <>{isUser ? <Dashboard /> : <SignInPage />}</>
+  const isLoading = useIsLoading()
+
+  if (isUser) {
+    return <Dashboard/>
+  }
+  if (isLoading) {
+    return <Loader type="Bars" color="#157FFB" height={40} width={40}/>
+  }
+  return <SignInPage/>
 }
 
 export default App

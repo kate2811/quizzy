@@ -3,25 +3,32 @@ import { State } from './types'
 import { ActionTypes } from './actions'
 
 export const initialState: State = {
-  user: null
+  user: null,
+  isLoading: false
 }
 
 export default function reducer(state = initialState, action: any): State {
   return produce(state, (draft) => {
     switch (action.type) {
-      case ActionTypes.loginUser: {
+      case ActionTypes.loadUser: {
+        draft.isLoading = true
+        return draft
+      }
+
+      case ActionTypes.loadUserSuccess: {
+        draft.isLoading = false
         draft.user = action.payload
         return draft
       }
 
-      case ActionTypes.authSuccess: {
-        draft.user = action.payload
-        return draft
-      }
-
-      case ActionTypes.authFailure: {
+      case ActionTypes.loginFailure: {
         draft.user = null
-        console.log('fail!')
+        console.log('login fail!')
+        return draft
+      }
+
+      case ActionTypes.logoutUser: {
+        draft.user = null
         return draft
       }
 

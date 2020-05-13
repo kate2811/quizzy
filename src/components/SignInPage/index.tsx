@@ -1,8 +1,9 @@
 import React from 'react'
 import SignInPage from './SignInPage'
+import { useLoginRequest } from '../../module/hooks'
 
 export default function() {
-
-  return <SignInPage />
+  const onSubmit = useLoginRequest()
+  return <SignInPage onSubmit={onSubmit} />
 }
 

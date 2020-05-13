@@ -1,12 +1,12 @@
-import {Token, UserData, UserLogin} from "./types"
+import {UserData, UserLogin} from './types'
 
 export enum ActionTypes {
-  loginUser = 'User is logged in',
-  authRequest = 'Auth request',
-  authSuccess = 'Auth Success',
-  authFailure= 'Auth Failure',
-  getUser = 'Get User'
-
+  loginRequest = 'Login request',
+  getUser = 'Get user',
+  loadUser = 'Load user',
+  loadUserSuccess = 'Load user success',
+  loginFailure = 'Login failure',
+  logoutUser = 'User logged out'
 }
 
 function createAction<T, P>(type: T) {
@@ -16,9 +16,10 @@ function createAction<T, P>(type: T) {
 }
 
 export default {
-  loginUser: createAction<ActionTypes.loginUser, UserData>(ActionTypes.loginUser),
-  authRequest: createAction<ActionTypes.authRequest, UserLogin>(ActionTypes.authRequest),
-  authSuccess: createAction(ActionTypes.authSuccess),
-  authFailure: createAction(ActionTypes.authFailure),
-  getUser: createAction<ActionTypes.getUser, Token>(ActionTypes.getUser)
+  loginRequest: createAction<ActionTypes.loginRequest, UserLogin>(ActionTypes.loginRequest),
+  getUser: createAction<ActionTypes.getUser, string>(ActionTypes.getUser),
+  loadUser: createAction<ActionTypes.loadUser, void>(ActionTypes.loadUser),
+  loadUserSuccess: createAction<ActionTypes.loadUserSuccess, UserData>(ActionTypes.loadUserSuccess),
+  loginFailure: createAction<ActionTypes.loginFailure, void>(ActionTypes.loginFailure),
+  logoutUser: createAction<ActionTypes.logoutUser, void>(ActionTypes.logoutUser)
 }
