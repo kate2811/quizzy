@@ -1,12 +1,17 @@
-import React from 'react'
+import React, {ReactChildren} from 'react'
 import cx from 'classnames'
 
-const PageLayout: React.FC = ({ children }) => {
+type Props = {
+  logout: () => void
+  children?: ReactChildren
+}
+
+const PageLayout: React.FC<Props> = ({ children, logout }) => {
   return (
     <div>
-      <nav className={cx('navbar', 'bg-warning', 'justify-content-start')}>
+      <nav className={cx('navbar', 'bg-warning', 'justify-content-between')}>
         <span className={cx('navbar-brand', 'mb-0', 'h1')}>Quizzy</span>
-        <div className="navbar-nav">Home</div>
+        <button className="btn btn-light" onClick={logout}>Logout</button>
       </nav>
       {children}
     </div>
