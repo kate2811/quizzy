@@ -11,6 +11,24 @@
   opacity: 0.5;
 }
 
+.button_icon {
+  position: absolute;
+  top: 24px;
+  right: 14px;
+  margin: 0;
+  padding: 0 5px;
+  line-height: 38px;
+  font-size: 14px;
+  opacity: 0.5;
+  background: none;
+  border: none;
+}
+
+.button_icon:focus {
+  outline: none;
+}
+
 .formGroup .input {
   padding-left: 35px;
 }
+

@@ -26,6 +26,13 @@ export function useLoginRequest() {
   }, [dispatch])
 }
 
+export function useSignUpRequest() {
+  const dispatch = useDispatch()
+  return useCallback((userSignUpData) => {
+    return dispatch(actions.signUpRequest(userSignUpData))
+  }, [dispatch])
+}
+
 export function useLogoutUser() {
   const dispatch = useDispatch()
   return useCallback(() => {

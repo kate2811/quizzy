@@ -12,3 +12,9 @@ export type UserData = {
   id: number
   username: string
 }
+
+export type UserSingUpData = {
+  email: string
+  username: string
+  password: string
+}

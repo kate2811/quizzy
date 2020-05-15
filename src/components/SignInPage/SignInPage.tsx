@@ -10,6 +10,7 @@ type Props = {
 
 const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   const [userData, setUserData] = useState({ username: '', password: '' })
+  console.log(userData)
 
   const onFormSubmit = useCallback(
     (e) => {

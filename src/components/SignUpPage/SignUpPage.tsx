@@ -2,8 +2,11 @@ import React, { useCallback, useState } from 'react'
 import AuthPageLayout from '../AuthPageLayout'
 import FormInput from '../FormInput'
 import { Link } from 'react-router-dom'
+import { UserSingUpData } from '../../module/types'
 
-const SignUpPage: React.FC = () => {
+type Props = { onSubmit: (userData: UserSingUpData) => void }
+
+const SignUpPage: React.FC<Props> = ({ onSubmit }) => {
   const [userData, setUserData] = useState({ email: '', username: '', password: '' })
 
   const onChange = useCallback(
@@ -16,9 +19,17 @@ const SignUpPage: React.FC = () => {
     [userData]
   )
 
+  const onFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault()
+      onSubmit(userData)
+    },
+    [onSubmit, userData]
+  )
+
   return (
     <AuthPageLayout title={'Sign up to Quizzy'}>
-      <form>
+      <form onSubmit={onFormSubmit}>
         <FormInput
           label={'Email'}
           name={'email'}

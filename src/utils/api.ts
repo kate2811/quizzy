@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { UserLogin } from '../module/types'
+import {UserLogin, UserSingUpData} from '../module/types'
 import actions from '../module/actions'
 import store from '../store'
 
@@ -17,6 +17,15 @@ export async function getUserData(token: string) {
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
       'Authorization': 'Bearer ' + token
+    }
+  })
+  return response.data
+}
+
+export async function signUp(userData: UserSingUpData) {
+  let response = await axios.post('http://localhost:5000', userData, {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
     }
   })
   return response.data
