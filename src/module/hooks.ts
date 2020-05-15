@@ -1,10 +1,18 @@
 import { useSelector } from '../store'
 import { useDispatch } from 'react-redux'
 import {useCallback, useEffect} from 'react'
+import { customHistory } from '../history'
 import actions from './actions'
 
 export function useUser() {
   return useSelector((state) => state.user)
+}
+
+export function useIsUserLogin() {
+  const user = useSelector((state) => state.user)
+  if(!user) {
+    customHistory.push('/auth/sign-in')
+  }
 }
 
 export function useIsLoading() {

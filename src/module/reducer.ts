@@ -24,7 +24,6 @@ export default function reducer(state = initialState, action: any): State {
       case ActionTypes.loginFailure: {
         draft.user = null
         draft.isLoading = false
-        console.log('login fail!')
         return draft
       }
 

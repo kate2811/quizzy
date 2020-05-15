@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react'
-import style from './SignInPage.module.css'
-import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { UserLogin } from '../../module/types'
+import AuthPageLayout from '../AuthPageLayout'
+import FormInput from '../FormInput'
 
 type Props = {
   onSubmit: (userData: UserLogin) => void
@@ -9,12 +10,14 @@ type Props = {
 
 const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   const [userData, setUserData] = useState({ username: '', password: '' })
-  const dispatch = useDispatch()
 
-  const onFormSubmit = useCallback((e) => {
-    e.preventDefault()
-    onSubmit(userData)
-  }, [onSubmit, userData])
+  const onFormSubmit = useCallback(
+    (e) => {
+      e.preventDefault()
+      onSubmit(userData)
+    },
+    [onSubmit, userData]
+  )
 
   const onChange = useCallback(
     (e) => {
@@ -27,14 +30,30 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   )
 
   return (
-    <div>
-      <h1>Log in to Quizzy</h1>
+    <AuthPageLayout>
       <form onSubmit={onFormSubmit}>
-        <input type="text" name="username" value={userData.username} onChange={onChange} />
-        <input type="password" name="password" value={userData.password} onChange={onChange} />
-        <button>Log-in</button>
+        <FormInput
+          label={'Username'}
+          name={'username'}
+          onChange={onChange}
+          value={userData.username}
+          icon={'fa-user'}
+        />
+        <FormInput
+          label={'Password'}
+          type={'password'}
+          name={'password'}
+          onChange={onChange}
+          value={userData.password}
+          icon={'fa-lock'}
+        />
+        <button className="btn btn-secondary btn-block">Login</button>
+        <p className="text-center mt-4 text-secondary">
+          {`Don't have an account yet? `}
+          <Link to="/auth/sign-up">Sign-up!</Link>
+        </p>
       </form>
-    </div>
+    </AuthPageLayout>
   )
 }
 

@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F7D961;
+}
+
+.content {
+  position: absolute;
+  top: calc(50% - 175px);
+  left: calc(50% - 250px);
+  width: 500px;
+  height: 400px;
+  padding: 40px 45px 45px 45px;
+  box-shadow: 0 4px 38px 0 rgba(22, 21, 55, 0.06), 0 0 21px 0 rgba(22, 21, 55, 0.03);
+  border-radius: 5px;
+  background: #fff;
+}

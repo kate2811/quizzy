@@ -1,6 +1,6 @@
 import React from 'react'
 import Dashboard from './Dashboard'
-import { useUser } from '../../module/hooks'
+import {useUser} from '../../module/hooks'
 
 export default function () {
   const user = useUser()

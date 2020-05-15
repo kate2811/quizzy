@@ -1,0 +1,16 @@
+.formGroup {
+  position: relative;
+}
+
+.formGroup .icon {
+  position: absolute;
+  top: 24px;
+  left: 12px;
+  line-height: 38px;
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.formGroup .input {
+  padding-left: 35px;
+}
