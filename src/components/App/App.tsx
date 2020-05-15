@@ -6,7 +6,8 @@ import { customHistory } from '../../history'
 import { useAccessToken, useIsLoading } from '../../module/hooks'
 import Loader from 'react-loader-spinner'
 import Dashboard from '../Dashboard'
-import Protected from "../Protected"
+import Protected from '../Protected'
+import SignUpPage from '../SignUpPage'
 
 function App() {
   useAccessToken()
@@ -20,16 +21,16 @@ function App() {
         <Router history={customHistory}>
           <Switch>
             <Route path="/" exact>
-              <Protected >
+              <Protected>
                 <Dashboard />
               </Protected>
             </Route>
             <Route path="/auth/sign-in">
               <SignInPage />
             </Route>
-{/*            <Route path="/auth/sign-up">
+            <Route path="/auth/sign-up">
               <SignUpPage />
-            </Route>*/}
+            </Route>
           </Switch>
         </Router>
       )}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import cx from "classnames"
 import style from "./FormInput.module.css"
 
@@ -6,7 +6,7 @@ type Props = {
   label: string
   type?: string
   name: string
-  onChange(e: any): void
+  onChange(e: ChangeEvent<HTMLInputElement>): void
   value: string | number
   icon?: string
 }

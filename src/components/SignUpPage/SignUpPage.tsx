@@ -1,23 +1,10 @@
 import React, { useCallback, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { UserLogin } from '../../module/types'
 import AuthPageLayout from '../AuthPageLayout'
 import FormInput from '../FormInput'
+import { Link } from 'react-router-dom'
 
-type Props = {
-  onSubmit: (userData: UserLogin) => void
-}
-
-const SignInPage: React.FC<Props> = ({ onSubmit }) => {
-  const [userData, setUserData] = useState({ username: '', password: '' })
-
-  const onFormSubmit = useCallback(
-    (e) => {
-      e.preventDefault()
-      onSubmit(userData)
-    },
-    [onSubmit, userData]
-  )
+const SignUpPage: React.FC = () => {
+  const [userData, setUserData] = useState({ email: '', username: '', password: '' })
 
   const onChange = useCallback(
     (e) => {
@@ -30,8 +17,16 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   )
 
   return (
-    <AuthPageLayout title={'Sign in to Quizzy'}>
-      <form onSubmit={onFormSubmit}>
+    <AuthPageLayout title={'Sign up to Quizzy'}>
+      <form>
+        <FormInput
+          label={'Email'}
+          name={'email'}
+          type={'email'}
+          onChange={onChange}
+          value={userData.email}
+          icon={'fa-envelope'}
+        />
         <FormInput
           label={'Username'}
           name={'username'}
@@ -41,20 +36,20 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
         />
         <FormInput
           label={'Password'}
-          type={'password'}
           name={'password'}
+          type={'password'}
           onChange={onChange}
           value={userData.password}
           icon={'fa-lock'}
         />
-        <button className="btn btn-secondary btn-block">Sign in</button>
+        <button className="btn btn-secondary btn-block">Sign up</button>
         <p className="text-center mt-4 text-secondary">
-          {`Don't have an account yet? `}
-          <Link to="/auth/sign-up">Sign-up!</Link>
+          {`Already have an account? `}
+          <Link to="/auth/sign-in">Sign-in!</Link>
         </p>
       </form>
     </AuthPageLayout>
   )
 }
 
-export default SignInPage
+export default SignUpPage
