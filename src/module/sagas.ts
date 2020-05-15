@@ -18,7 +18,7 @@ function* getUser({ payload }: ReturnType<typeof actions.getUser>) {
 
 }
 
-function* loginUser({ payload }: ReturnType<typeof actions.loginRequest>) {
+function* loginUser({ payload }: ReturnType<typeof actions.signInRequest>) {
   try {
     const token = yield call(login, payload)
     localStorage.setItem('accessToken', token.accessToken)
@@ -39,9 +39,9 @@ function* signUpUser({ payload }: ReturnType<typeof actions.signUpRequest>) {
 
 function* Saga() {
   yield all([
-    takeLatest(ActionTypes.loginRequest, loginUser),
+    takeLatest(ActionTypes.signInRequest, loginUser),
     takeLatest(ActionTypes.getUser, getUser),
-    takeLatest(ActionTypes.logoutUser, logoutUser),
+    takeLatest(ActionTypes.signOutUser, logoutUser),
     takeLatest(ActionTypes.signUpRequest, signUpUser),
   ])
 }

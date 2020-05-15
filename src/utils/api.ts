@@ -1,9 +1,9 @@
 import axios from 'axios'
-import {UserLogin, UserSingUpData} from '../module/types'
+import {UserSignInData, UserSingUpData} from '../module/types'
 import actions from '../module/actions'
 import store from '../store'
 
-export async function login(userData: UserLogin) {
+export async function login(userData: UserSignInData) {
   let response = await axios.post('http://localhost:5000/auth/login', userData, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
@@ -37,7 +37,7 @@ axios.interceptors.response.use(
   },
   function (error) {
     if (401 === error.response.status) {
-      store.dispatch(actions.loginFailure())
+      store.dispatch(actions.signInFailure())
       localStorage.removeItem('accessToken')
     }
     return Promise.reject(error)

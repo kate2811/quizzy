@@ -1,9 +1,9 @@
 import React from 'react'
-import { useLogoutUser } from '../../module/hooks'
+import { useSignOutUser } from '../../module/hooks'
 import PageLayout from "./PageLayout"
 
 export default function ({ children }: {children: any}) {
-  const logout = useLogoutUser()
+  const signOut = useSignOutUser()
 
-  return <PageLayout logout={logout} children={children} />
+  return <PageLayout signOut={signOut} children={children} />
 }

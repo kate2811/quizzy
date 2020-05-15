@@ -21,13 +21,13 @@ export default function reducer(state = initialState, action: any): State {
         return draft
       }
 
-      case ActionTypes.loginFailure: {
+      case ActionTypes.signInFailure: {
         draft.user = null
         draft.isLoading = false
         return draft
       }
 
-      case ActionTypes.logoutUser: {
+      case ActionTypes.signOutUser: {
         draft.user = null
         return draft
       }

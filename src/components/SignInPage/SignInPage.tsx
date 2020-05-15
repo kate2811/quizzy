@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { UserLogin } from '../../module/types'
+import { UserSignInData } from '../../module/types'
 import AuthPageLayout from '../AuthPageLayout'
 import FormInput from '../FormInput'
 
 type Props = {
-  onSubmit: (userData: UserLogin) => void
+  onSubmit: (userData: UserSignInData) => void
 }
 
 const SignInPage: React.FC<Props> = ({ onSubmit }) => {
@@ -31,7 +31,7 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   )
 
   return (
-    <AuthPageLayout title={'Sign in to Quizzy'}>
+    <AuthPageLayout title={'Sign in'}>
       <form onSubmit={onFormSubmit}>
         <FormInput
           label={'Username'}

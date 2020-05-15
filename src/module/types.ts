@@ -3,14 +3,14 @@ export type State = {
   isLoading: boolean
 }
 
-export type UserLogin = {
-  username: string
-  password: string
-}
-
 export type UserData = {
   id: number
   username: string
+}
+
+export type UserSignInData = {
+  username: string
+  password: string
 }
 
 export type UserSingUpData = {

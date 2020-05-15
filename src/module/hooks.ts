@@ -1,28 +1,20 @@
 import { useSelector } from '../store'
 import { useDispatch } from 'react-redux'
 import {useCallback, useEffect} from 'react'
-import { customHistory } from '../history'
 import actions from './actions'
 
 export function useUser() {
   return useSelector((state) => state.user)
 }
 
-export function useIsUserLogin() {
-  const user = useSelector((state) => state.user)
-  if(!user) {
-    customHistory.push('/auth/sign-in')
-  }
-}
-
 export function useIsLoading() {
   return useSelector((state) => state.isLoading)
 }
 
-export function useLoginRequest() {
+export function useSignInRequest() {
   const dispatch = useDispatch()
   return useCallback((userData) => {
-    return dispatch(actions.loginRequest(userData))
+    return dispatch(actions.signInRequest(userData))
   }, [dispatch])
 }
 
@@ -33,10 +25,10 @@ export function useSignUpRequest() {
   }, [dispatch])
 }
 
-export function useLogoutUser() {
+export function useSignOutUser() {
   const dispatch = useDispatch()
   return useCallback(() => {
-    return dispatch(actions.logoutUser())
+    return dispatch(actions.signOutUser())
   }, [dispatch])
 }
 

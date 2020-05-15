@@ -28,7 +28,7 @@ const SignUpPage: React.FC<Props> = ({ onSubmit }) => {
   )
 
   return (
-    <AuthPageLayout title={'Sign up to Quizzy'}>
+    <AuthPageLayout title={'Sign up'}>
       <form onSubmit={onFormSubmit}>
         <FormInput
           label={'Email'}

@@ -1,12 +1,12 @@
-import {UserData, UserLogin, UserSingUpData} from './types'
+import {UserData, UserSignInData, UserSingUpData} from './types'
 
 export enum ActionTypes {
-  loginRequest = 'Login request',
+  signInRequest = 'Sign in request',
   getUser = 'Get user',
   loadUser = 'Load user',
   loadUserSuccess = 'Load user success',
-  loginFailure = 'Login failure',
-  logoutUser = 'User logged out',
+  signInFailure = 'Sign in failure',
+  signOutUser = 'User signed out',
   signUpRequest = 'Sign up request'
 }
 
@@ -17,11 +17,11 @@ function createAction<T, P>(type: T) {
 }
 
 export default {
-  loginRequest: createAction<ActionTypes.loginRequest, UserLogin>(ActionTypes.loginRequest),
+  signInRequest: createAction<ActionTypes.signInRequest, UserSignInData>(ActionTypes.signInRequest),
   getUser: createAction<ActionTypes.getUser, string>(ActionTypes.getUser),
   loadUser: createAction<ActionTypes.loadUser, void>(ActionTypes.loadUser),
   loadUserSuccess: createAction<ActionTypes.loadUserSuccess, UserData>(ActionTypes.loadUserSuccess),
-  loginFailure: createAction<ActionTypes.loginFailure, void>(ActionTypes.loginFailure),
-  logoutUser: createAction<ActionTypes.logoutUser, void>(ActionTypes.logoutUser),
+  signInFailure: createAction<ActionTypes.signInFailure, void>(ActionTypes.signInFailure),
+  signOutUser: createAction<ActionTypes.signOutUser, void>(ActionTypes.signOutUser),
   signUpRequest: createAction<ActionTypes.signUpRequest, UserSingUpData>(ActionTypes.signUpRequest)
 }
