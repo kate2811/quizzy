@@ -14,10 +14,10 @@ type Props = {
 const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   const validationSchema = useMemo(() => {
     return Yup.object({
-      email: Yup.string().email('Invalid email address').required('Required'),
-      password: Yup.string().required('Required')
+      email: Yup.string().email('Invalid email address').required('Email is required'),
+      password: Yup.string().required('Password is required')
     })
-  }, [Yup])
+  }, [])
 
   return (
     <AuthPageLayout title="Sign in">
@@ -27,8 +27,8 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
         validationSchema={validationSchema}
       >
         <Form>
-          <FormInput label='Email' name='email' icon='fa-user' type='text' id='email' />
-          <FormInput label='Password' type='password' name='password' icon='fa-lock' id='password' />
+          <FormInput label='Email' name='email' icon='fa-user' id='email' />
+          <FormInput label='Password' name='password' type='password' icon='fa-lock' id='password' />
           <FormCheckbox name='isRemember'>Remember me?</FormCheckbox>
           <button type="submit" className="btn btn-secondary btn-block mt-4">
             Sign in

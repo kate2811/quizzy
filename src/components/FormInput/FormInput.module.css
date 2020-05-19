@@ -32,3 +32,6 @@
   padding-left: 35px;
 }
 
+.inputFeedback {
+  position: absolute;
+}

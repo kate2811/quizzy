@@ -5,13 +5,13 @@ import { useField } from 'formik'
 
 type Props = {
   label: string
-  type: string
+  type?: string
   name: string
   icon?: string
   id: string
 }
 
-const FormInput: React.FC<Props> = ({ label, icon, name, type, id }) => {
+const FormInput: React.FC<Props> = ({ label, icon, name, type = 'text', id }) => {
   const [field, meta] = useField({name, type, id})
   const [inputType, setInputType] = useState(type)
 
@@ -32,7 +32,7 @@ const FormInput: React.FC<Props> = ({ label, icon, name, type, id }) => {
       <label className="w-100">
         {label}
       <input className={inputClassName} type={inputType} {...field}  name={name} id={id} />
-        {meta.touched && meta.error ? <div className="invalid-feedback">{meta.error}</div> : null}
+        {meta.touched && meta.error ? <div className={cx("invalid-feedback", style.inputFeedback)}>{meta.error}</div> : null}
       </label>
 
       {icon ? <i className={cx('fas', icon, style.icon)} /> : null}
