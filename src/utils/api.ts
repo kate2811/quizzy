@@ -3,7 +3,7 @@ import {UserSignInData, UserSingUpData} from '../module/types'
 import actions from '../module/actions'
 import store from '../store'
 
-export async function login(userData: UserSignInData) {
+export async function signIn(userData: Omit<UserSignInData, 'isRemember'>) {
   let response = await axios.post('http://localhost:5000/auth/login', userData, {
     headers: {
       'Content-Type': 'application/json;charset=utf-8'

@@ -9,8 +9,9 @@ export type UserData = {
 }
 
 export type UserSignInData = {
-  username: string
+  email: string
   password: string
+  isRemember: boolean
 }
 
 export type UserSingUpData = {

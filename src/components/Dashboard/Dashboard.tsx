@@ -1,7 +1,5 @@
-import React, {useCallback} from 'react'
-import style from './Dashboard.module.css'
+import React from 'react'
 import { UserData } from '../../module/types'
-import actions from "../../module/actions"
 import PageLayout from "../PageLayout"
 
 type Props = {

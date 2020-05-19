@@ -1,10 +1,11 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import actions, { ActionTypes } from './actions'
-import {getUserData, login, signUp} from '../utils/api'
+import {getUserData, signIn, signUp} from '../utils/api'
 import {customHistory} from "../history"
 
-function* logoutUser() {
+function* signOutUser() {
   yield localStorage.removeItem('accessToken')
+  yield sessionStorage.removeItem('accessToken')
 }
 
 function* getUser({ payload }: ReturnType<typeof actions.getUser>) {
@@ -18,10 +19,11 @@ function* getUser({ payload }: ReturnType<typeof actions.getUser>) {
 
 }
 
-function* loginUser({ payload }: ReturnType<typeof actions.signInRequest>) {
+function* signInUser({ payload }: ReturnType<typeof actions.signInRequest>) {
   try {
-    const token = yield call(login, payload)
-    localStorage.setItem('accessToken', token.accessToken)
+    const token = yield call(signIn, {email: payload.email, password: payload.password})
+    payload.isRemember ?
+    localStorage.setItem('accessToken', token.accessToken) : sessionStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser(token.accessToken))
   } catch (error) {
     alert('Login request has failed, please try again')
@@ -39,9 +41,9 @@ function* signUpUser({ payload }: ReturnType<typeof actions.signUpRequest>) {
 
 function* Saga() {
   yield all([
-    takeLatest(ActionTypes.signInRequest, loginUser),
+    takeLatest(ActionTypes.signInRequest, signInUser),
     takeLatest(ActionTypes.getUser, getUser),
-    takeLatest(ActionTypes.signOutUser, logoutUser),
+    takeLatest(ActionTypes.signOutUser, signOutUser),
     takeLatest(ActionTypes.signUpRequest, signUpUser),
   ])
 }

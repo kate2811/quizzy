@@ -11,6 +11,10 @@
   margin: 40px 0;
 }
 
+.logoImg {
+  height: 90px;
+}
+
 .content {
   width: 500px;
   min-height: 400px;

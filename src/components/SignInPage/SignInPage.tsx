@@ -1,59 +1,45 @@
-import React, { useCallback, useState } from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { UserSignInData } from '../../module/types'
 import AuthPageLayout from '../AuthPageLayout'
 import FormInput from '../FormInput'
+import { Formik, Form } from 'formik'
+import * as Yup from 'yup'
+import FormCheckbox from '../FormCheckbox'
 
 type Props = {
   onSubmit: (userData: UserSignInData) => void
 }
 
 const SignInPage: React.FC<Props> = ({ onSubmit }) => {
-  const [userData, setUserData] = useState({ username: '', password: '' })
-  console.log(userData)
-
-  const onFormSubmit = useCallback(
-    (e) => {
-      e.preventDefault()
-      onSubmit(userData)
-    },
-    [onSubmit, userData]
-  )
-
-  const onChange = useCallback(
-    (e) => {
-      setUserData({
-        ...userData,
-        [e.target.name]: e.target.value
-      })
-    },
-    [userData]
-  )
+  const validationSchema = useMemo(() => {
+    return Yup.object({
+      email: Yup.string().email('Invalid email address').required('Required'),
+      password: Yup.string().required('Required')
+    })
+  }, [Yup])
 
   return (
-    <AuthPageLayout title={'Sign in'}>
-      <form onSubmit={onFormSubmit}>
-        <FormInput
-          label={'Username'}
-          name={'username'}
-          onChange={onChange}
-          value={userData.username}
-          icon={'fa-user'}
-        />
-        <FormInput
-          label={'Password'}
-          type={'password'}
-          name={'password'}
-          onChange={onChange}
-          value={userData.password}
-          icon={'fa-lock'}
-        />
-        <button className="btn btn-secondary btn-block">Sign in</button>
-        <p className="text-center mt-4 text-secondary">
-          {`Don't have an account yet? `}
-          <Link to="/auth/sign-up">Sign-up!</Link>
-        </p>
-      </form>
+    <AuthPageLayout title="Sign in">
+      <Formik
+        initialValues={{ email: '', password: '', isRemember: true }}
+        onSubmit={(values) => onSubmit(values)}
+        validationSchema={validationSchema}
+      >
+        <Form>
+          <FormInput label='Email' name='email' icon='fa-user' type='text' id='email' />
+          <FormInput label='Password' type='password' name='password' icon='fa-lock' id='password' />
+          <FormCheckbox name='isRemember'>Remember me?</FormCheckbox>
+          <button type="submit" className="btn btn-secondary btn-block mt-4">
+            Sign in
+          </button>
+        </Form>
+      </Formik>
+
+      <p className="text-center mt-4 text-secondary">
+        Don't have an account yet?&nbsp;
+        <Link to="/auth/sign-up">Sign-up!</Link>
+      </p>
     </AuthPageLayout>
   )
 }

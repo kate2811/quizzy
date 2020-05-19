@@ -30,7 +30,7 @@ const SignUpPage: React.FC<Props> = ({ onSubmit }) => {
   return (
     <AuthPageLayout title={'Sign up'}>
       <form onSubmit={onFormSubmit}>
-        <FormInput
+        {/*<FormInput
           label={'Email'}
           name={'email'}
           type={'email'}
@@ -52,7 +52,7 @@ const SignUpPage: React.FC<Props> = ({ onSubmit }) => {
           onChange={onChange}
           value={userData.password}
           icon={'fa-lock'}
-        />
+        />*/}
         <button className="btn btn-secondary btn-block">Sign up</button>
         <p className="text-center mt-4 text-secondary">
           {`Already have an account? `}
