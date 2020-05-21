@@ -11,6 +11,10 @@ export function useIsLoading() {
   return useSelector((state) => state.isLoading)
 }
 
+export function useQuizzes() {
+  return useSelector((state) => state.quizzes)
+}
+
 export function useSignInRequest() {
   const dispatch = useDispatch()
   return useCallback((userData) => {

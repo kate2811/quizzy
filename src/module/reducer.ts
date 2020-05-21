@@ -3,7 +3,9 @@ import { State } from './types'
 import { ActionTypes } from './actions'
 
 export const initialState: State = {
-  user: null,
+  user: { id: 1, username: 'Masha'},
+  quizzes: [],
+  //quizzes: [{ title: 'elementary school quiz'}, { title: 'high school quiz'} ],
   isLoading: false
 }
 

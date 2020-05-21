@@ -14,7 +14,8 @@ type Props = {
 const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   const validationSchema = useMemo(() => {
     return Yup.object({
-      email: Yup.string().email('Invalid email address').required('Email is required'),
+      //email: Yup.string().email('Invalid email address').required('Email is required'),
+      email: Yup.string().required('Email is required'),
       password: Yup.string().required('Password is required')
     })
   }, [])

@@ -24,7 +24,7 @@ const FormInput: React.FC<Props> = ({ label, icon, name, type = 'text', id }) =>
   )
 
   const inputClassName = useMemo(() => {
-    return cx('form-control', style.input, meta.touched ? (meta.error ? 'is-invalid' : 'is-valid') : 'form-control')
+    return cx('form-control', style.input, meta.touched && (meta.error ? 'is-invalid' : 'is-valid'))
   }, [meta.touched, meta.error])
 
   return (

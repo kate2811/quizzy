@@ -8,6 +8,7 @@ import Loader from 'react-loader-spinner'
 import Dashboard from '../Dashboard'
 import Protected from '../Protected'
 import SignUpPage from '../SignUpPage'
+import CreateQuiz from '../CreateQuiz'
 
 function App() {
   useAccessToken()
@@ -16,13 +17,20 @@ function App() {
   return (
     <>
       {isLoading ? (
-        <Loader type="Bars" color="#157FFB" height={40} width={40} />
+        <div>
+          <Loader type="Bars" color="#157FFB" height={40} width={40} />
+        </div>
       ) : (
         <Router history={customHistory}>
           <Switch>
             <Route path="/" exact>
               <Protected>
                 <Dashboard />
+              </Protected>
+            </Route>
+            <Route path="/create" exact>
+              <Protected>
+                <CreateQuiz />
               </Protected>
             </Route>
             <Route path="/auth/sign-in">

@@ -1,0 +1,11 @@
+.container {
+  background: #ffffff;
+}
+
+.input_title {
+  border: none;
+}
+
+.input_title:focus {
+  outline: none;
+}
