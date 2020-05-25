@@ -9,6 +9,7 @@ import Dashboard from '../Dashboard'
 import Protected from '../Protected'
 import SignUpPage from '../SignUpPage'
 import CreateQuiz from '../CreateQuiz'
+import QuizTemplate from '../QuizTemplate'
 
 function App() {
   useAccessToken()
@@ -31,6 +32,11 @@ function App() {
             <Route path="/create" exact>
               <Protected>
                 <CreateQuiz />
+              </Protected>
+            </Route>
+            <Route path="/quiz" exact>
+              <Protected>
+                <QuizTemplate />
               </Protected>
             </Route>
             <Route path="/auth/sign-in">

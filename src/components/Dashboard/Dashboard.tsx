@@ -1,7 +1,7 @@
 import React from 'react'
 import { Quiz, UserData } from '../../module/types'
 import PageLayout from '../PageLayout'
-import {Link} from "react-router-dom"
+import { Link } from 'react-router-dom'
 
 type Props = {
   user: null | UserData
@@ -18,16 +18,20 @@ const Dashboard: React.FC<Props> = ({ user, quizzes }) => {
         {quizzes.length === 0 ? (
           <>
             <div>You don't have any quizzes yet</div>
-            <Link to='/create' className='btn btn-warning'>Create it!</Link>
+            <Link to="/create" className="btn btn-warning">
+              Create it!
+            </Link>
           </>
         ) : (
           <div>
             <ul>
-              {quizzes.map((item) => (
-                <li>{item.title}</li>
+              {quizzes.map((item, index) => (
+                <li key={index}>{item.title}</li>
               ))}
             </ul>
-            <Link to='/create' className='btn btn-warning'>Create new quiz!</Link>
+            <Link to="/create" className="btn btn-warning">
+              Create new quiz!
+            </Link>
           </div>
         )}
       </PageLayout>

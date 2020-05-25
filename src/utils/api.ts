@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {UserSignInData, UserSingUpData} from '../module/types'
+import { Quiz, UserSignInData, UserSingUpData } from '../module/types'
 import actions from '../module/actions'
 import store from '../store'
 
@@ -29,6 +29,10 @@ export async function signUp(userData: UserSingUpData) {
     }
   })
   return response.data
+}
+
+export async function saveQuiz(quiz: Quiz) {
+  store.dispatch(actions.saveQuiz(quiz))
 }
 
 axios.interceptors.response.use(

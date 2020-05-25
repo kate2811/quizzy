@@ -22,18 +22,17 @@ export type UserSingUpData = {
 }
 
 export type Quiz = {
-  userUuid: string
+  userUuid?: string
   uuid: string
   title: string
   questions?: QuizQuestion[]
 }
 
 export type QuizQuestion = {
-  quizUuid: string
+  quizUuid?: string
   uuid: string
-  type: 'checkbox' | 'radio' | 'input'
+  type?: 'checkbox' | 'radio' | 'input'
   title: string
   image?: string
-  options?: string[]
-  answers: string[]
+  options: { uuid: string; value: string; isCorrect: boolean }[]
 }
