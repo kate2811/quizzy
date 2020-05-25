@@ -58,7 +58,7 @@ export function useAccessToken() {
     const token = localStorage.getItem('accessToken')
     if (token) {
       dispatch(actions.loadUser())
-      dispatch(actions.getUser(token))
+      dispatch(actions.getUser())
     }
   }, [dispatch])
 }

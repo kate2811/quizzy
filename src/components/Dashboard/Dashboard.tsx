@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Dashboard: React.FC<Props> = ({ user, quizzes }) => {
-  const userName = user && user.username ? user.username : 'Guest'
+  const userName = user && user.firstName ? user.firstName : 'Guest'
 
   return (
     <>

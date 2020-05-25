@@ -5,8 +5,12 @@ export type State = {
 }
 
 export type UserData = {
-  id: number
-  username: string
+  uuid: string
+  email: string
+  firstName: string
+  lastName: string
+  createDate: string
+  updateDate: string
 }
 
 export type UserSignInData = {
@@ -17,7 +21,8 @@ export type UserSignInData = {
 
 export type UserSingUpData = {
   email: string
-  username: string
+  firstName: string
+  lastName: string
   password: string
 }
 

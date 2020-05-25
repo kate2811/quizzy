@@ -9,9 +9,9 @@ function* signOutUser() {
   yield sessionStorage.removeItem('accessToken')
 }
 
-function* getUser({ payload }: ReturnType<typeof actions.getUser>) {
+function* getUser() {
   try {
-    const response = yield call(getUserData, payload)
+    const response = yield call(getUserData)
     yield put(actions.loadUserSuccess(response))
     customHistory.push('/')
   } catch (error) {
@@ -23,9 +23,9 @@ function* signInUser({ payload }: ReturnType<typeof actions.signInRequest>) {
   try {
     const token = yield call(signIn, { email: payload.email, password: payload.password })
     payload.isRemember
-      ? localStorage.setItem('accessToken', token.accessToken)
-      : sessionStorage.setItem('accessToken', token.accessToken)
-    yield put(actions.getUser(token.accessToken))
+      ? yield localStorage.setItem('accessToken', token.accessToken)
+      : yield sessionStorage.setItem('accessToken', token.accessToken)
+    yield put(actions.getUser())
   } catch (error) {
     alert('Login request has failed, please try again')
   }
@@ -34,6 +34,7 @@ function* signInUser({ payload }: ReturnType<typeof actions.signInRequest>) {
 function* signUpUser({ payload }: ReturnType<typeof actions.signUpRequest>) {
   try {
     const token = yield call(signUp, payload)
+    localStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser(token.accessToken))
   } catch (error) {
     alert('Sign up request has failed, please try again')

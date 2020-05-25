@@ -20,7 +20,7 @@ function createAction<T, P>(type: T) {
 
 export default {
   signInRequest: createAction<ActionTypes.signInRequest, UserSignInData>(ActionTypes.signInRequest),
-  getUser: createAction<ActionTypes.getUser, string>(ActionTypes.getUser),
+  getUser: createAction<ActionTypes.getUser, void>(ActionTypes.getUser),
   loadUser: createAction<ActionTypes.loadUser, void>(ActionTypes.loadUser),
   loadUserSuccess: createAction<ActionTypes.loadUserSuccess, UserData>(ActionTypes.loadUserSuccess),
   signInFailure: createAction<ActionTypes.signInFailure, void>(ActionTypes.signInFailure),

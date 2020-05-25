@@ -4,7 +4,7 @@ import { ActionTypes } from './actions'
 import { v4 as uuidv4 } from 'uuid'
 
 export const initialState: State = {
-  user: { id: 1, username: 'Masha' },
+  user: null,
   quizzes: [
     {
       uuid: 'be471009-0f53-49da-8fb5-afff413a6df7',
