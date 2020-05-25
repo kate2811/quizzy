@@ -76,6 +76,7 @@ export const initialState: State = {
       ]
     }
   ],
+  notifications: [],
   isLoading: false
 }
 

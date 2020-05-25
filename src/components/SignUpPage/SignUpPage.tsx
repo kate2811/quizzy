@@ -1,17 +1,26 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import AuthPageLayout from '../AuthPageLayout'
 import FormInput from '../FormInput'
 import { Link } from 'react-router-dom'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import { UserSingUpData } from '../../module/types'
+import { signUpCheck } from '../../utils/api'
 
 type Props = { onSubmit: (userData: UserSingUpData) => void }
 
 const SignUpPage: React.FC<Props> = ({ onSubmit }) => {
   const validationSchema = useMemo(() => {
     return Yup.object({
-      email: Yup.string().email('Invalid email address').required('Email is required'),
+      email: Yup.string()
+        .email()
+        .required()
+        .test('isEmailUnique', 'The email address is already registered', function (value) {
+          return (
+            value &&
+            fetch('http://47.56.144.147:5555/auth/sign-up-check?email=' + value).then((resp) => resp.status === 200)
+          )
+        }),
       firstName: Yup.string().required('First name is required'),
       lastName: Yup.string().required('Last name is required'),
       password: Yup.string().required('Password is required'),

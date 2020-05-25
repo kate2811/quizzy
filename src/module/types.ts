@@ -2,6 +2,14 @@ export type State = {
   user: null | UserData
   isLoading: boolean
   quizzes: Quiz[]
+  notifications: Notification[]
+}
+export type NotificationType = 'warning' | 'success'
+
+export type Notification = {
+  uuid: string
+  text: string
+  type: NotificationType
 }
 
 export type UserData = {

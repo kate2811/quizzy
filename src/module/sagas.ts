@@ -21,8 +21,8 @@ function* getUser() {
 
 function* signInUser({ payload }: ReturnType<typeof actions.signInRequest>) {
   try {
-    yield put(actions.loadUser())
     const token = yield call(signIn, { email: payload.email, password: payload.password })
+    yield put(actions.loadUser())
     payload.isRemember
       ? yield localStorage.setItem('accessToken', token.accessToken)
       : yield sessionStorage.setItem('accessToken', token.accessToken)
@@ -34,8 +34,8 @@ function* signInUser({ payload }: ReturnType<typeof actions.signInRequest>) {
 
 function* signUpUser({ payload }: ReturnType<typeof actions.signUpRequest>) {
   try {
-    yield put(actions.loadUser())
     const token = yield call(signUp, payload)
+    yield put(actions.loadUser())
     localStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser())
   } catch (error) {

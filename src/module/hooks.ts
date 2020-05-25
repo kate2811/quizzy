@@ -25,6 +25,10 @@ export function usePublishQuiz() {
   )
 }
 
+export function useNotifications() {
+  return useSelector((state) => state.notifications)
+}
+
 export function useSignInRequest() {
   const dispatch = useDispatch()
   return useCallback(

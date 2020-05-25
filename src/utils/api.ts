@@ -42,25 +42,30 @@ class Api {
   }
 }
 
-const api = new Api()
+export const api = new Api()
 
 export async function signIn(userData: Omit<UserSignInData, 'isRemember'>) {
-  let response = await api.post('/auth/login', userData)
+  const response = await api.post('/auth/login', userData)
   return response.data
 }
 
 export async function getUserData() {
-  let response = await api.get('/users/current')
+  const response = await api.get('/users/current')
   return response.data
 }
 
 export async function signUp(userData: UserSingUpData) {
-  let response = await api.post('/auth/sign-up', userData)
+  const response = await api.post('/auth/sign-up', userData)
   return response.data
 }
 
 export async function saveQuiz(quiz: Quiz) {
   store.dispatch(actions.saveQuiz(quiz))
+}
+
+export async function signUpCheck(email: string) {
+  const response = await api.get('/auth/sign-up-check?email=' + email)
+  return response.status === 200
 }
 
 axios.interceptors.response.use(
