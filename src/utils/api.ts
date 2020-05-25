@@ -6,21 +6,23 @@ import store from '../store'
 class Api {
   private readonly apiUrl: string
   private readonly headers: { headers: { 'Content-Type': string } }
-  private token: null | string
-  private config: any
+  private config: { headers: { [key: string]: string } }
 
   constructor() {
     this.apiUrl = 'http://47.56.144.147:5555'
-    this.token = null
     this.headers = { headers: { 'Content-Type': 'application/json;charset=utf-8' } }
-    this.config = {}
+    this.config = this.headers
   }
 
-  getConfig() {
-    this.token = localStorage.getItem('accessToken')
-    return (this.config = this.token
-      ? { headers: { ...this.headers.headers, Authorization: 'Bearer ' + this.token } }
-      : this.headers)
+  getConfig(data?) {
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      this.config = { headers: { ...this.config.headers, Authorization: 'Bearer ' + token } }
+    }
+    if (data) {
+      this.config = { headers: { ...this.config.headers, data: data } }
+    }
+    return this.config
   }
 
   get(url) {
@@ -36,7 +38,7 @@ class Api {
   }
 
   delete(url, data) {
-    return axios.delete(this.apiUrl + url, { headers: { data: data, ...this.getConfig().headers } })
+    return axios.delete(this.apiUrl + url, this.getConfig())
   }
 }
 
