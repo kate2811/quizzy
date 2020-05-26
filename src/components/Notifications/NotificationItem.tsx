@@ -1,21 +1,32 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import style from './Notifications.module.css'
+import cx from 'classnames'
+import { useNotification } from '../../module/hooks'
 
-const NotificationItem: React.FC = () => {
+type Props = {
+  uuid: string
+}
+
+const NotificationItem: React.FC<Props> = ({ uuid }) => {
+  const { removeNotification, text, type } = useNotification(uuid)
+  const isSuccess = useMemo(() => type === 'success', [type])
+
   return (
-    <div className="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div className="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div className="toast-header">
-          <img src="..." className="rounded mr-2" alt="...">
-            <strong className="mr-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" className="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </img>
-        </div>
-        <div className="toast-body">Hello, world! This is a toast message.</div>
-      </div>
-      <div className="toast-body">Hello, world! This is a toast message.</div>
+    <div
+      className={cx(
+        style.container,
+        'alert',
+        'd-flex',
+        'align-items-baseline',
+        isSuccess ? 'alert-success' : 'alert-warning'
+      )}
+      role="alert"
+    >
+      <i className={cx('fas', 'pr-3', isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle')} />
+      <button className={style.button_close} onClick={removeNotification}>
+        <i className="fas fa-times" />
+      </button>
+      {text}
     </div>
   )
 }

@@ -1,0 +1,18 @@
+.container {
+  position: relative;
+}
+
+.button_close {
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  color: inherit;
+}
+
+.button_close:focus {
+  outline: none;
+}

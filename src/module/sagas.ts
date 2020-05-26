@@ -1,4 +1,4 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects'
+import { call, put, delay, takeLatest, select, takeEvery, all } from 'redux-saga/effects'
 import actions, { ActionTypes } from './actions'
 import { getUserData, signIn, signUp, saveQuiz } from '../utils/api'
 import { customHistory } from '../history'
@@ -54,13 +54,24 @@ function* publishQuiz({ payload }: ReturnType<typeof actions.publishQuiz>) {
   }
 }
 
+function* addNotification({ payload }: ReturnType<typeof actions.getNotification>) {
+  const uuid = uuidv4()
+  yield put(actions.addNotification({ ...payload, uuid }))
+  yield delay(5000)
+  const notification = yield select((state) => state.notifications.some((item) => item.uuid === uuid))
+  if (notification) {
+    yield put(actions.removeNotification(uuid))
+  }
+}
+
 function* Saga() {
   yield all([
     takeLatest(ActionTypes.signInRequest, signInUser),
     takeLatest(ActionTypes.getUser, getUser),
     takeLatest(ActionTypes.signOutUser, signOutUser),
     takeLatest(ActionTypes.signUpRequest, signUpUser),
-    takeLatest(ActionTypes.publishQuiz, publishQuiz)
+    takeLatest(ActionTypes.publishQuiz, publishQuiz),
+    takeEvery(ActionTypes.getNotification, addNotification)
   ])
 }
 

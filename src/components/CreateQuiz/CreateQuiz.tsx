@@ -3,7 +3,6 @@ import PageLayout from '../PageLayout'
 import style from './CreateQuiz.module.css'
 import QuizQuestion from '../QuizQuestion'
 import { produce } from 'immer'
-import { UserData } from '../../module/types'
 
 const emptyQuestion = {
   title: '',

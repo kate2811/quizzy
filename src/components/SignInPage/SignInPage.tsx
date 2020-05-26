@@ -6,12 +6,15 @@ import FormInput from '../FormInput'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import FormCheckbox from '../FormCheckbox'
+import { useDispatch } from 'react-redux'
+import actions from '../../module/actions'
 
 type Props = {
   onSubmit: (userData: UserSignInData) => void
 }
 
 const SignInPage: React.FC<Props> = ({ onSubmit }) => {
+  const dispatch = useDispatch()
   const validationSchema = useMemo(() => {
     return Yup.object({
       //email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -28,9 +31,9 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
         validationSchema={validationSchema}
       >
         <Form>
-          <FormInput label='Email' name='email' icon='fa-user' id='email' />
-          <FormInput label='Password' name='password' type='password' icon='fa-lock' id='password' />
-          <FormCheckbox name='isRemember'>Remember me?</FormCheckbox>
+          <FormInput label="Email" name="email" icon="fa-user" id="email" />
+          <FormInput label="Password" name="password" type="password" icon="fa-lock" id="password" />
+          <FormCheckbox name="isRemember">Remember me?</FormCheckbox>
           <button type="submit" className="btn btn-secondary btn-block mt-4">
             Sign in
           </button>
@@ -41,6 +44,9 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
         Don't have an account yet?&nbsp;
         <Link to="/auth/sign-up">Sign-up!</Link>
       </p>
+      <button onClick={() => dispatch(actions.getNotification({ type: 'success', text: 'Some information' }))}>
+        !
+      </button>
     </AuthPageLayout>
   )
 }

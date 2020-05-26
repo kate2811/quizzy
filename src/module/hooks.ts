@@ -26,7 +26,22 @@ export function usePublishQuiz() {
 }
 
 export function useNotifications() {
-  return useSelector((state) => state.notifications)
+  return useSelector((state) => state.notifications.map((item) => item.uuid))
+}
+
+export function useNotification(uuid: string) {
+  const dispatch = useDispatch()
+  const notification = useSelector((state) => state.notifications.find((item) => item.uuid === uuid))
+
+  if (!notification) {
+    throw new Error('notification is not found')
+  }
+
+  return {
+    text: notification.text,
+    type: notification.type,
+    removeNotification: useCallback(() => dispatch(actions.removeNotification(uuid)), [dispatch, uuid])
+  }
 }
 
 export function useSignInRequest() {

@@ -1,4 +1,4 @@
-import { Quiz, UserData, UserSignInData, UserSingUpData } from './types'
+import { Quiz, UserData, UserSignInData, UserSingUpData, Notification } from './types'
 
 export enum ActionTypes {
   signInRequest = 'Sign in request',
@@ -9,7 +9,10 @@ export enum ActionTypes {
   signOutUser = 'User signed out',
   signUpRequest = 'Sign up request',
   publishQuiz = 'Quiz is published',
-  saveQuiz = 'Quiz is saved'
+  saveQuiz = 'Quiz is saved',
+  getNotification = 'Get notification',
+  addNotification = 'Add notification',
+  removeNotification = 'Remove notification'
 }
 
 function createAction<T, P>(type: T) {
@@ -27,5 +30,8 @@ export default {
   signOutUser: createAction<ActionTypes.signOutUser, void>(ActionTypes.signOutUser),
   signUpRequest: createAction<ActionTypes.signUpRequest, UserSingUpData>(ActionTypes.signUpRequest),
   publishQuiz: createAction<ActionTypes.publishQuiz, Omit<Quiz, 'uuid'>>(ActionTypes.publishQuiz),
-  saveQuiz: createAction<ActionTypes.saveQuiz, Quiz>(ActionTypes.saveQuiz)
+  saveQuiz: createAction<ActionTypes.saveQuiz, Quiz>(ActionTypes.saveQuiz),
+  getNotification: createAction<ActionTypes.getNotification, Omit<Notification, 'uuid'>>(ActionTypes.getNotification),
+  addNotification: createAction<ActionTypes.addNotification, Notification>(ActionTypes.addNotification),
+  removeNotification: createAction<ActionTypes.removeNotification, string>(ActionTypes.removeNotification)
 }

@@ -76,7 +76,16 @@ export const initialState: State = {
       ]
     }
   ],
-  notifications: [],
+  notifications: [
+    {
+      type: 'success',
+      text:
+        'We created a shim to help folks upgrade easily their existing projects from Font Awesome 4 to ' +
+        '5 and avoid those embarrassing missing icon moments. Read more about upgrading from version',
+      uuid: '1kdemrfh4u3'
+    },
+    { type: 'warning', text: 'Warning notification. Something happened wrong', uuid: '1kfghrfh4u3' }
+  ],
   isLoading: false
 }
 
@@ -107,6 +116,16 @@ export default function reducer(state = initialState, action: any): State {
 
       case ActionTypes.saveQuiz: {
         draft.quizzes = [...draft.quizzes, action.payload]
+        return draft
+      }
+
+      case ActionTypes.addNotification: {
+        draft.notifications.push(action.payload)
+        return draft
+      }
+
+      case ActionTypes.removeNotification: {
+        draft.notifications = draft.notifications.filter((item) => item.uuid !== action.payload)
         return draft
       }
 
