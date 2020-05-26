@@ -9,7 +9,7 @@
 }
 
 .notifications {
-  position: absolute;
+  position: fixed;
   top: 10px;
   right: 50px;
   width: 300px;

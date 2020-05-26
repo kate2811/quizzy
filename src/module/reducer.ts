@@ -76,16 +76,7 @@ export const initialState: State = {
       ]
     }
   ],
-  notifications: [
-    {
-      type: 'success',
-      text:
-        'We created a shim to help folks upgrade easily their existing projects from Font Awesome 4 to ' +
-        '5 and avoid those embarrassing missing icon moments. Read more about upgrading from version',
-      uuid: '1kdemrfh4u3'
-    },
-    { type: 'warning', text: 'Warning notification. Something happened wrong', uuid: '1kfghrfh4u3' }
-  ],
+  notifications: [],
   isLoading: false
 }
 

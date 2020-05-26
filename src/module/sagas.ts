@@ -1,6 +1,6 @@
 import { call, put, delay, takeLatest, select, takeEvery, all } from 'redux-saga/effects'
 import actions, { ActionTypes } from './actions'
-import { getUserData, signIn, signUp, saveQuiz } from '../utils/api'
+import { getUserData, signIn, signUp, saveQuiz, handleError } from '../utils/api'
 import { customHistory } from '../history'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -15,7 +15,7 @@ function* getUser() {
     yield put(actions.loadUserSuccess(response))
     customHistory.push('/')
   } catch (error) {
-    console.log('token error')
+    yield call(handleError, error)
   }
 }
 
@@ -28,7 +28,7 @@ function* signInUser({ payload }: ReturnType<typeof actions.signInRequest>) {
       : yield sessionStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser())
   } catch (error) {
-    alert('Login request has failed, please try again')
+    yield call(handleError, error)
   }
 }
 
@@ -39,7 +39,7 @@ function* signUpUser({ payload }: ReturnType<typeof actions.signUpRequest>) {
     localStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser())
   } catch (error) {
-    alert('Sign up request has failed, please try again')
+    yield call(handleError, error)
   }
 }
 
@@ -50,7 +50,7 @@ function* publishQuiz({ payload }: ReturnType<typeof actions.publishQuiz>) {
     yield call(saveQuiz, quiz)
     customHistory.push('/')
   } catch (error) {
-    alert('Error. Quiz is not saved')
+    yield call(handleError, error)
   }
 }
 
