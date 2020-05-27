@@ -1,10 +1,10 @@
 import produce from 'immer'
 import { State } from './types'
-import { ActionTypes } from './actions'
+import { ActionType } from 'typesafe-actions'
+import { actions, ActionTypes } from './actions'
 import { v4 as uuidv4 } from 'uuid'
 
 export const initialState: State = {
-  user: null,
   quizzes: [
     {
       uuid: 'be471009-0f53-49da-8fb5-afff413a6df7',
@@ -75,48 +75,14 @@ export const initialState: State = {
         }
       ]
     }
-  ],
-  notifications: [],
-  isLoading: false
+  ]
 }
 
-export default function reducer(state = initialState, action: any): State {
+export default function quizReducer(state = initialState, action: ActionType<typeof actions>): State {
   return produce(state, (draft) => {
     switch (action.type) {
-      case ActionTypes.loadUser: {
-        draft.isLoading = true
-        return draft
-      }
-
-      case ActionTypes.loadUserSuccess: {
-        draft.isLoading = false
-        draft.user = action.payload
-        return draft
-      }
-
-      case ActionTypes.signInFailure: {
-        draft.user = null
-        draft.isLoading = false
-        return draft
-      }
-
-      case ActionTypes.signOutUser: {
-        draft.user = null
-        return draft
-      }
-
       case ActionTypes.saveQuiz: {
         draft.quizzes = [...draft.quizzes, action.payload]
-        return draft
-      }
-
-      case ActionTypes.addNotification: {
-        draft.notifications.push(action.payload)
-        return draft
-      }
-
-      case ActionTypes.removeNotification: {
-        draft.notifications = draft.notifications.filter((item) => item.uuid !== action.payload)
         return draft
       }
 

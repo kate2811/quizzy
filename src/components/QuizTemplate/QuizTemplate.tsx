@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
-import { Quiz } from '../../module/types'
-import { useQuizzes } from '../../module/hooks'
+import { Quiz } from '../../module/quiz/types'
+import { useQuizzes } from '../../module/quiz/hooks'
 import QuizQuestion from './QuizQuestion'
 import { keyBy, mapValues } from 'lodash'
 

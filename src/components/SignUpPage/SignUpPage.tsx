@@ -4,7 +4,7 @@ import FormInput from '../FormInput'
 import { Link } from 'react-router-dom'
 import { Form, Formik } from 'formik'
 import * as Yup from 'yup'
-import { UserSingUpData } from '../../module/types'
+import { UserSingUpData } from '../../module/auth/types'
 
 type Props = { onSubmit: (userData: UserSingUpData) => void }
 

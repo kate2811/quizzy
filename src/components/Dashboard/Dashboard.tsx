@@ -1,5 +1,6 @@
 import React from 'react'
-import { Quiz, UserData } from '../../module/types'
+import { Quiz } from '../../module/quiz/types'
+import { UserData } from '../../module/auth/types'
 import PageLayout from '../PageLayout'
 import { Link } from 'react-router-dom'
 

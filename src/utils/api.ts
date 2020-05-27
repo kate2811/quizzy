@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { Quiz, UserSignInData, UserSingUpData } from '../module/types'
-import actions from '../module/actions'
+import { UserSignInData, UserSingUpData } from '../module/auth/types'
+import { Quiz } from '../module/quiz/types'
+import { actions } from '../module/quiz/actions'
 import store from '../store'
 
 class Api {
