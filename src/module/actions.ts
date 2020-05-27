@@ -1,4 +1,5 @@
 import { Quiz, UserData, UserSignInData, UserSingUpData, Notification } from './types'
+import { AxiosResponse } from 'axios'
 
 export enum ActionTypes {
   signInRequest = 'Sign in request',
@@ -12,7 +13,8 @@ export enum ActionTypes {
   saveQuiz = 'Quiz is saved',
   getNotification = 'Get notification',
   addNotification = 'Add notification',
-  removeNotification = 'Remove notification'
+  removeNotification = 'Remove notification',
+  handleError = 'Handle error'
 }
 
 function createAction<T, P>(type: T) {
@@ -33,5 +35,6 @@ export default {
   saveQuiz: createAction<ActionTypes.saveQuiz, Quiz>(ActionTypes.saveQuiz),
   getNotification: createAction<ActionTypes.getNotification, Omit<Notification, 'uuid'>>(ActionTypes.getNotification),
   addNotification: createAction<ActionTypes.addNotification, Notification>(ActionTypes.addNotification),
-  removeNotification: createAction<ActionTypes.removeNotification, string>(ActionTypes.removeNotification)
+  removeNotification: createAction<ActionTypes.removeNotification, string>(ActionTypes.removeNotification),
+  handleError: createAction<ActionTypes.handleError, AxiosResponse>(ActionTypes.handleError)
 }

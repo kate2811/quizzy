@@ -67,27 +67,3 @@ export async function saveQuiz(quiz: Quiz) {
   const response = await api.get('/auth/sign-up-check?email=' + email)
   return response.status === 200
 }*/
-
-export function handleError(error) {
-  const status = error.response.status
-  const token = localStorage.getItem('accessToken')
-  let errorMessage = 'Something went wrong'
-
-  if (status === 401 && token) {
-    store.dispatch(actions.signInFailure())
-    localStorage.removeItem('accessToken')
-    errorMessage = 'Your session has expired. Please sign-in again'
-  }
-
-  if (status === 401 && !token) {
-    store.dispatch(actions.signInFailure())
-    errorMessage = 'Authorization failed, please try again'
-  }
-
-  if (status === 400) {
-    const errorId = error.response.data.errors
-    errorMessage = errorId[Object.keys(errorId)[0]]
-  }
-
-  store.dispatch(actions.getNotification({ type: 'warning', text: errorMessage }))
-}

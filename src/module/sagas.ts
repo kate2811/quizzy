@@ -1,6 +1,6 @@
 import { call, put, delay, takeLatest, select, takeEvery, all } from 'redux-saga/effects'
 import actions, { ActionTypes } from './actions'
-import { getUserData, signIn, signUp, saveQuiz, handleError } from '../utils/api'
+import { getUserData, signIn, signUp, saveQuiz } from '../utils/api'
 import { customHistory } from '../history'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -15,7 +15,7 @@ function* getUser() {
     yield put(actions.loadUserSuccess(response))
     customHistory.push('/')
   } catch (error) {
-    yield call(handleError, error)
+    yield put(actions.handleError(error.response))
   }
 }
 
@@ -28,7 +28,7 @@ function* signInUser({ payload }: ReturnType<typeof actions.signInRequest>) {
       : yield sessionStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser())
   } catch (error) {
-    yield call(handleError, error)
+    yield put(actions.handleError(error.response))
   }
 }
 
@@ -39,7 +39,7 @@ function* signUpUser({ payload }: ReturnType<typeof actions.signUpRequest>) {
     localStorage.setItem('accessToken', token.accessToken)
     yield put(actions.getUser())
   } catch (error) {
-    yield call(handleError, error)
+    yield put(actions.handleError(error.response))
   }
 }
 
@@ -50,7 +50,7 @@ function* publishQuiz({ payload }: ReturnType<typeof actions.publishQuiz>) {
     yield call(saveQuiz, quiz)
     customHistory.push('/')
   } catch (error) {
-    yield call(handleError, error)
+    yield put(actions.handleError(error.response))
   }
 }
 
@@ -64,6 +64,35 @@ function* addNotification({ payload }: ReturnType<typeof actions.getNotification
   }
 }
 
+function* handleError({ payload }: ReturnType<typeof actions.handleError>) {
+  console.log(payload)
+  const status = payload.status
+  const token = localStorage.getItem('accessToken')
+  let errorMessage = 'Something went wrong'
+
+  if (status === 401 && token) {
+    yield put(actions.signInFailure())
+    yield localStorage.removeItem('accessToken')
+    errorMessage = 'Your session has expired. Please sign-in again'
+  }
+
+  if (status === 401 && !token) {
+    yield put(actions.signInFailure())
+    errorMessage = 'Authorization failed, please try again'
+  }
+
+  if (status === 400) {
+    const errorId = payload.data.errors
+    errorMessage = errorId[Object.keys(errorId)[0]]
+  }
+
+  if (status >= 500) {
+    errorMessage = 'The server did not response. Please, try again later '
+  }
+
+  yield put(actions.getNotification({ type: 'warning', text: errorMessage }))
+}
+
 function* Saga() {
   yield all([
     takeLatest(ActionTypes.signInRequest, signInUser),
@@ -71,7 +100,8 @@ function* Saga() {
     takeLatest(ActionTypes.signOutUser, signOutUser),
     takeLatest(ActionTypes.signUpRequest, signUpUser),
     takeLatest(ActionTypes.publishQuiz, publishQuiz),
-    takeEvery(ActionTypes.getNotification, addNotification)
+    takeEvery(ActionTypes.getNotification, addNotification),
+    takeEvery(ActionTypes.handleError, handleError)
   ])
 }
 
