@@ -1,24 +1,27 @@
 import React, { useCallback } from 'react'
 import style from './QuizAnswer.module.css'
 import cx from 'classnames'
+import { QuizAnswer as QuizAnswerType } from '../../module/quiz/types'
 
 type Props = {
-  value: string
+  title: string
   isCorrect: boolean
   onRemove(): void
-  onChange(answer: { value: string; isCorrect: boolean }): void
+  onChange(answer: QuizAnswerType): void
 }
 
-const QuizAnswer: React.FC<Props> = ({ onRemove, value, onChange, isCorrect }) => {
-  const onChangeText = useCallback((e) => onChange(Object.assign({}, { isCorrect, value: e.target.value })), [
+const QuizAnswer: React.FC<Props> = ({ onRemove, title, onChange, isCorrect }) => {
+  const onChangeText = useCallback((e) => onChange(Object.assign({}, { isCorrect, title: e.target.value })), [
     onChange,
     isCorrect
   ])
-  const onToggleIsCorrect = useCallback(() => onChange(Object.assign({}, { value, isCorrect: !isCorrect })), [
+
+  const onToggleIsCorrect = useCallback(() => onChange(Object.assign({}, { title, isCorrect: !isCorrect })), [
     onChange,
-    value,
+    title,
     isCorrect
   ])
+
   return (
     <div className={style.answer}>
       <button
@@ -31,7 +34,7 @@ const QuizAnswer: React.FC<Props> = ({ onRemove, value, onChange, isCorrect }) =
         className="form-control w-75 d-inline"
         type="text"
         placeholder="Enter answer option"
-        value={value}
+        value={title}
         onChange={onChangeText}
       />
       <button onClick={onRemove} className={cx(style.button, style.button_remove)}>

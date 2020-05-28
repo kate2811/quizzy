@@ -24,7 +24,7 @@ const QuizTemplate: React.FC<Props> = ({ q }) => {
   return (
     <div>
       <h1>{quiz.title}</h1>
-      {quiz.questions &&
+      {/*      {quiz.questions &&
         quiz.questions.map((item, index) => (
           <QuizQuestion
             key={index}
@@ -32,7 +32,7 @@ const QuizTemplate: React.FC<Props> = ({ q }) => {
             answers={answers[item.uuid]}
             onAnswer={(answers) => onAnswer(item.uuid, answers)}
           />
-        ))}
+        ))}*/}
     </div>
   )
 }

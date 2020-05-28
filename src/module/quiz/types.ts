@@ -1,19 +1,25 @@
 export type State = {
   quizzes: Quiz[]
+  isLoading: boolean
 }
 
 export type Quiz = {
-  userUuid?: string
-  uuid: string
+  uuid?: string
   title: string
+  description?: string
   questions?: QuizQuestion[]
+  isActive: boolean
 }
 
 export type QuizQuestion = {
-  quizUuid?: string
-  uuid: string
-  type?: 'checkbox' | 'radio' | 'input'
+  uuid?: string
   title: string
   image?: string
-  options: { uuid: string; value: string; isCorrect: boolean }[]
+  options: QuizAnswer[]
+}
+
+export type QuizAnswer = {
+  uuid?: string
+  title: string
+  isCorrect: boolean
 }

@@ -2,23 +2,25 @@ import React, { useCallback } from 'react'
 import style from './QuizQuestion.module.css'
 import QuizAnswer from '../QuizAnswer'
 import cx from 'classnames'
+import { QuizQuestion as QuizQuestionType } from '../../module/quiz/types'
 
 type Props = {
-  value: any
-  onChange: any
+  value: QuizQuestionType
+  onChange: (value: QuizQuestionType) => void
   onRemove(): void
   number: number
 }
 
 const newOption = {
-  value: '',
+  title: '',
   isCorrect: false
 }
 
 const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) => {
-  const onAddAnswer = useCallback(() => {
-    onChange(Object.assign({}, value, { options: [...value.options, newOption] }))
-  }, [onChange, value])
+  const onAddAnswer = useCallback(
+    () => onChange(Object.assign({}, value, { options: [...value.options, newOption] })),
+    [onChange, value]
+  )
 
   const onChangeTitle = useCallback((e) => onChange(Object.assign({}, value, { title: e.target.value })), [
     onChange,
@@ -26,9 +28,8 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) =>
   ])
 
   const onAnswerRemove = useCallback(
-    (index) => {
-      onChange(Object.assign({}, value, { options: value.options.filter((item, itemIndex) => itemIndex !== index) }))
-    },
+    (index) =>
+      onChange(Object.assign({}, value, { options: value.options.filter((item, itemIndex) => itemIndex !== index) })),
     [onChange, value]
   )
 
@@ -76,7 +77,7 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) =>
           <QuizAnswer
             key={index}
             onRemove={() => onAnswerRemove(index)}
-            value={item.value}
+            title={item.title}
             isCorrect={item.isCorrect}
             onChange={(value) => onAnswerChange(index, value)}
           />

@@ -3,11 +3,13 @@ import { actions, ActionTypes } from './actions'
 import { getUserData, signIn, signUp } from '../../utils/api'
 import { customHistory } from '../../history'
 import { actions as coreActions } from '../core/actions'
+import { actions as quizActions } from '../quiz/actions'
 
 function* getUser() {
   try {
     const response = yield call(getUserData)
     yield put(actions.loadUserSuccess(response))
+    yield put(quizActions.loadQuizzes())
     customHistory.push('/')
   } catch (error) {
     yield put(coreActions.handleError(error.response))
@@ -42,6 +44,7 @@ function* signOutUser() {
   yield put(actions.clearUser())
   localStorage.removeItem('accessToken')
   sessionStorage.removeItem('accessToken')
+  yield put(quizActions.clearQuizzes())
 }
 
 function* authSaga() {

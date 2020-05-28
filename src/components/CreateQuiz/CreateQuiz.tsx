@@ -4,19 +4,21 @@ import style from './CreateQuiz.module.css'
 import QuizQuestion from '../QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
+import { Quiz } from '../../module/quiz/types'
+
+type Props = {
+  onSubmit: (quiz: Quiz) => void
+}
 
 const emptyQuestion = {
   title: '',
+  description: 'some description',
   options: []
-}
-
-type Props = {
-  onSubmit: (quiz: { questions: { options: any[]; title: string }[]; title: string }) => void
 }
 
 const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
   const [questions, setQuestions] = useState([emptyQuestion])
-  const [title, setTitle] = useState('')
+  const [quiz, setQuiz] = useState({ description: '', title: '' })
 
   const onAdd = useCallback(() => {
     setQuestions([...questions, emptyQuestion])
@@ -40,6 +42,13 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
     [setQuestions, questions]
   )
 
+  const onQuizChange = useCallback(
+    (e) => {
+      setQuiz({ ...quiz, [e.target.name]: e.target.value })
+    },
+    [setQuiz, quiz]
+  )
+
   return (
     <PageLayout>
       <div className={style.container}>
@@ -48,9 +57,10 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
           type="text"
           name="title"
           placeholder="Enter quiz title here..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={quiz.title}
+          onChange={onQuizChange}
         />
+        <textarea name="description" className="form-control" value={quiz.description} onChange={onQuizChange} />
 
         <div className={style.questions}>
           {questions.map((item, index) => (
@@ -69,7 +79,7 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
         </button>
       </div>
       <button
-        onClick={() => onSubmit({ title, questions })}
+        onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions, isActive: true })}
         className="btn btn-warning btn-lg m-auto d-block"
         disabled={!questions[0].title && questions.length <= 1}
       >

@@ -1,8 +1,6 @@
 import axios from 'axios'
 import { UserSignInData, UserSingUpData } from '../module/auth/types'
 import { Quiz } from '../module/quiz/types'
-import { actions } from '../module/quiz/actions'
-import store from '../store'
 
 class Api {
   private readonly apiUrl: string
@@ -61,10 +59,12 @@ export async function signUp(userData: UserSingUpData) {
 }
 
 export async function saveQuiz(quiz: Quiz) {
-  store.dispatch(actions.saveQuiz(quiz))
+  console.log(quiz)
+  const response = await api.post('/quizzes', quiz)
+  return response.data
 }
 
-/*export async function signUpCheck(email: string) {
-  const response = await api.get('/auth/sign-up-check?email=' + email)
-  return response.status === 200
-}*/
+export async function getQuizzes() {
+  const response = await api.get('/quizzes')
+  return response.data
+}
