@@ -8,8 +8,8 @@ export type UserData = {
   email: string
   firstName: string
   lastName: string
-  createDate: string
-  updateDate: string
+  createDate?: string
+  updateDate?: string
 }
 
 export type UserSignInData = {

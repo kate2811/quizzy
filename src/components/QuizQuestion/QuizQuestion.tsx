@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react'
 import style from './QuizQuestion.module.css'
 import QuizAnswer from '../QuizAnswer'
+import cx from 'classnames'
 
 type Props = {
   value: any
   onChange: any
   onRemove(): void
+  number: number
 }
 
 const newOption = {
@@ -13,7 +15,7 @@ const newOption = {
   isCorrect: false
 }
 
-const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove }) => {
+const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) => {
   const onAddAnswer = useCallback(() => {
     onChange(Object.assign({}, value, { options: [...value.options, newOption] }))
   }, [onChange, value])
@@ -44,21 +46,28 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove }) => {
   return (
     <div>
       <div className={style.question}>
-        <textarea
-          name="question"
-          placeholder="Enter your question here..."
-          value={value.title}
-          onChange={onChangeTitle}
-        />
-        <button onClick={onRemove}>
-          <i className="fas fa-times-circle" />
-        </button>
-      </div>
+        <span className={style.question__number}>{number}.</span>
+        <div className={style.question__body}>
+          <textarea
+            className={cx(style.question__input, 'form-control')}
+            name="question"
+            placeholder="Enter your question here..."
+            value={value.title}
+            onChange={onChangeTitle}
+          />
 
-      <div className={style.attachments}>
-        <button>
-          <i className="fas fa-image" />
-          <i className="fas fa-video" />
+          <div className={style.attachments}>
+            <button>
+              <i className="fas fa-image" />
+            </button>
+            <button>
+              <i className="fas fa-video" />
+            </button>
+          </div>
+        </div>
+
+        <button className={style.question__closeBtn} onClick={onRemove}>
+          <i className="fas fa-times" />
         </button>
       </div>
 
@@ -72,7 +81,9 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove }) => {
             onChange={(value) => onAnswerChange(index, value)}
           />
         ))}
-        <button onClick={onAddAnswer}>Add answer option</button>
+        <button onClick={onAddAnswer} className="btn btn-outline-secondary btn-sm">
+          Add answer option
+        </button>
       </div>
     </div>
   )

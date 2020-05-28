@@ -11,8 +11,8 @@ type Props = {
 const QuizTemplate: React.FC<Props> = ({ q }) => {
   const quizzes = useQuizzes()
   const quiz = quizzes[0]
+  console.log(quiz)
   const [answers, setAnswers] = useState(mapValues(keyBy(quiz.questions, 'uuid'), () => []))
-  console.log(answers)
 
   const onAnswer = useCallback(
     (questionUuid, questionAnswers) => {

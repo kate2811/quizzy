@@ -3,6 +3,7 @@ import PageLayout from '../PageLayout'
 import style from './CreateQuiz.module.css'
 import QuizQuestion from '../QuizQuestion'
 import { produce } from 'immer'
+import cx from 'classnames'
 
 const emptyQuestion = {
   title: '',
@@ -41,10 +42,9 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
 
   return (
     <PageLayout>
-      <h1>Create a quiz</h1>
       <div className={style.container}>
         <input
-          className={style.input_title}
+          className={cx(style.quiz__title, 'h2')}
           type="text"
           name="title"
           placeholder="Enter quiz title here..."
@@ -52,10 +52,11 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <div className={style.container}>
+        <div className={style.questions}>
           {questions.map((item, index) => (
             <QuizQuestion
               key={index}
+              number={index + 1}
               onRemove={() => onRemove(index)}
               value={item}
               onChange={(value) => onChange(index, value)}
@@ -63,9 +64,17 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
           ))}
         </div>
 
-        <button onClick={onAdd}>Add new question</button>
+        <button onClick={onAdd} className="btn btn-warning mt-3">
+          Add new question
+        </button>
       </div>
-      <button onClick={() => onSubmit({ title, questions })}>Publish</button>
+      <button
+        onClick={() => onSubmit({ title, questions })}
+        className="btn btn-warning btn-lg m-auto d-block"
+        disabled={!questions[0].title && questions.length <= 1}
+      >
+        Publish it!
+      </button>
     </PageLayout>
   )
 }

@@ -11,7 +11,7 @@ type Props = {
 
 const PageLayout: React.FC<Props> = ({ children, signOut }) => {
   return (
-    <div>
+    <div className={style.container}>
       <nav className={cx('navbar', 'bg-warning', 'justify-content-between', style.header)}>
         <img src={logo} height={30} alt="quizzy_logo" />
         <Notifications className={style.notifications} />

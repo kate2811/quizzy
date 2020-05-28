@@ -1,11 +1,23 @@
 .container {
-  background: #ffffff;
+  width: 1000px;
+  margin: auto;
+  padding: 45px 50px;
 }
 
-.input_title {
+.quiz__title {
+  display: block;
+  margin: auto auto 20px auto;
+  font-size: 30px;
+  color: #444343;
+  text-align: center;
   border: none;
+  box-shadow: -1px 16px 38px -32px rgba(0,0,0,0.75);
 }
 
-.input_title:focus {
+.quiz__title:focus {
   outline: none;
+}
+
+.questions {
+  margin-top: 40px;
 }
