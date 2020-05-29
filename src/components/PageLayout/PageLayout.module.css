@@ -1,0 +1,21 @@
+.container {
+}
+
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.notifications {
+  z-index: 1;
+  position: absolute;
+  top: 8px;
+  right: 150px;
+  width: 300px;
+}

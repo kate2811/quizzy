@@ -1,15 +1,17 @@
 import React from 'react'
 import style from './AuthPageLayout.module.css'
 import logo from '../../images/logo.png'
+import Notifications from '../Notifications'
 
-const AuthPageLayout: React.FC<{title: string}> = ({ children, title }) => {
+const AuthPageLayout: React.FC<{ title: string }> = ({ children, title }) => {
   return (
     <div className={style.container}>
+      <Notifications className={style.notifications} />
       <div className={style.logo}>
-        <img src={logo} className={style.logoImg} alt='quizzy_logo' />
+        <img src={logo} className={style.logoImg} alt="quizzy_logo" />
       </div>
       <div className={style.content}>
-        <h1 className='text-center h3 mb-4'>{title}</h1>
+        <h1 className="text-center h3 mb-4">{title}</h1>
         {children}
       </div>
     </div>

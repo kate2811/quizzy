@@ -1,15 +1,14 @@
 import produce from 'immer'
+import { ActionType } from 'typesafe-actions'
 import { State } from './types'
-import { ActionTypes } from './actions'
+import { actions, ActionTypes } from './actions'
 
 export const initialState: State = {
-  user: { id: 1, username: 'Masha'},
-  quizzes: [],
-  //quizzes: [{ title: 'elementary school quiz'}, { title: 'high school quiz'} ],
+  user: null,
   isLoading: false
 }
 
-export default function reducer(state = initialState, action: any): State {
+export default function authReducer(state = initialState, action: ActionType<typeof actions>): State {
   return produce(state, (draft) => {
     switch (action.type) {
       case ActionTypes.loadUser: {
@@ -29,7 +28,7 @@ export default function reducer(state = initialState, action: any): State {
         return draft
       }
 
-      case ActionTypes.signOutUser: {
+      case ActionTypes.clearUser: {
         draft.user = null
         return draft
       }

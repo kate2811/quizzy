@@ -1,45 +1,69 @@
 import axios from 'axios'
-import {UserSignInData, UserSingUpData} from '../module/types'
-import actions from '../module/actions'
-import store from '../store'
+import { UserSignInData, UserSingUpData } from '../module/auth/types'
+import { Quiz } from '../module/quiz/types'
+
+class Api {
+  private readonly apiUrl: string
+  private readonly headers: { headers: { 'Content-Type': string } }
+  private config: { headers: { [key: string]: string } }
+
+  constructor() {
+    this.apiUrl = 'http://47.56.144.147:5555'
+    this.headers = { headers: { 'Content-Type': 'application/json;charset=utf-8' } }
+    this.config = this.headers
+  }
+
+  getConfig(data?) {
+    const token = localStorage.getItem('accessToken')
+    if (token) {
+      this.config = { headers: { ...this.config.headers, Authorization: 'Bearer ' + token } }
+    }
+    if (data) {
+      this.config = { headers: { ...this.config.headers, data: data } }
+    }
+    return this.config
+  }
+
+  get(url) {
+    return axios.get(this.apiUrl + url, this.getConfig())
+  }
+
+  post(url, data) {
+    return axios.post(this.apiUrl + url, data, this.getConfig())
+  }
+
+  put(url, data) {
+    return axios.put(this.apiUrl + url, data, this.getConfig())
+  }
+
+  delete(url, data) {
+    return axios.delete(this.apiUrl + url, this.getConfig())
+  }
+}
+
+export const api = new Api()
 
 export async function signIn(userData: Omit<UserSignInData, 'isRemember'>) {
-  let response = await axios.post('http://localhost:5000/auth/login', userData, {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    }
-  })
+  const response = await api.post('/auth/login', userData)
   return response.data
 }
 
-export async function getUserData(token: string) {
-  let response = await axios.get('http://localhost:5000/users/current', {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Authorization': 'Bearer ' + token
-    }
-  })
+export async function getUserData() {
+  const response = await api.get('/users/current')
   return response.data
 }
 
 export async function signUp(userData: UserSingUpData) {
-  let response = await axios.post('http://localhost:5000', userData, {
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    }
-  })
+  const response = await api.post('/auth/sign-up', userData)
   return response.data
 }
 
-axios.interceptors.response.use(
-  function (response) {
-    return response
-  },
-  function (error) {
-    if (401 === error.response.status) {
-      store.dispatch(actions.signInFailure())
-      localStorage.removeItem('accessToken')
-    }
-    return Promise.reject(error)
-  }
-)
+export async function addQuiz(quiz: Quiz) {
+  const response = await api.post('/quizzes', quiz)
+  return response.data
+}
+
+export async function getQuizzes() {
+  const response = await api.get('/quizzes')
+  return response.data
+}
