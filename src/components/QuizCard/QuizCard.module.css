@@ -1,0 +1,19 @@
+.card__body {
+  min-height: 100px;
+}
+
+.card__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 15px 20px;
+}
+
+.card__footer button {
+  margin-right: 7px;
+  border-color: #b6babe;
+  background-color: #fff;
+}
+
+.card__footer button:last-child {
+  margin-right: 0
+}
