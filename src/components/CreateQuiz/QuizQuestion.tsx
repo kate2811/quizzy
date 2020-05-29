@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
-import style from './QuizQuestion.module.css'
-import QuizAnswer from '../QuizAnswer'
+import style from './CreateQuiz.module.css'
+import QuizAnswer from './QuizAnswer'
 import cx from 'classnames'
 import { QuizQuestion as QuizQuestionType } from '../../module/quiz/types'
 

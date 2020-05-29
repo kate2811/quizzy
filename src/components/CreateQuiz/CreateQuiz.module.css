@@ -21,3 +21,94 @@
 .questions {
   margin-top: 40px;
 }
+
+.question {
+  display: flex;
+  margin-top: 30px;
+}
+
+.question__number {
+  color: #A6A6A6;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.question__body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.question__input {
+  min-height: 120px;
+  margin-bottom: 7px;
+}
+
+.question__closeBtn {
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  margin-left: 15px;
+  color: #A6A6A6;
+  background: none;
+  border: none;
+}
+
+.question__closeBtn:hover {
+  color: #e16f60;
+}
+
+.question__closeBtn:focus {
+  outline: none;
+}
+
+.attachments button {
+  font-size: 23px;
+  color: #A6A6A6;
+  background: none;
+  border: none;
+  margin-right: 5px;
+}
+
+.attachments button:hover {
+  color: #000000;
+}
+
+.answers {
+  margin-top: 20px;
+}
+
+.answer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.button {
+  width: 20px;
+  height: 20px;
+  margin: 0 15px 0 0;
+  font-size: 25px;
+  border: none;
+  color: #A6A6A6;
+  background: none;
+  padding: 0;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button_correct:hover,
+.button_selected {
+  color: #000000;
+}
+
+.button_remove {
+  margin: 0 0 0 15px;
+  font-size: 17px;
+}
+
+.button_remove:hover {
+  color: #e16f60;
+}
