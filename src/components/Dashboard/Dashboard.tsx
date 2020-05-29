@@ -4,6 +4,8 @@ import { UserData } from '../../module/auth/types'
 import PageLayout from '../PageLayout'
 import { Link } from 'react-router-dom'
 import Loader from 'react-loader-spinner'
+import QuizCard from '../QuizCard'
+import style from './Dashboard.module.css'
 
 type Props = {
   user: null | UserData
@@ -11,35 +13,33 @@ type Props = {
   isQuizzesLoading: boolean
 }
 
+const cardsPlaceholder = ['', '', '']
+
 const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
   const userName = user && user.firstName ? user.firstName : 'Guest'
 
   return (
     <>
       <PageLayout>
-        <h1 className="text-center">{`Hello, ${userName}. Create your quiz`}</h1>
+        <div className={style.container}>
+          <h1 className="text-center">Hello, {userName}. Your quizzes are here</h1>
 
-        {isQuizzesLoading ? (
-          <Loader type="Bars" color="#157FFB" height={40} width={40} />
-        ) : quizzes.length === 0 ? (
-          <>
+          <Link to="/create" className="btn btn-warning">
+            Create new quiz!
+          </Link>
+
+          {isQuizzesLoading ? (
+            cardsPlaceholder.map((item, index) => <QuizCard key={index} className={style.card} />)
+          ) : quizzes.length === 0 ? (
             <div>You don't have any quizzes yet</div>
-            <Link to="/create" className="btn btn-warning">
-              Create it!
-            </Link>
-          </>
-        ) : (
-          <div>
-            <ul>
+          ) : (
+            <div className={style.quizzes__container}>
               {quizzes.map((item, index) => (
-                <li key={index}>{item.title}</li>
+                <QuizCard key={index} title={item.title} description={item.description} className={style.card} />
               ))}
-            </ul>
-            <Link to="/create" className="btn btn-warning">
-              Create new quiz!
-            </Link>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </PageLayout>
     </>
   )

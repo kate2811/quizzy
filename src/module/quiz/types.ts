@@ -6,7 +6,7 @@ export type State = {
 export type Quiz = {
   uuid?: string
   title: string
-  description?: string
+  description: string
   questions?: QuizQuestion[]
   isActive: boolean
 }
