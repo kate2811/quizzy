@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import PageLayout from '../PageLayout'
 import style from './CreateQuiz.module.css'
-import QuizQuestion from '../QuizQuestion'
+import QuizQuestion from './QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
 import { Quiz } from '../../module/quiz/types'
