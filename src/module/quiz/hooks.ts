@@ -15,7 +15,7 @@ export function useIsQuizzesLoading() {
 export function usePublishQuiz() {
   const dispatch = useDispatch()
   return useCallback(
-    (quiz: Omit<Quiz, 'uuid'>) => {
+    (quiz: Quiz) => {
       return dispatch(actions.publishQuiz(quiz))
     },
     [dispatch]

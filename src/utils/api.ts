@@ -58,8 +58,7 @@ export async function signUp(userData: UserSingUpData) {
   return response.data
 }
 
-export async function saveQuiz(quiz: Quiz) {
-  console.log(quiz)
+export async function addQuiz(quiz: Quiz) {
   const response = await api.post('/quizzes', quiz)
   return response.data
 }
