@@ -14,7 +14,7 @@ type Props = {
 const emptyQuestion = {
   title: '',
   description: 'some description',
-  options: []
+  options: [{ title: '', isCorrect: false }]
 }
 
 const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
