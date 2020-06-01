@@ -10,10 +10,39 @@
 
 .card__footer button {
   margin-right: 7px;
-  border-color: #b6babe;
-  background-color: #fff;
+  border-color: #cdd0d3;
 }
 
 .card__footer button:last-child {
   margin-right: 0
+}
+
+.placeholder__title,
+.placeholder__description {
+  width: 150px;
+  height: 10px;
+  margin: 8px 0 27px 0;
+  background: #cdd0d3;
+}
+
+.placeholder__description {
+  width: 250px;
+  margin: 0;
+}
+
+.placeholder__buttons {
+  height: 31px;
+}
+
+.placeholder__buttons div {
+  display: inline-block;
+  height: 100%;
+  width: 33px;
+  margin-right: 7px;
+  background: #cdd0d3;
+  border-radius: 3px;
+}
+
+.placeholder__buttons div:last-child {
+  margin-right: 0;
 }

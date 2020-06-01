@@ -7,22 +7,33 @@
 .container h1 {
   margin-bottom: 30px;
 }
-.container a {
-  display: block;
-  width: 170px;
-  margin: auto auto 30px auto;
-}
 
 .card {
   min-height: 147px;
   margin-bottom: 20px;
 }
 
+a .card_createNew {
+  min-height: 147px;
+  margin-bottom: 20px;
+  background: #ffd569;
+  color: #000;
+  border: none;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: #000;
+}
+
+.card_createNew button {
+  display: none;
+}
+
 .card:hover {
   background-color: #f7f8f8;
 }
 
-.card:last-child {
-  margin-bottom: 0;
-
+a .card_createNew:hover {
+  background-color: #ffd978;
 }

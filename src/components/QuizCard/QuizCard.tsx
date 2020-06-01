@@ -11,21 +11,43 @@ type Props = {
 const actionsIcons = ['fa-share', 'fa-edit', 'fa-chart-line']
 
 const QuizCard: React.FC<Props> = ({ title, description, className }) => {
-  return (
+  const placeholder = (
     <div className={cx('card', className)}>
       <div className={cx('card-body', style.card__body)}>
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
+        <div className={style.placeholder__title} />
+        <div className={style.placeholder__description} />
       </div>
-
       <div className={style.card__footer}>
-        {actionsIcons.map((item, index) => (
-          <button key={index} className="btn btn-outline-secondary btn-sm">
-            <i className={cx('fas', item)} />
-          </button>
-        ))}
+        <div className={style.placeholder__buttons}>
+          {actionsIcons.map((item, index) => (
+            <div key={index} />
+          ))}
+        </div>
       </div>
     </div>
+  )
+
+  return (
+    <>
+      {title && description ? (
+        <div className={cx('card', className)}>
+          <div className={cx('card-body', style.card__body)}>
+            <h5 className="card-title">{title}</h5>
+            <p className="card-text">{description}</p>
+          </div>
+
+          <div className={style.card__footer}>
+            {actionsIcons.map((item, index) => (
+              <button key={index} className="btn btn-outline-secondary btn-sm">
+                <i className={cx('fas', item)} />
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : (
+        placeholder
+      )}
+    </>
   )
 }
 

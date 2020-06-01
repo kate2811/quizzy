@@ -3,7 +3,7 @@ import { Quiz } from '../../module/quiz/types'
 import { UserData } from '../../module/auth/types'
 import PageLayout from '../PageLayout'
 import { Link } from 'react-router-dom'
-import Loader from 'react-loader-spinner'
+import cx from 'classnames'
 import QuizCard from '../QuizCard'
 import style from './Dashboard.module.css'
 
@@ -24,8 +24,8 @@ const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
         <div className={style.container}>
           <h1 className="text-center">Hello, {userName}. Your quizzes are here</h1>
 
-          <Link to="/create" className="btn btn-warning">
-            Create new quiz!
+          <Link to="/create" className={style.link}>
+            <QuizCard className={style.card_createNew} title="Create new quiz!" description="It's fast and easy!" />
           </Link>
 
           {isQuizzesLoading ? (
