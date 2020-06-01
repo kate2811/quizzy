@@ -4,6 +4,7 @@ import style from './CreateQuiz.module.css'
 import QuizQuestion from './QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
+import { Link } from 'react-router-dom'
 import { Quiz } from '../../module/quiz/types'
 
 type Props = {
@@ -60,7 +61,13 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
           value={quiz.title}
           onChange={onQuizChange}
         />
-        <textarea name="description" className="form-control" value={quiz.description} onChange={onQuizChange} />
+        <textarea
+          name="description"
+          placeholder="Enter quiz description here..."
+          className={cx('form-control', style.quiz__description)}
+          value={quiz.description}
+          onChange={onQuizChange}
+        />
 
         <div className={style.questions}>
           {questions.map((item, index) => (
@@ -74,17 +81,22 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
           ))}
         </div>
 
-        <button onClick={onAdd} className="btn btn-warning mt-3">
+        <button onClick={onAdd} className={cx('btn', 'btn-warning', 'mt-3', style.button_addQuestion)}>
           Add new question
         </button>
       </div>
-      <button
-        onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions, isActive: true })}
-        className="btn btn-warning btn-lg m-auto d-block"
-        disabled={!questions[0].title && questions.length <= 1}
-      >
-        Publish it!
-      </button>
+      <div className={style.buttons_navigation}>
+        <Link to="/" className="btn btn-secondary">
+          Go back
+        </Link>
+        <button
+          onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions, isActive: true })}
+          className="btn btn-warning btn-lg"
+          disabled={!questions[0].title && questions.length <= 1}
+        >
+          Publish it!
+        </button>
+      </div>
     </PageLayout>
   )
 }

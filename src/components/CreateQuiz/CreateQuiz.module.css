@@ -4,6 +4,17 @@
   padding: 45px 50px;
 }
 
+.buttons_navigation {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.buttons_navigation button {
+  margin-left: 30px;
+}
+
+
 .quiz__title {
   display: block;
   margin: auto auto 20px auto;
@@ -16,6 +27,11 @@
 
 .quiz__title:focus {
   outline: none;
+}
+
+.container .quiz__description {
+  margin: 30px 3px 0 30px;
+  width: 826px;
 }
 
 .questions {
@@ -61,6 +77,11 @@
 
 .question__closeBtn:focus {
   outline: none;
+}
+
+.button_addOption,
+.button_addQuestion {
+  margin-left: 35px;
 }
 
 .attachments button {
