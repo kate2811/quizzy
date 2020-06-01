@@ -82,7 +82,7 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) =>
             onChange={(value) => onAnswerChange(index, value)}
           />
         ))}
-        <button onClick={onAddAnswer} className="btn btn-outline-secondary btn-sm">
+        <button onClick={onAddAnswer} className={cx('btn', 'btn-outline-secondary', 'btn-sm', style.button_addOption)}>
           Add answer option
         </button>
       </div>

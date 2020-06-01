@@ -3,7 +3,6 @@ import { Quiz } from '../../module/quiz/types'
 import { UserData } from '../../module/auth/types'
 import PageLayout from '../PageLayout'
 import { Link } from 'react-router-dom'
-import cx from 'classnames'
 import QuizCard from '../QuizCard'
 import style from './Dashboard.module.css'
 
