@@ -34,10 +34,8 @@ function App() {
                 <CreateQuiz />
               </Protected>
             </Route>
-            <Route path="/quiz" exact>
-              <Protected>
-                <QuizTemplate />
-              </Protected>
+            <Route path="/quiz/:uuid">
+              <QuizTemplate />
             </Route>
             <Route path="/auth/sign-in">
               <SignInPage />

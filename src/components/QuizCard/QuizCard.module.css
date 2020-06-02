@@ -8,12 +8,12 @@
   padding: 0 20px 15px 20px;
 }
 
-.card__footer button {
+.card__footer .button {
   margin-right: 7px;
   border-color: #cdd0d3;
 }
 
-.card__footer button:last-child {
+.card__footer .button:last-child {
   margin-right: 0
 }
 

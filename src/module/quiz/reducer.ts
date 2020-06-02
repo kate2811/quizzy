@@ -17,7 +17,11 @@ export default function quizReducer(state = initialState, action: ActionType<typ
       }
 
       case ActionTypes.loadQuizzesSuccess: {
-        draft.quizzes = action.payload
+        if (Array.isArray(action.payload)) {
+          draft.quizzes = action.payload
+        } else {
+          draft.quizzes.push(action.payload)
+        }
         draft.isLoading = false
         return draft
       }

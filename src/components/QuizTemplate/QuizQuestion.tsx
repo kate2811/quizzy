@@ -1,11 +1,9 @@
 import React, { useCallback } from 'react'
 import style from './QuizTemplate.module.css'
+import { QuizQuestion as QuizQuestionType } from '../../module/quiz/types'
 
 type Props = {
-  value: {
-    title: string
-    options: { uuid: string; value: string; isCorrect: boolean }[]
-  }
+  value: QuizQuestionType
   onAnswer: any
   answers: string[]
 }
@@ -25,11 +23,11 @@ const QuizQuestion: React.FC<Props> = ({ value, onAnswer, answers }) => {
         <label key={index}>
           <input
             type="checkbox"
-            value={item.value}
+            value={item.title}
             onChange={() => onToggleAnswer(item.uuid)}
-            checked={answers.includes(item.uuid)}
+            checked={answers.includes(item.uuid as string)}
           />
-          {item.value}
+          {item.title}
         </label>
       ))}
     </div>

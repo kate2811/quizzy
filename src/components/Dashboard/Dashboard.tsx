@@ -26,15 +26,20 @@ const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
         <Link to="/create" className={style.link}>
           <button className="btn btn-primary" />
         </Link>
-
         {isQuizzesLoading ? (
           cardsPlaceholder.map((item, index) => <QuizCard key={index} className={style.card} />)
         ) : quizzes.length === 0 ? (
           <div>You don't have any quizzes yet</div>
         ) : (
-          <div className="row">
+          <div className={style.quizzes__container}>
             {quizzes.map((item, index) => (
-              <QuizCard key={index} title={item.title} description={item.description} />
+              <QuizCard
+                key={index}
+                title={item.title}
+                description={item.description}
+                uuid={item.uuid}
+                className={style.card}
+              />
             ))}
           </div>
         )}

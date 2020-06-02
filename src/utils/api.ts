@@ -67,3 +67,8 @@ export async function getQuizzes() {
   const response = await api.get('/admin/quizzes')
   return response.data
 }
+
+export async function getQuizByUuid(uuid) {
+  const response = await api.get('/quizzes/' + uuid)
+  return response.data
+}
