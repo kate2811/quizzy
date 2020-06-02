@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './AuthPageLayout.module.css'
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.svg'
 import Notifications from '../Notifications'
 
 const AuthPageLayout: React.FC<{ title: string }> = ({ children, title }) => {
