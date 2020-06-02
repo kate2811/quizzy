@@ -1,10 +1,9 @@
 import React, { useCallback, useState } from 'react'
-import { Quiz } from '../../module/quiz/types'
-import { useQuizzes } from '../../module/quiz/hooks'
+import { Quiz } from '../../modules/quiz/types'
 import QuizQuestion from './QuizQuestion'
 import { keyBy, mapValues } from 'lodash'
 import Loader from 'react-loader-spinner'
-import { UserData } from '../../module/auth/types'
+import { UserData } from '../../modules/auth/types'
 import { Link } from 'react-router-dom'
 
 type Props = {

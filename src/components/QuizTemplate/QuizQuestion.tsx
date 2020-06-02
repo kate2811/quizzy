@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import style from './QuizTemplate.module.css'
-import { QuizQuestion as QuizQuestionType } from '../../module/quiz/types'
+import { QuizQuestion as QuizQuestionType } from '../../modules/quiz/types'
 
 type Props = {
   value: QuizQuestionType

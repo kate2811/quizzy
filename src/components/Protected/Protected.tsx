@@ -1,5 +1,5 @@
 import React from 'react'
-import { UserData } from '../../module/auth/types'
+import { UserData } from '../../modules/auth/types'
 import { Redirect } from 'react-router-dom'
 
 type Props = {

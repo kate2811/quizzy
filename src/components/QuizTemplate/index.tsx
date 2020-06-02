@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import QuizTemplate from './QuizTemplate'
-import { useGetQuizByUuid, useIsQuizzesLoading, useQuizByUuid } from '../../module/quiz/hooks'
-import { useUser } from '../../module/auth/hooks'
+import { useGetQuizByUuid, useIsQuizzesLoading, useQuizByUuid } from '../../modules/quiz/hooks'
+import { useUser } from '../../modules/auth/hooks'
 
 export default function () {
   const { uuid } = useParams()

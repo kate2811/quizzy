@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import style from './CreateQuiz.module.css'
 import cx from 'classnames'
-import { QuizAnswer as QuizAnswerType } from '../../module/quiz/types'
+import { QuizAnswer as QuizAnswerType } from '../../modules/quiz/types'
 
 type Props = {
   title: string
