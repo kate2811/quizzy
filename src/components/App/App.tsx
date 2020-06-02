@@ -18,8 +18,8 @@ function App() {
   return (
     <>
       {isLoading ? (
-        <div>
-          <Loader type="Bars" color="#157FFB" height={40} width={40} />
+        <div className="d-flex justify-content-center min-vh-100 align-items-center">
+          <Loader type="Bars" color="#ffd569" height={50} width={50} />
         </div>
       ) : (
         <Router history={customHistory}>
