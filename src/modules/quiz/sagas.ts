@@ -1,6 +1,12 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import { actions, ActionTypes } from './actions'
-import { getQuizzes, addQuiz, getQuizByUuid } from '../../utils/api'
+import {
+  getQuizzes,
+  addQuiz,
+  getQuizByUuid,
+  deleteQuiz as deleteQuizFromApi,
+  editQuiz as editQuizInApi
+} from '../../utils/api'
 import { customHistory } from '../../history'
 import { actions as coreActions } from '../core/actions'
 
@@ -13,10 +19,10 @@ function* loadQuizzes() {
   }
 }
 
-function* loadQuizByUuid({ payload }: ReturnType<typeof actions.getQuizByUuid>) {
+function* loadQuizByUuid({ payload }: ReturnType<typeof actions.loadQuizByUuid>) {
   try {
     const response = yield call(getQuizByUuid, payload)
-    yield put(actions.loadQuizzesSuccess(response))
+    yield put(actions.loadQuizByUuidSuccess(response))
   } catch (error) {
     yield put(coreActions.handleError(error.response))
   }
@@ -32,11 +38,33 @@ function* publishQuiz({ payload }: ReturnType<typeof actions.publishQuiz>) {
   }
 }
 
+function* deleteQuiz({ payload }: ReturnType<typeof actions.deleteQuiz>) {
+  try {
+    customHistory.push('/')
+    yield put(actions.deleteQuizLocally(payload))
+    yield call(deleteQuizFromApi, payload)
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
+function* editQuiz({ payload }: ReturnType<typeof actions.editQuiz>) {
+  try {
+    const response = yield call(editQuizInApi, payload)
+    yield put(actions.editQuizLocally(response))
+    customHistory.push('/')
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
 function* quizSaga() {
   yield all([
     takeLatest(ActionTypes.publishQuiz, publishQuiz),
     takeLatest(ActionTypes.loadQuizzes, loadQuizzes),
-    takeLatest(ActionTypes.getQuizByUuid, loadQuizByUuid)
+    takeLatest(ActionTypes.loadQuizByUuid, loadQuizByUuid),
+    takeLatest(ActionTypes.deleteQuiz, deleteQuiz),
+    takeLatest(ActionTypes.editQuiz, editQuiz)
   ])
 }
 

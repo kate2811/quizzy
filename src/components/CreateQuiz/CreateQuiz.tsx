@@ -9,16 +9,21 @@ import { Quiz } from '../../modules/quiz/types'
 
 type Props = {
   onSubmit: (quiz: Quiz) => void
+  onDelete?: (uuid: string) => void
+  editedQuiz?: Quiz
 }
 
 const emptyQuestion = {
   title: '',
+  description: 'some description',
   options: [{ title: '', isCorrect: false }]
 }
 
-const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
-  const [questions, setQuestions] = useState([emptyQuestion])
-  const [quiz, setQuiz] = useState({ description: '', title: '' })
+const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onDelete }) => {
+  const [questions, setQuestions] = useState(editedQuiz ? (editedQuiz.questions as []) : [emptyQuestion])
+  const [quiz, setQuiz] = useState(
+    editedQuiz ? { description: editedQuiz.description, title: editedQuiz.title } : { description: '', title: '' }
+  )
 
   const onAdd = useCallback(() => {
     setQuestions([...questions, emptyQuestion])
@@ -89,12 +94,23 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
           Go back
         </Link>
         <button
-          onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions })}
+          onClick={() =>
+            onSubmit(
+              editedQuiz
+                ? { uuid: editedQuiz.uuid, title: quiz.title, description: quiz.description, questions, isActive: true }
+                : { title: quiz.title, description: quiz.description, questions, isActive: true }
+            )
+          }
           className="btn btn-warning btn-lg"
           disabled={!questions[0].title && questions.length <= 1}
         >
-          Publish it!
+          {editedQuiz ? 'Save it' : 'Publish it!'}
         </button>
+        {onDelete && editedQuiz && (
+          <button className="btn btn-secondary" onClick={() => onDelete(editedQuiz.uuid as string)}>
+            Delete
+          </button>
+        )}
       </div>
     </PageLayout>
   )

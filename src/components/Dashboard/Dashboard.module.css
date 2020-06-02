@@ -26,11 +26,6 @@ a .card_createNew {
   color: #000;
 }
 
-.card_createNew button,
-.card_createNew a {
-  display: none;
-}
-
 .card:hover {
   background-color: #f7f8f8;
 }
