@@ -5,9 +5,9 @@ import login from '../../images/login-visual-5.svg'
 import Notifications from '../Notifications'
 import cx from 'classnames'
 
-const AuthPageLayout: React.FC<{ title: string }> = ({ children, title }) => {
+const AuthPageLayout: React.FC = ({ children }) => {
   return (
-    <div className="d-flex min-vh-100 min-vw-100">
+    <div className="d-flex min-vh-100 min-vw-100 position-relative">
       <Notifications className={style.notifications} />
 
       <div className={style.container_logo}>
@@ -20,25 +20,17 @@ const AuthPageLayout: React.FC<{ title: string }> = ({ children, title }) => {
 
       <div
         className={cx(
-          'login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto',
+          'login-content flex-row-fluid d-flex flex-column justify-content-center position-relative',
+          'overflow-hidden p-7 mx-auto',
           style.container_form
         )}
       >
-        <div className="d-flex flex-column-fluid flex-center">{children}</div>
+        <div className="d-flex flex-column-fluid flex-center">
+          <div className={cx('login-form', style.form)}>{children}</div>
+        </div>
       </div>
     </div>
   )
 }
 
 export default AuthPageLayout
-
-/*    <div className={style.container}>
-      <Notifications className={style.notifications} />
-      <div className={style.logo}>
-        <img src={logo} className={style.logoImg} alt="quizzy_logo" />
-      </div>
-      <div className={style.content}>
-        <h1 className="text-center h3 mb-4">{title}</h1>
-        {children}
-      </div>
-    </div>*/
