@@ -31,4 +31,5 @@
   top: 10px;
   right: 50px;
   width: 300px;
+  z-index: 1;
 }
