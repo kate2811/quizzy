@@ -1,6 +1,13 @@
 @font-face {
   font-family: 'Comfortaa';
   src: local('Comfortaa'), url("fonts/Comfortaa-Regular.ttf") format('truetype');
+  src: local('Comfortaa'), url("fonts/Comfortaa-Medium.ttf") format('truetype');
+  src: local('Comfortaa'), url("fonts/Comfortaa-Bold.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'Ki';
+  src: local('Ki'), url('fonts/Ki.woff') format('woff');
 }
 
 body {

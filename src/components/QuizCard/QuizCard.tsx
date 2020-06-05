@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './QuizCard.module.css'
 import cx from 'classnames'
+import Dropdown from '../Dropdown'
 
 type Props = {
   title?: string
@@ -8,7 +9,11 @@ type Props = {
   className?: string
 }
 
-const actionsIcons = ['fa-share', 'fa-edit', 'fa-chart-line']
+const actions = [
+  { title: 'Results', to: '/' },
+  { title: 'Edit', to: '/' },
+  { title: 'Share', to: '/' }
+]
 
 const QuizCard: React.FC<Props> = ({ title, description, className }) => {
   const placeholder = (
@@ -17,31 +22,24 @@ const QuizCard: React.FC<Props> = ({ title, description, className }) => {
         <div className={style.placeholder__title} />
         <div className={style.placeholder__description} />
       </div>
-      <div className={style.card__footer}>
-        <div className={style.placeholder__buttons}>
-          {actionsIcons.map((item, index) => (
-            <div key={index} />
-          ))}
-        </div>
-      </div>
+      <div className={style.card__footer} />
     </div>
   )
 
   return (
     <>
       {title && description ? (
-        <div className={cx('card', className)}>
-          <div className={cx('card-body', style.card__body)}>
-            <h5 className="card-title">{title}</h5>
-            <p className="card-text">{description}</p>
-          </div>
-
-          <div className={style.card__footer}>
-            {actionsIcons.map((item, index) => (
-              <button key={index} className="btn btn-outline-secondary btn-sm">
-                <i className={cx('fas', item)} />
-              </button>
-            ))}
+        <div className="col-lg-6">
+          <div className="card mb-8">
+            <div className="card-body row">
+              <div className="col-sm-7">
+                <h2 className="text-dark mb-4">{title}</h2>
+                <p className="text-dark-50 font-size-lg overflow-hidden">{description}</p>
+              </div>
+              <div className="col-sm-5 d-flex align-items-center justify-content-sm-end">
+                <Dropdown menuItems={actions} />
+              </div>
+            </div>
           </div>
         </div>
       ) : (

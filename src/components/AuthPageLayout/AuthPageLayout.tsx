@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './AuthPageLayout.module.css'
 import logo from '../../images/logo.svg'
-import login from '../../images/login-visual-5.svg'
+import login from '../../images/illustration/login-visual-5.svg'
 import Notifications from '../Notifications'
 import cx from 'classnames'
 
