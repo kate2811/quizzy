@@ -4,6 +4,7 @@ import cx from 'classnames'
 import Dropdown from '../Dropdown'
 
 type Props = {
+  uuid?: string
   title?: string
   description?: string
   className?: string
@@ -15,7 +16,7 @@ const actions = [
   { title: 'Share', to: '/' }
 ]
 
-const QuizCard: React.FC<Props> = ({ title, description, className }) => {
+const QuizCard: React.FC<Props> = ({ uuid, title, description, className }) => {
   const placeholder = (
     <div className={cx('card', className)}>
       <div className={cx('card-body', style.card__body)}>
