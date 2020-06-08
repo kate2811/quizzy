@@ -12,12 +12,12 @@ const HeaderCard: React.FC<Props> = ({ title }) => {
     <div className="card position-relative overflow-hidden mb-8">
       <div className="position-absolute bottom-0 left-0 right-0 d-none d-lg-flex flex-row-fluid">
         <span className="svg-icon svg-icon-full flex-row-fluid svg-icon-dark opacity-3">
-          <img src={background} />
+          <img src={background} alt="" />
         </span>
       </div>
       <div className="position-absolute d-flex top-0 right-0 offset-lg-6 col-lg-6 opacity-30 opacity-lg-100">
         <span className="svg-icon svg-icon-full flex-row-fluid p-10">
-          <img src={illustration} height={270} />
+          <img src={illustration} height={270} alt="" />
         </span>
       </div>
       <div className="card-body">

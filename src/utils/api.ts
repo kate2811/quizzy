@@ -59,11 +59,11 @@ export async function signUp(userData: UserSingUpData) {
 }
 
 export async function addQuiz(quiz: Quiz) {
-  const response = await api.post('/quizzes', quiz)
+  const response = await api.post('/admin/quizzes', quiz)
   return response.data
 }
 
 export async function getQuizzes() {
-  const response = await api.get('/quizzes')
+  const response = await api.get('/admin/quizzes')
   return response.data
 }
