@@ -1,10 +1,23 @@
 import React from 'react'
+import logo from '../../images/logo.svg'
+import { Link } from 'react-router-dom'
 
-const MenuTop: React.FC = () => {
+type Props = {
+  signOut: () => void
+}
+
+const MenuTop: React.FC<Props> = ({ signOut }) => {
   return (
     <div className="d-flex justify-content-between p-6 bg-white">
-      <button className="btn btn-success font-weight-bold mr-2 btn-lg">Menu</button>
-      <button className="btn btn-light-success font-weight-bold mr-2 btn-lg">Log out</button>
+      <Link to="/">
+        <img src={logo} height={50} />
+      </Link>
+      <div>
+        <button className="btn btn-success font-weight-bold mr-2 btn-lg">Menu</button>
+        <button className="btn btn-light-success font-weight-bold mr-2 btn-lg" onClick={signOut}>
+          Log out
+        </button>
+      </div>
     </div>
   )
 }

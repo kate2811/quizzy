@@ -1,16 +1,12 @@
 import React, { ReactChildren } from 'react'
-import logo from '../../images/logo.svg'
-import cx from 'classnames'
-import Notifications from '../Notifications'
 import style from './PageLayout.module.css'
-import MenuTop from '../MenuTop/MenuTop'
+import MenuTop from '../MenuTop'
 
 type Props = {
-  signOut: () => void
   children?: ReactChildren
 }
 
-const PageLayout: React.FC<Props> = ({ children, signOut }) => {
+const PageLayout: React.FC<Props> = ({ children }) => {
   return (
     <div className={style.container}>
       <MenuTop />
