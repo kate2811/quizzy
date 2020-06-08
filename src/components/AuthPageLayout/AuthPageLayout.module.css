@@ -1,11 +1,29 @@
-.container {
-  position: relative;
+.container_logo {
+  flex-basis: 35%;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
+  padding-top: 70px;
+  background-color: #80D2CA;
+}
+
+.container_form {
+  flex-basis: 65%;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  min-height: 100vh;
-  background-color: #ffce4f;
+  background: #fff;
+}
+
+.text_logo {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 17px;
+  color: #000;
+}
+
+.form {
+  width: 450px;
 }
 
 .notifications {
@@ -13,22 +31,5 @@
   top: 10px;
   right: 50px;
   width: 300px;
-}
-
-.logo {
-  margin: 40px 0;
-}
-
-.logoImg {
-  height: 90px;
-}
-
-.content {
-  width: 500px;
-  min-height: 400px;
-  margin-bottom: 50px;
-  padding: 40px 45px 45px 45px;
-  box-shadow: 0 4px 38px 0 rgba(22, 21, 55, 0.06), 0 0 21px 0 rgba(22, 21, 55, 0.03);
-  border-radius: 5px;
-  background: #fff;
+  z-index: 1;
 }

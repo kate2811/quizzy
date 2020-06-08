@@ -1,5 +1,6 @@
 import React from 'react'
 import { useField } from 'formik'
+import style from './FormCheckbox.module.css'
 
 type Props = {
   children: any
@@ -9,10 +10,11 @@ type Props = {
 const FormCheckbox: React.FC<Props> = ({ children, ...props }) => {
   const [field] = useField({ ...props, type: 'checkbox' })
   return (
-    <div className="form-check">
-      <label className="form-check-label text-secondary">
-        <input className="form-check-input" type="checkbox" checked={field.value} {...field} {...props} />
-        {children}
+    <div className="checkbox-single form-group">
+      <label className="checkbox checkbox-success">
+        <input type="checkbox" checked={field.value} {...field} {...props} />
+        <span />
+        <div className={style.content}>{children}</div>
       </label>
     </div>
   )

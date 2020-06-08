@@ -9,3 +9,7 @@
 .button_close:focus {
   outline: none;
 }
+
+.notification i {
+  color: #ffffff;
+}

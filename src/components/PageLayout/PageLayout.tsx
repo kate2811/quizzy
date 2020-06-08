@@ -1,25 +1,20 @@
 import React, { ReactChildren } from 'react'
-import logo from '../../images/logo.svg'
-import cx from 'classnames'
-import Notifications from '../Notifications'
 import style from './PageLayout.module.css'
+import MenuTop from '../MenuTop'
 
 type Props = {
-  signOut: () => void
   children?: ReactChildren
 }
 
-const PageLayout: React.FC<Props> = ({ children, signOut }) => {
+const PageLayout: React.FC<Props> = ({ children }) => {
   return (
     <div className={style.container}>
-      <nav className={cx('navbar', 'justify-content-between', style.header)}>
-        <img src={logo} height={40} alt="quizzy_logo" />
-        <Notifications className={style.notifications} />
-        <button className="btn btn-light" onClick={signOut}>
-          Sign out
-        </button>
-      </nav>
-      {children}
+      <MenuTop />
+      <div className="content d-flex flex-column flex-column-fluid mt-5" id="kt_content">
+        <div className="d-flex flex-column-fluid">
+          <div className="container">{children}</div>
+        </div>
+      </div>
     </div>
   )
 }

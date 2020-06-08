@@ -13,7 +13,13 @@ const NotificationItem: React.FC<Props> = ({ uuid }) => {
 
   return (
     <div
-      className={cx('alert', 'd-flex', 'align-items-baseline', isSuccess ? 'alert-success' : 'alert-warning')}
+      className={cx(
+        'alert',
+        'd-flex',
+        'align-items-baseline',
+        style.notification,
+        isSuccess ? 'alert-success' : 'alert-danger'
+      )}
       role="alert"
     >
       <i className={cx('fas', 'pr-3', isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle')} />

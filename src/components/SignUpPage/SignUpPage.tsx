@@ -31,34 +31,31 @@ const SignUpPage: React.FC<Props> = ({ onSubmit }) => {
   }, [])
 
   return (
-    <AuthPageLayout title={'Sign up'}>
+    <AuthPageLayout>
+      <div className="pb-13 pt-lg-0 pt-5">
+        <h3 className="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Sign Up</h3>
+        <p className="text-muted font-weight-bold font-size-h4">Enter your details to create your account</p>
+      </div>
+
       <Formik
         initialValues={{ email: '', firstName: '', lastName: '', password: '', confirmPassword: '' }}
         onSubmit={({ confirmPassword, ...rest }) => onSubmit(rest)}
         validationSchema={validationSchema}
       >
-        <Form>
-          <FormInput label="Email" name="email" icon="fa-envelope" id="email" />
-          <FormInput label="First name" name="firstName" icon="fa-user" id="firstName" />
-          <FormInput label="Last name" name="lastName" icon="fa-user" id="lastName" />
-          <FormInput label="Password" type="password" name="password" icon="fa-lock" id="password" />
-          <FormInput
-            label="Confirm password"
-            type="password"
-            name="confirmPassword"
-            icon="fa-lock"
-            id="confirmPassword"
-          />
-          <button type="submit" className="btn btn-secondary btn-block mt-4">
+        <Form className="form">
+          <FormInput placeholder="Email" name="email" id="email" />
+          <FormInput placeholder="First name" name="firstName" id="firstName" />
+          <FormInput placeholder="Last name" name="lastName" id="lastName" />
+          <FormInput placeholder="Password" type="password" name="password" id="password" />
+          <FormInput placeholder="Confirm password" type="password" name="confirmPassword" id="confirmPassword" />
+          <button type="submit" className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">
             Sign up
           </button>
+          <Link to="/auth/sign-in" className="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">
+            Cancel
+          </Link>
         </Form>
       </Formik>
-
-      <p className="text-center mt-4 text-secondary">
-        Already have an account?&nbsp;
-        <Link to="/auth/sign-in">Sign-in!</Link>
-      </p>
     </AuthPageLayout>
   )
 }

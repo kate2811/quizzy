@@ -17,33 +17,38 @@ const SignInPage: React.FC<Props> = ({ onSubmit }) => {
   const dispatch = useDispatch()
   const validationSchema = useMemo(() => {
     return Yup.object({
-      //email: Yup.string().email('Invalid email address').required('Email is required'),
-      email: Yup.string().required('Email is required'),
+      email: Yup.string().email('Invalid email address').required('Email is required'),
       password: Yup.string().required('Password is required')
     })
   }, [])
 
   return (
-    <AuthPageLayout title="Sign in">
+    <AuthPageLayout>
+      <div className="pb-13 pt-lg-0 pt-5">
+        <h3 className="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">Welcome to Quizzy</h3>
+        <span className="text-muted font-weight-bold font-size-h4">
+          {`New Here? `}
+          <Link to="/auth/sign-up" className="text-success font-weight-bolder">
+            Create an Account
+          </Link>
+        </span>
+      </div>
+
       <Formik
         initialValues={{ email: '', password: '', isRemember: true }}
         onSubmit={(values) => onSubmit(values)}
         validationSchema={validationSchema}
       >
-        <Form>
-          <FormInput label="Email" name="email" icon="fa-user" id="email" />
-          <FormInput label="Password" name="password" type="password" icon="fa-lock" id="password" />
+        <Form className="form">
+          <FormInput label="Email" name="email" id="email" />
+          <FormInput label="Password" name="password" type="password" id="password" />
           <FormCheckbox name="isRemember">Remember me?</FormCheckbox>
-          <button type="submit" className="btn btn-secondary btn-block mt-4">
+          <button type="submit" className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
             Sign in
           </button>
         </Form>
       </Formik>
 
-      <p className="text-center mt-4 text-secondary">
-        Don't have an account yet?&nbsp;
-        <Link to="/auth/sign-up">Sign-up!</Link>
-      </p>
       <button onClick={() => dispatch(actions.getNotification({ type: 'success', text: 'Some information' }))}>
         !
       </button>
