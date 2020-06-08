@@ -3,14 +3,13 @@ import './App.css'
 import { Route, Router, Switch } from 'react-router-dom'
 import SignInPage from '../SignInPage'
 import { customHistory } from '../../history'
-import { useAccessToken, useIsLoading } from '../../modules/auth/hooks'
+import { useAccessToken, useIsLoading } from '../../module/auth/hooks'
 import Loader from 'react-loader-spinner'
 import Dashboard from '../Dashboard'
 import Protected from '../Protected'
 import SignUpPage from '../SignUpPage'
 import CreateQuiz from '../CreateQuiz'
 import QuizTemplate from '../QuizTemplate'
-import EditQuiz from '../EditQuiz'
 
 function App() {
   useAccessToken()
@@ -35,13 +34,10 @@ function App() {
                 <CreateQuiz />
               </Protected>
             </Route>
-            <Route path="/edit/:uuid">
+            <Route path="/quiz" exact>
               <Protected>
-                <EditQuiz />
+                <QuizTemplate />
               </Protected>
-            </Route>
-            <Route path="/quiz/:uuid">
-              <QuizTemplate />
             </Route>
             <Route path="/auth/sign-in">
               <SignInPage />

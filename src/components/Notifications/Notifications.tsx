@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNotificationsUuids } from '../../modules/core/hooks'
+import { useNotificationsUuids } from '../../module/core/hooks'
 import NotificationItem from './NotificationItem'
 
 const Notifications: React.FC<{ className: string }> = ({ className }) => {

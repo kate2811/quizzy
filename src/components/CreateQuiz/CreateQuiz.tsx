@@ -5,25 +5,20 @@ import QuizQuestion from './QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
-import { Quiz } from '../../modules/quiz/types'
+import { Quiz } from '../../module/quiz/types'
 
 type Props = {
   onSubmit: (quiz: Quiz) => void
-  onDelete?: (uuid: string) => void
-  editedQuiz?: Quiz
 }
 
 const emptyQuestion = {
   title: '',
-  description: 'some description',
   options: [{ title: '', isCorrect: false }]
 }
 
-const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onDelete }) => {
-  const [questions, setQuestions] = useState(editedQuiz ? (editedQuiz.questions as []) : [emptyQuestion])
-  const [quiz, setQuiz] = useState(
-    editedQuiz ? { description: editedQuiz.description, title: editedQuiz.title } : { description: '', title: '' }
-  )
+const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
+  const [questions, setQuestions] = useState([emptyQuestion])
+  const [quiz, setQuiz] = useState({ description: '', title: '' })
 
   const onAdd = useCallback(() => {
     setQuestions([...questions, emptyQuestion])
@@ -94,23 +89,12 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onDelete }) => {
           Go back
         </Link>
         <button
-          onClick={() =>
-            onSubmit(
-              editedQuiz
-                ? { uuid: editedQuiz.uuid, title: quiz.title, description: quiz.description, questions, isActive: true }
-                : { title: quiz.title, description: quiz.description, questions, isActive: true }
-            )
-          }
+          onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions })}
           className="btn btn-warning btn-lg"
           disabled={!questions[0].title && questions.length <= 1}
         >
-          {editedQuiz ? 'Save it' : 'Publish it!'}
+          Publish it!
         </button>
-        {onDelete && editedQuiz && (
-          <button className="btn btn-secondary" onClick={() => onDelete(editedQuiz.uuid as string)}>
-            Delete
-          </button>
-        )}
       </div>
     </PageLayout>
   )

@@ -26,10 +26,14 @@ a .card_createNew {
   color: #000;
 }
 
+.card_createNew button {
+  display: none;
+}
+
 .card:hover {
   background-color: #f7f8f8;
 }
 
 a .card_createNew:hover {
-  background-color: #FEC02F;
+  background-color: #ffd978;
 }

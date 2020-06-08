@@ -2,7 +2,6 @@ import produce from 'immer'
 import { State } from './types'
 import { ActionType } from 'typesafe-actions'
 import { actions, ActionTypes } from './actions'
-import { findIndex } from 'lodash'
 
 export const initialState: State = {
   quizzes: [],
@@ -23,30 +22,8 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
-      case ActionTypes.loadQuizByUuid: {
-        draft.isLoading = true
-        return draft
-      }
-
-      case ActionTypes.loadQuizByUuidSuccess: {
-        draft.quizzes.push(action.payload)
-        draft.isLoading = false
-        return draft
-      }
-
       case ActionTypes.addQuiz: {
         draft.quizzes.push(action.payload)
-        return draft
-      }
-
-      case ActionTypes.deleteQuizLocally: {
-        draft.quizzes = draft.quizzes.filter((item) => item.uuid !== action.payload)
-        return draft
-      }
-
-      case ActionTypes.editQuizLocally: {
-        const editedQuizIndex = findIndex(draft.quizzes, (item) => item.uuid === action.payload.uuid)
-        draft.quizzes[editedQuizIndex] = action.payload
         return draft
       }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUser } from '../../modules/auth/hooks'
+import { useUser } from '../../module/auth/hooks'
 import Protected from './Protected'
 
 export default function ({ children }: any) {

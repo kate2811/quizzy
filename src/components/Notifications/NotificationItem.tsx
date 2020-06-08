@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import style from './Notifications.module.css'
 import cx from 'classnames'
-import { useNotification } from '../../modules/core/hooks'
+import { useNotification } from '../../module/core/hooks'
 
 type Props = {
   uuid: string
