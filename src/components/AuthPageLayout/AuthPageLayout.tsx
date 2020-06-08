@@ -12,10 +12,10 @@ const AuthPageLayout: React.FC = ({ children }) => {
 
       <div className={style.container_logo}>
         <div className="d-flex flex-column">
-          <img src={logo} height={100} />
+          <img src={logo} height={100} alt="quizzy-logo" />
           <p className={style.text_logo}>Create and share your quiz for free!</p>
         </div>
-        <img src={login} height={400} />
+        <img src={login} height={400} alt="login-page" />
       </div>
 
       <div

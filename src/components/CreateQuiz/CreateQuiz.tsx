@@ -13,7 +13,6 @@ type Props = {
 
 const emptyQuestion = {
   title: '',
-  description: 'some description',
   options: [{ title: '', isCorrect: false }]
 }
 
@@ -90,7 +89,7 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
           Go back
         </Link>
         <button
-          onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions, isActive: true })}
+          onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions })}
           className="btn btn-warning btn-lg"
           disabled={!questions[0].title && questions.length <= 1}
         >

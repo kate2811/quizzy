@@ -16,6 +16,7 @@ export function usePublishQuiz() {
   const dispatch = useDispatch()
   return useCallback(
     (quiz: Quiz) => {
+      console.log(quiz)
       return dispatch(actions.publishQuiz(quiz))
     },
     [dispatch]

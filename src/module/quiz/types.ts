@@ -8,7 +8,6 @@ export type Quiz = {
   title: string
   description: string
   questions?: QuizQuestion[]
-  isActive: boolean
 }
 
 export type QuizQuestion = {

@@ -8,7 +8,7 @@ const SearchInput: React.FC = () => {
         <div className="input-group-prepend">
           <span className="input-group-text bg-white border-0 py-7 px-8">
             <span className="svg-icon svg-icon-xl">
-              <img src={search} />
+              <img src={search} alt="search" />
             </span>
           </span>
         </div>
