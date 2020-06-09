@@ -5,10 +5,11 @@ import QuizQuestion from './QuizQuestion'
 
 type Props = {
   quiz: Quiz
+  isLoading: boolean
 }
 
-const QuizTemplate: React.FC<Props> = ({ quiz }) => {
-  const [answers, setAnswers] = useState(mapValues(keyBy(quiz.questions, 'uuid'), () => []))
+const QuizTemplate: React.FC<Props> = ({ quiz, isLoading }) => {
+  const [answers, setAnswers] = useState(quiz ? mapValues(keyBy(quiz.questions, 'uuid'), () => []) : [])
 
   const onAnswer = useCallback(
     (questionUuid, questionAnswers) => {

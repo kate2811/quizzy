@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import style from './QuizTemplate.module.css'
-import { QuizAnswer, QuizQuestion as QuizQuestionType } from '../../module/quiz/types'
+import { QuizQuestion as QuizQuestionType } from '../../module/quiz/types'
 
 type Props = {
   value: QuizQuestionType
@@ -9,7 +9,6 @@ type Props = {
 }
 
 const QuizQuestion: React.FC<Props> = ({ value, onAnswer, answers }) => {
-  console.log(answers)
   const onToggleAnswer = useCallback(
     (answerUuid) => {
       onAnswer(answers.includes(answerUuid) ? answers.filter((item) => item !== answerUuid) : [...answers, answerUuid])

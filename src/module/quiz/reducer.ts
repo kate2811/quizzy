@@ -22,6 +22,17 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
+      case ActionTypes.loadQuizByUuid: {
+        draft.isLoading = true
+        return draft
+      }
+
+      case ActionTypes.loadQuizByUuidSuccess: {
+        draft.quizzes.push(action.payload)
+        draft.isLoading = false
+        return draft
+      }
+
       case ActionTypes.addQuiz: {
         draft.quizzes.push(action.payload)
         return draft

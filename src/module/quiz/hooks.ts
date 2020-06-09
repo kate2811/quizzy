@@ -42,16 +42,13 @@ export function useEditQuiz() {
   )
 }
 
-export function useQuizByUuid(uuid) {
+export function useQuizByUuid(uuid: string) {
   return useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === uuid)
 }
 
-export function useGetQuizByUuid(uuid) {
+export function useLoadQuizByUuid(uuid: string) {
   const dispatch = useDispatch()
-  return useCallback(
-    (quiz: Quiz) => {
-      return dispatch(actions.publishQuiz(quiz))
-    },
-    [dispatch]
-  )
+  return useCallback(() => {
+    return dispatch(actions.loadQuizByUuid(uuid))
+  }, [dispatch])
 }
