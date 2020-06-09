@@ -16,7 +16,40 @@ export function usePublishQuiz() {
   const dispatch = useDispatch()
   return useCallback(
     (quiz: Quiz) => {
-      console.log(quiz)
+      return dispatch(actions.publishQuiz(quiz))
+    },
+    [dispatch]
+  )
+}
+
+export function useDeleteQuiz() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quiz: Quiz) => {
+      return dispatch(actions.publishQuiz(quiz))
+    },
+    [dispatch]
+  )
+}
+
+export function useEditQuiz() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quiz: Quiz) => {
+      return dispatch(actions.publishQuiz(quiz))
+    },
+    [dispatch]
+  )
+}
+
+export function useQuizByUuid(uuid) {
+  return useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === uuid)
+}
+
+export function useGetQuizByUuid(uuid) {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quiz: Quiz) => {
       return dispatch(actions.publishQuiz(quiz))
     },
     [dispatch]

@@ -1,16 +1,13 @@
 import React, { useCallback, useState } from 'react'
 import { Quiz } from '../../module/quiz/types'
-import { useQuizzes } from '../../module/quiz/hooks'
 import { keyBy, mapValues } from 'lodash'
+import QuizQuestion from './QuizQuestion'
 
 type Props = {
-  q?: Quiz
+  quiz: Quiz
 }
 
-const QuizTemplate: React.FC<Props> = ({ q }) => {
-  const quizzes = useQuizzes()
-  const quiz = quizzes[0]
-  console.log(quiz)
+const QuizTemplate: React.FC<Props> = ({ quiz }) => {
   const [answers, setAnswers] = useState(mapValues(keyBy(quiz.questions, 'uuid'), () => []))
 
   const onAnswer = useCallback(
@@ -23,15 +20,15 @@ const QuizTemplate: React.FC<Props> = ({ q }) => {
   return (
     <div>
       <h1>{quiz.title}</h1>
-      {/*      {quiz.questions &&
+      {quiz.questions &&
         quiz.questions.map((item, index) => (
           <QuizQuestion
             key={index}
             value={item}
-            answers={answers[item.uuid]}
+            answers={answers[item.uuid as string]}
             onAnswer={(answers) => onAnswer(item.uuid, answers)}
           />
-        ))}*/}
+        ))}
     </div>
   )
 }

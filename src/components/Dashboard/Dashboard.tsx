@@ -34,7 +34,7 @@ const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
         ) : (
           <div className="row">
             {quizzes.map((item, index) => (
-              <QuizCard key={index} title={item.title} description={item.description} />
+              <QuizCard key={index} title={item.title} description={item.description} uuid={item.uuid} />
             ))}
           </div>
         )}

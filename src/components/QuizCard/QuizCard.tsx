@@ -7,15 +7,16 @@ type Props = {
   title?: string
   description?: string
   className?: string
+  uuid?: string
 }
 
-const actions = [
-  { title: 'Results', to: '/' },
-  { title: 'Edit', to: '/' },
-  { title: 'Share', to: '/' }
-]
+const QuizCard: React.FC<Props> = ({ title, description, uuid, className }) => {
+  const actions = [
+    { title: 'Results', to: '/' },
+    { title: 'Edit', to: '/' },
+    { title: 'Share', to: `/quiz/${uuid}` }
+  ]
 
-const QuizCard: React.FC<Props> = ({ title, description, className }) => {
   const placeholder = (
     <div className={cx('card', className)}>
       <div className={cx('card-body', style.card__body)}>
