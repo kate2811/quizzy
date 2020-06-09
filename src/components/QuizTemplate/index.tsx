@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import QuizTemplate from './QuizTemplate'
 import { useQuizByUuid, useLoadQuizByUuid, useIsQuizzesLoading } from '../../module/quiz/hooks'
 import { useUser } from '../../module/auth/hooks'
-import Loader from 'react-loader-spinner'
 
 export default function () {
   const { uuid } = useParams()
@@ -16,11 +15,7 @@ export default function () {
     if (!user && !quiz) {
       loadQuiz()
     }
-  })
+  }, [])
 
-  if (!quiz) {
-    return <Loader />
-  }
-
-  return <QuizTemplate quiz={quiz as any} isLoading={isLoading} />
+  return <QuizTemplate quiz={quiz} isLoading={isLoading} />
 }
