@@ -68,17 +68,8 @@ export async function getQuizzes() {
   return response.data
 }
 
-export async function getQuizByUuid(uuid) {
+export async function getQuiz(uuid: string) {
   const response = await api.get('/quizzes/' + uuid)
   return response.data
 }
 
-export async function deleteQuiz(uuid: string) {
-  const response = await api.post('/quizzes', uuid)
-  return response.data
-}
-
-export async function editQuiz(quiz: Quiz) {
-  const response = await api.post('/quizzes', quiz)
-  return response.data
-}

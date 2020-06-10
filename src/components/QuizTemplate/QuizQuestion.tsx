@@ -1,16 +1,15 @@
 import React, { useCallback } from 'react'
 import style from './QuizTemplate.module.css'
+import { QuizQuestion as QuizQuestionType } from '../../module/quiz/types'
 
 type Props = {
-  value: {
-    title: string
-    options: { uuid: string; value: string; isCorrect: boolean }[]
-  }
-  onAnswer: any
+  value: QuizQuestionType
+  onAnswer: (uuid: string[]) => void
   answers: string[]
+  number: number
 }
 
-const QuizQuestion: React.FC<Props> = ({ value, onAnswer, answers }) => {
+const QuizQuestion: React.FC<Props> = ({ value, onAnswer, answers, number }) => {
   const onToggleAnswer = useCallback(
     (answerUuid) => {
       onAnswer(answers.includes(answerUuid) ? answers.filter((item) => item !== answerUuid) : [...answers, answerUuid])
@@ -19,19 +18,23 @@ const QuizQuestion: React.FC<Props> = ({ value, onAnswer, answers }) => {
   )
 
   return (
-    <div className={style.container}>
-      <div className={style.title}>{value.title}</div>
-      {value.options.map((item, index) => (
-        <label key={index}>
-          <input
-            type="checkbox"
-            value={item.value}
-            onChange={() => onToggleAnswer(item.uuid)}
-            checked={answers.includes(item.uuid)}
-          />
-          {item.value}
-        </label>
-      ))}
+    <div className={style.container_question}>
+      <div className="font-size-h6 font-weight-bolder text-dark mb-2">Question {number}</div>
+      <div className="form-control form-control-solid font-size-lg mb-5 h-auto py-7 px-6 rounded-lg">{value.title}</div>
+      <div className="checkbox-list">
+        {value.options.map((item, index) => (
+          <label key={index} className="checkbox checkbox-success font-size-lg">
+            <input
+              type="checkbox"
+              value={item.title}
+              onChange={() => onToggleAnswer(item.uuid)}
+              checked={answers.includes(item.uuid as string)}
+            />
+            <span />
+            {item.title}
+          </label>
+        ))}
+      </div>
     </div>
   )
 }

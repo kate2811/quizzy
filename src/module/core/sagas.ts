@@ -15,12 +15,12 @@ function* addNotification({ payload }: ReturnType<typeof actions.getNotification
 }
 
 function* handleError({ payload }: ReturnType<typeof actions.handleError>) {
-  /*  const status = payload.status
-  const token = localStorage.getItem('accessToken')*/
+  const status = payload.status
+  const token = localStorage.getItem('accessToken')
   let errorMessage = 'Something went wrong'
   console.log(payload)
 
-  /*  if (status === 401 && token) {
+  if (status === 401 && token) {
     yield put(authActions.signInFailure())
     localStorage.removeItem('accessToken')
     errorMessage = 'Your session has expired. Please sign-in again'
@@ -38,7 +38,7 @@ function* handleError({ payload }: ReturnType<typeof actions.handleError>) {
 
   if (status >= 500) {
     errorMessage = 'The server did not response. Please, try again later '
-  }*/
+  }
 
   yield put(actions.getNotification({ type: 'warning', text: errorMessage }))
 }

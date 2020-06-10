@@ -9,6 +9,7 @@ import { Quiz } from '../../module/quiz/types'
 
 type Props = {
   onSubmit: (quiz: Quiz) => void
+  editedQuiz?: Quiz
 }
 
 const emptyQuestion = {
@@ -16,7 +17,7 @@ const emptyQuestion = {
   options: [{ title: '', isCorrect: false }]
 }
 
-const CreateQuiz: React.FC<Props> = ({ onSubmit }) => {
+const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
   const [questions, setQuestions] = useState([emptyQuestion])
   const [quiz, setQuiz] = useState({ description: '', title: '' })
 
