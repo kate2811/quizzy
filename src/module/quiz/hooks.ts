@@ -50,5 +50,5 @@ export function useLoadQuizByUuid(uuid: string) {
   const dispatch = useDispatch()
   return useCallback(() => {
     return dispatch(actions.loadQuizByUuid(uuid))
-  }, [dispatch])
+  }, [dispatch, uuid])
 }

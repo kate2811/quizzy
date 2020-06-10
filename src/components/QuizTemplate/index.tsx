@@ -17,5 +17,5 @@ export default function () {
     }
   }, [])
 
-  return <QuizTemplate quiz={quiz} isLoading={isLoading} />
+  return <QuizTemplate quiz={quiz} isLoading={isLoading} user={user} />
 }
