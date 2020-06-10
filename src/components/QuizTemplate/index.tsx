@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import QuizTemplate from './QuizTemplate'
-import { useQuizByUuid, useLoadQuizByUuid, useIsQuizzesLoading } from '../../module/quiz/hooks'
+import { useQuizByUuid, useLoadQuizByUuid } from '../../module/quiz/hooks'
 import { useUser } from '../../module/auth/hooks'
 
 export default function () {
@@ -9,7 +9,6 @@ export default function () {
   const user = useUser()
   const quiz = useQuizByUuid(uuid)
   const loadQuiz = useLoadQuizByUuid(uuid)
-  const isLoading = useIsQuizzesLoading()
 
   useEffect(() => {
     if (!user && !quiz) {
@@ -17,5 +16,5 @@ export default function () {
     }
   }, [])
 
-  return <QuizTemplate quiz={quiz} isLoading={isLoading} user={user} />
+  return <QuizTemplate quiz={quiz} user={user} />
 }
