@@ -2,18 +2,17 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Quiz } from '../../module/quiz/types'
 import { keyBy, mapValues } from 'lodash'
 import QuizQuestion from './QuizQuestion'
-import Loader from 'react-loader-spinner'
 import style from './QuizTemplate.module.css'
 import { UserData } from '../../module/auth/types'
 import img from '../../images/illustration/features.svg'
+import QuizTemplatePlaceholder from './QuizTemplatePlaceholder'
 
 type Props = {
   quiz: Quiz | undefined
-  isLoading: boolean
   user: UserData | null
 }
 
-const QuizTemplate: React.FC<Props> = ({ quiz, isLoading, user }) => {
+const QuizTemplate: React.FC<Props> = ({ quiz, user }) => {
   const [answers, setAnswers] = useState()
   useEffect(() => {
     if (quiz) {
@@ -38,14 +37,9 @@ const QuizTemplate: React.FC<Props> = ({ quiz, isLoading, user }) => {
         </h3>
         <img className={style.background__img} src={img} height={400} alt="answer the quiz" />
       </div>
-      {isLoading ? (
-        <div className="d-flex justify-content-center min-vh-100 align-items-center">
-          <Loader type="Bars" color="#ffd569" height={50} width={50} />
-        </div>
-      ) : (
-        quiz &&
-        answers && (
-          <div className={style.card}>
+      <div className={style.card}>
+        {quiz && answers ? (
+          <>
             <h1 className="font-weight-bolder text-dark font-size-h1-lg">{quiz.title}</h1>
             <p className="text-muted font-weight-bold font-size-h4">{quiz.description}</p>
             {quiz.questions &&
@@ -70,9 +64,11 @@ const QuizTemplate: React.FC<Props> = ({ quiz, isLoading, user }) => {
                 <button className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4">Send answers</button>
               )}
             </div>
-          </div>
-        )
-      )}
+          </>
+        ) : (
+          <QuizTemplatePlaceholder />
+        )}
+      </div>
     </div>
   )
 }
