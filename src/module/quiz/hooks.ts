@@ -1,8 +1,14 @@
-import { useSelector } from '../index'
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
 import { actions } from './actions'
 import { Quiz } from './types'
+import * as reactRedux from 'react-redux'
+import { State } from '../index'
+
+const useSelector: <TSelected>(
+  selector: (state: State) => TSelected,
+  equalityFn?: (left: TSelected, right: TSelected) => boolean
+) => TSelected = reactRedux.useSelector
 
 export function useQuizzes() {
   return useSelector((state) => state.quiz.quizzes)

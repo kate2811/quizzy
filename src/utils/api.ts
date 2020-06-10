@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { UserSignInData, UserSingUpData } from '../modules/auth/types'
-import { Quiz } from '../modules/quiz/types'
+import { UserSignInData, UserSingUpData } from '../module/auth/types'
+import { Quiz } from '../module/quiz/types'
 
 class Api {
   private readonly apiUrl: string
@@ -72,4 +72,3 @@ export async function getQuiz(uuid: string) {
   const response = await api.get('/quizzes/' + uuid)
   return response.data
 }
-
