@@ -3,14 +3,10 @@ import { Quiz } from '../../modules/quiz/types'
 import { UserData } from '../../modules/auth/types'
 import PageLayout from '../PageLayout'
 import QuizCard from '../QuizCard'
-import style from './Dashboard.module.css'
 import HeaderCard from '../HeaderCard'
-import { Link } from 'react-router-dom'
 import QuizCardPlaceholder from '../QuizCard/QuizCardPlaceholder'
 import { times } from 'lodash'
-import icon from '../../images/icon/Selected-file.svg'
-import { actions } from '../../modules/core/actions'
-import { useDispatch } from 'react-redux'
+import NewQuizCard from '../QuizCard/NewQuizCard'
 
 type Props = {
   user: null | UserData
@@ -23,7 +19,11 @@ function Content({ isQuizzesLoading, quizzes }: { isQuizzesLoading: boolean; qui
     return times(6, (index) => <QuizCardPlaceholder key={index} />)
   }
   if (quizzes.length === 0) {
-    return <div>You don't have any quizzes yet</div>
+    return (
+      <div className="col-lg-6 h2 d-flex align-items-center justify-content-center">
+        <span>You don't have any quizzes yet</span>
+      </div>
+    )
   }
 
   return quizzes.map((item, index) => (
@@ -33,34 +33,14 @@ function Content({ isQuizzesLoading, quizzes }: { isQuizzesLoading: boolean; qui
 
 const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
   const userName = user && user.firstName ? user.firstName : 'Guest'
-  const dispatch = useDispatch()
 
   return (
     <>
       <PageLayout>
         <HeaderCard title={`Hello, ${userName}. Your quizzes are here`} />
 
-        <Link to="/create" className={style.link}>
-          <button className="btn btn-primary" />
-        </Link>
-        <button onClick={() => dispatch(actions.getNotification({ type: 'success', text: 'Some information' }))}>
-          !
-        </button>
         <div className="row">
-          <div className="col-lg-6">
-            <div
-              className="card mb-8 card-custom wave wave-animate-slow wave-success mb-lg-0"
-              style={{ height: 132.5 }}
-            >
-              <div className="card-body row">
-                <div className="col-sm-7">
-                  <img src={icon} alt="Create new quiz" />
-                  <span>Create new quiz!</span>
-                </div>
-                Create quiz
-              </div>
-            </div>
-          </div>
+          <NewQuizCard />
           {Content({ isQuizzesLoading, quizzes })}
         </div>
       </PageLayout>
