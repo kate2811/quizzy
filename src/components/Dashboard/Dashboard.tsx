@@ -8,6 +8,7 @@ import HeaderCard from '../HeaderCard'
 import { Link } from 'react-router-dom'
 import QuizCardPlaceholder from '../QuizCard/QuizCardPlaceholder'
 import { times } from 'lodash'
+import icon from '../../images/icon/Selected-file.svg'
 
 type Props = {
   user: null | UserData
@@ -39,7 +40,23 @@ const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
         <Link to="/create" className={style.link}>
           <button className="btn btn-primary" />
         </Link>
-        <div className="row">{Content({ isQuizzesLoading, quizzes })}</div>
+        <div className="row">
+          <div className="col-lg-6">
+            <div
+              className="card mb-8 card-custom wave wave-animate-slow wave-success mb-lg-0"
+              style={{ height: 132.5 }}
+            >
+              <div className="card-body row">
+                <div className="col-sm-7">
+                  <img src={icon} alt="Create new quiz" />
+                  <span>Create new quiz!</span>
+                </div>
+                Create quiz
+              </div>
+            </div>
+          </div>
+          {Content({ isQuizzesLoading, quizzes })}
+        </div>
       </PageLayout>
     </>
   )
