@@ -2,6 +2,16 @@
   min-height: 100px;
 }
 
+.card_new {
+  min-height: 132.5px;
+}
+
+.card_new:hover i,
+.card_new:hover span {
+  color: #27b1aa !important;
+}
+
+
 .card__footer {
   display: flex;
   justify-content: flex-end;
