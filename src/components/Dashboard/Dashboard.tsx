@@ -1,6 +1,6 @@
 import React from 'react'
-import { Quiz } from '../../module/quiz/types'
-import { UserData } from '../../module/auth/types'
+import { Quiz } from '../../modules/quiz/types'
+import { UserData } from '../../modules/auth/types'
 import PageLayout from '../PageLayout'
 import QuizCard from '../QuizCard'
 import style from './Dashboard.module.css'

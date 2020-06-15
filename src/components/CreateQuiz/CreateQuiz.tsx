@@ -5,7 +5,7 @@ import QuizQuestion from './QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
-import { Quiz } from '../../module/quiz/types'
+import { Quiz } from '../../modules/quiz/types'
 
 type Props = {
   onSubmit: (quiz: Quiz) => void

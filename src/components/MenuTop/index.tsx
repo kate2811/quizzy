@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSignOutUser } from '../../module/auth/hooks'
+import { useSignOutUser } from '../../modules/auth/hooks'
 import MenuTop from './MenuTop'
 
 export default function () {
