@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDeleteQuiz, useEditQuiz, useQuizByUuid } from '../../module/quiz/hooks'
+import { useDeleteQuiz, useEditQuiz, useQuizByUuid } from '../../modules/quiz/hooks'
 import EditQuiz from './EditQuiz'
 import { useParams } from 'react-router-dom'
 

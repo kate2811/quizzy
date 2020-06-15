@@ -1,6 +1,6 @@
 import React from 'react'
 import CreateQuiz from '../CreateQuiz/CreateQuiz'
-import { Quiz } from '../../module/quiz/types'
+import { Quiz } from '../../modules/quiz/types'
 
 type Props = {
   editedQuiz: any

@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { UserSignInData } from '../../module/auth/types'
+import { UserSignInData } from '../../modules/auth/types'
 import AuthPageLayout from '../AuthPageLayout'
 import FormInput from '../FormInput'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import FormCheckbox from '../FormCheckbox'
 import { useDispatch } from 'react-redux'
-import { actions } from '../../module/core/actions'
+import { actions } from '../../modules/core/actions'
 
 type Props = {
   onSubmit: (userData: UserSignInData) => void

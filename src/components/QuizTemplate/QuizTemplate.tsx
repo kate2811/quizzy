@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Quiz } from '../../module/quiz/types'
+import { Quiz } from '../../modules/quiz/types'
 import { keyBy, mapValues } from 'lodash'
 import QuizQuestion from './QuizQuestion'
 import style from './QuizTemplate.module.css'
-import { UserData } from '../../module/auth/types'
+import { UserData } from '../../modules/auth/types'
 import img from '../../images/illustration/features.svg'
 import QuizTemplatePlaceholder from './QuizTemplatePlaceholder'
 

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { UserSignInData, UserSingUpData } from '../module/auth/types'
-import { Quiz } from '../module/quiz/types'
+import { UserSignInData, UserSingUpData } from '../modules/auth/types'
+import { Quiz } from '../modules/quiz/types'
 
 class Api {
   private readonly apiUrl: string
