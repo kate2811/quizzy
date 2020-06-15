@@ -2,7 +2,6 @@
 }
 
 .header {
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,9 +13,9 @@
 }
 
 .notifications {
-  z-index: 1;
-  position: absolute;
-  top: 8px;
-  right: 150px;
+  position: fixed;
+  top: 10px;
+  right: 50px;
   width: 300px;
+  z-index: 1;
 }

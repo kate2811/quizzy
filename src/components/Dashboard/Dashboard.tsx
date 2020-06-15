@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom'
 import QuizCardPlaceholder from '../QuizCard/QuizCardPlaceholder'
 import { times } from 'lodash'
 import icon from '../../images/icon/Selected-file.svg'
+import { actions } from '../../modules/core/actions'
+import { useDispatch } from 'react-redux'
 
 type Props = {
   user: null | UserData
@@ -31,6 +33,7 @@ function Content({ isQuizzesLoading, quizzes }: { isQuizzesLoading: boolean; qui
 
 const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
   const userName = user && user.firstName ? user.firstName : 'Guest'
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -40,6 +43,9 @@ const Dashboard: React.FC<Props> = ({ user, quizzes, isQuizzesLoading }) => {
         <Link to="/create" className={style.link}>
           <button className="btn btn-primary" />
         </Link>
+        <button onClick={() => dispatch(actions.getNotification({ type: 'success', text: 'Some information' }))}>
+          !
+        </button>
         <div className="row">
           <div className="col-lg-6">
             <div
