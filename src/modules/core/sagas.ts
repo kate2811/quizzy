@@ -7,11 +7,6 @@ import { selectState } from '../index'
 function* addNotification({ payload }: ReturnType<typeof actions.getNotification>) {
   const uuid = uuidv4()
   yield put(actions.addNotification({ ...payload, uuid }))
-  yield delay(5000)
-  const notification = yield selectState((state) => state.core.notifications.some((item) => item.uuid === uuid))
-  if (notification) {
-    yield put(actions.removeNotification(uuid))
-  }
 }
 
 function* handleError({ payload }: ReturnType<typeof actions.handleError>) {

@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import style from './Notifications.module.css'
 import cx from 'classnames'
 import { useNotification } from '../../modules/core/hooks'
 
@@ -12,21 +11,17 @@ const NotificationItem: React.FC<Props> = ({ uuid }) => {
   const isSuccess = useMemo(() => type === 'success', [type])
 
   return (
-    <div
-      className={cx(
-        'alert',
-        'd-flex',
-        'align-items-baseline',
-        style.notification,
-        isSuccess ? 'alert-success' : 'alert-danger'
-      )}
-      role="alert"
-    >
-      <i className={cx('fas', 'pr-3', isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle')} />
-      {text}
-      <button className={cx('pl-3', style.button_close)} onClick={removeNotification}>
-        <i className="fas fa-times" />
-      </button>
+    <div className={cx('alert alert-custom fade show', isSuccess ? 'alert-success' : 'alert-danger')} role="alert">
+      <div className="alert-icon">
+        <i className={cx('fas', isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle')} />
+      </div>
+      <div className="alert-text">{text}</div>
+
+      <div className="alert-close">
+        <button type="button" className="close" onClick={removeNotification}>
+          <i className="fas fa-times" />
+        </button>
+      </div>
     </div>
   )
 }
