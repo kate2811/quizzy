@@ -10,6 +10,7 @@ import Protected from '../Protected'
 import SignUpPage from '../SignUpPage'
 import CreateQuiz from '../CreateQuiz'
 import QuizTemplate from '../QuizTemplate'
+import NotProtected from '../NotProtected'
 
 function App() {
   useAccessToken()
@@ -38,10 +39,14 @@ function App() {
               <QuizTemplate />
             </Route>
             <Route path="/auth/sign-in">
-              <SignInPage />
+              <NotProtected>
+                <SignInPage />
+              </NotProtected>
             </Route>
             <Route path="/auth/sign-up">
-              <SignUpPage />
+              <NotProtected>
+                <SignUpPage />
+              </NotProtected>
             </Route>
           </Switch>
         </Router>
