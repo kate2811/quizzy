@@ -1,6 +1,7 @@
 export type State = {
   quizzes: Quiz[]
   isLoading: boolean
+  filter: string | null
 }
 
 export type Quiz = {

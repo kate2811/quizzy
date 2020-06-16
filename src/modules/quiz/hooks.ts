@@ -2,16 +2,21 @@ import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
 import { actions } from './actions'
 import { Quiz } from './types'
-import * as reactRedux from 'react-redux'
-import { State } from '../index'
-
-const useSelector: <TSelected>(
-  selector: (state: State) => TSelected,
-  equalityFn?: (left: TSelected, right: TSelected) => boolean
-) => TSelected = reactRedux.useSelector
+import { useSelector } from '../index'
+import { getFilteredQuizzes } from './selectors'
 
 export function useQuizzes() {
-  return useSelector((state) => state.quiz.quizzes)
+  return useSelector(getFilteredQuizzes)
+}
+
+export function useSetFilter() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (value: string) => {
+      return dispatch(actions.setFilter(value))
+    },
+    [dispatch]
+  )
 }
 
 export function useIsQuizzesLoading() {

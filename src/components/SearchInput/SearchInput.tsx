@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import search from '../../images/icon/Search.svg'
 
-const SearchInput: React.FC = () => {
+type Props = {
+  setFilter: (e: any) => void
+}
+
+const SearchInput: React.FC<Props> = ({ setFilter }) => {
+  const onChange = useCallback((e) => setFilter(e.target.value), [setFilter])
   return (
     <form className="d-flex position-relative flex-row-fluid">
       <div className="input-group shadow-sm">
@@ -13,7 +18,12 @@ const SearchInput: React.FC = () => {
           </span>
         </div>
 
-        <input type="text" className="form-control h-auto border-0 font-size-lg py-7 px-1" placeholder="Search..." />
+        <input
+          type="text"
+          className="form-control h-auto border-0 font-size-lg py-7 px-1"
+          placeholder="Search..."
+          onChange={onChange}
+        />
       </div>
     </form>
   )
