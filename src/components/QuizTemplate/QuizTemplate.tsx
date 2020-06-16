@@ -6,6 +6,7 @@ import style from './QuizTemplate.module.css'
 import { UserData } from '../../modules/auth/types'
 import img from '../../images/illustration/features.svg'
 import QuizTemplatePlaceholder from './QuizTemplatePlaceholder'
+import { Link } from 'react-router-dom'
 
 type Props = {
   quiz: Quiz | undefined
@@ -55,9 +56,9 @@ const QuizTemplate: React.FC<Props> = ({ quiz, user }) => {
             <div className="mt-5">
               {user ? (
                 <>
-                  <button className="btn btn-light-success font-weight-bolder font-size-h6 px-8 py-4 mr-4">
+                  <Link to="/" className="btn btn-light-success font-weight-bolder font-size-h6 px-8 py-4 mr-4">
                     Go back
-                  </button>
+                  </Link>
                   <button className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4">View results</button>
                 </>
               ) : (
