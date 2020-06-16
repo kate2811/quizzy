@@ -8,7 +8,8 @@ export enum ActionTypes {
   addQuiz = 'Quiz is added to store',
   clearQuizzes = 'Clear quizzes',
   loadQuizByUuid = 'Load a quiz',
-  loadQuizByUuidSuccess = 'Load a quiz success'
+  loadQuizByUuidSuccess = 'Load a quiz success',
+  setFilter = 'Set filter'
 }
 
 export const actions = {
@@ -18,5 +19,6 @@ export const actions = {
   addQuiz: createAction<ActionTypes.addQuiz, Quiz>(ActionTypes.addQuiz),
   clearQuizzes: createAction<ActionTypes.clearQuizzes, void>(ActionTypes.clearQuizzes),
   loadQuizByUuid: createAction<ActionTypes.loadQuizByUuid, string>(ActionTypes.loadQuizByUuid),
-  loadQuizByUuidSuccess: createAction<ActionTypes.loadQuizByUuidSuccess, Quiz>(ActionTypes.loadQuizByUuidSuccess)
+  loadQuizByUuidSuccess: createAction<ActionTypes.loadQuizByUuidSuccess, Quiz>(ActionTypes.loadQuizByUuidSuccess),
+  setFilter: createAction<ActionTypes.setFilter, string>(ActionTypes.setFilter)
 }
