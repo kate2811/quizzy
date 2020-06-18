@@ -77,3 +77,9 @@ export async function updateQuizData(quizData: Omit<Quiz, 'questions'>) {
   const response = await api.put('/admin/quizzes/' + quizData.uuid, quizData)
   return response.data
 }
+
+export async function removeQuiz(uuid: string) {
+  console.log(uuid)
+  const response = await api.delete('/admin/quizzes/' + uuid, null)
+  return response.data
+}

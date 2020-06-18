@@ -9,7 +9,9 @@ type Props = {
 }
 
 const EditQuiz: React.FC<Props> = ({ editedQuiz, onEdit, onDelete }) => {
-  return <CreateQuiz onEditQuiz={onEdit} editedQuiz={editedQuiz} />
+  return <CreateQuiz onEditQuiz={onEdit} onDeleteQuiz={onDelete} editedQuiz={editedQuiz} />
 }
 
 export default EditQuiz
+
+//класс editQuiz с методами?

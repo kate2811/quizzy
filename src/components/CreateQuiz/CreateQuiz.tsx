@@ -11,6 +11,7 @@ type Props = {
   onSubmit?: (quiz: Quiz) => void
   editedQuiz?: Quiz
   onEditQuiz?: (quizData: Omit<Quiz, 'questions'>) => void
+  onDeleteQuiz?: (uuid: string) => void
 }
 
 const emptyQuestion = {
@@ -18,7 +19,7 @@ const emptyQuestion = {
   options: [{ title: '', isCorrect: false }]
 }
 
-const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onEditQuiz }) => {
+const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onEditQuiz, onDeleteQuiz }) => {
   const [questions, setQuestions] = useState(editedQuiz?.questions || [emptyQuestion])
   const [quiz, setQuiz] = useState({ description: editedQuiz?.description || '', title: editedQuiz?.title || '' })
 
@@ -112,6 +113,7 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onEditQuiz }) => {
           >
             Publish it!
           </button>
+          <button onClick={() => (onDeleteQuiz ? onDeleteQuiz(editedQuiz?.uuid as string) : null)}>delete!</button>
         </div>
       </div>
     </div>

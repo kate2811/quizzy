@@ -4,12 +4,7 @@ import { ActionType } from 'typesafe-actions'
 import { actions, ActionTypes } from './actions'
 
 export const initialState: State = {
-  quizzes: [
-    { title: 'Quiz for kids #1', description: 'Easy and quick', uuid: '1111' },
-    { title: 'Quiz for men #2', description: 'Easy and quick', uuid: '1111e' },
-    { title: 'Quiz for women #3', description: 'Easy and quick', uuid: '1e111e' },
-    { title: 'Quiz for girls #4', description: 'Easy and quick', uuid: '111eee' }
-  ],
+  quizzes: [],
   isLoading: false,
   filter: null
 }
@@ -54,13 +49,17 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
-      case ActionTypes.editQuizLocally: {
+      case ActionTypes.updateQuizSuccess: {
         draft.quizzes = draft.quizzes.map((item) =>
           item.uuid === action.payload.uuid
             ? Object.assign({}, item, { title: action.payload.title, description: action.payload.description })
             : item
         )
+        return draft
+      }
 
+      case ActionTypes.deleteQuizSuccess: {
+        draft.quizzes = draft.quizzes.filter((item) => item.uuid !== action.payload)
         return draft
       }
 

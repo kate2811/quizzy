@@ -13,6 +13,7 @@ export enum ActionTypes {
   updateQuiz = 'Update quiz',
   updateQuizSuccess = 'Update quiz success',
   deleteQuiz = 'Remove quiz to archive',
+  deleteQuizSuccess = 'Remove quiz to archive success',
   addQuizQuestion = 'Add new question',
   editQuizQuestion = 'Edit quiz question',
   deleteQuizQuestion = 'Delete quiz question',
@@ -35,6 +36,7 @@ export const actions = {
     ActionTypes.updateQuizSuccess
   ),
   deleteQuiz: createAction<ActionTypes.deleteQuiz, string>(ActionTypes.deleteQuiz),
+  deleteQuizSuccess: createAction<ActionTypes.deleteQuizSuccess, string>(ActionTypes.deleteQuizSuccess),
   addQuizQuestion: createAction<ActionTypes.addQuizQuestion, Pick<Quiz, 'uuid' & 'questions'>>(
     ActionTypes.addQuizQuestion
   ),

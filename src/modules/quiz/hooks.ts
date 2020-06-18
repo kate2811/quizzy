@@ -33,21 +33,21 @@ export function usePublishQuiz() {
   )
 }
 
-export function useDeleteQuiz() {
-  const dispatch = useDispatch()
-  return useCallback(
-    (quiz: Quiz) => {
-      return dispatch(actions.publishQuiz(quiz))
-    },
-    [dispatch]
-  )
-}
-
 export function useEditQuiz() {
   const dispatch = useDispatch()
   return useCallback(
     (quizData: Omit<Quiz, 'questions'>) => {
       return dispatch(actions.updateQuiz(quizData))
+    },
+    [dispatch]
+  )
+}
+
+export function useDeleteQuiz() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (uuid: string) => {
+      return dispatch(actions.deleteQuiz(uuid))
     },
     [dispatch]
   )
