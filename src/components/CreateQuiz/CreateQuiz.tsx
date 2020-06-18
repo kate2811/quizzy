@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react'
-import PageLayout from '../PageLayout'
 import style from './CreateQuiz.module.css'
 import QuizQuestion from './QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
 import { Quiz } from '../../modules/quiz/types'
+import img from '../../images/illustration/features.svg'
 
 type Props = {
   onSubmit: (quiz: Quiz) => void
@@ -51,54 +51,79 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
   )
 
   return (
-    <PageLayout>
-      <div className={style.container}>
-        <input
-          className={cx(style.quiz__title, 'h2')}
-          type="text"
-          name="title"
-          placeholder="Enter quiz title here..."
-          value={quiz.title}
-          onChange={onQuizChange}
-        />
-        <textarea
-          name="description"
-          placeholder="Enter quiz description here..."
-          className={cx('form-control', style.quiz__description)}
-          value={quiz.description}
-          onChange={onQuizChange}
-        />
+    <div className={style.container}>
+      <div className={style.info}>
+        <h3 className="font-weight-bolder text-dark font-size-h1-lg text-center">
+          Create your quiz.
+          <br />
+          It's easy and fun!
+        </h3>
+        <img className={style.background__img} src={img} height={400} alt="create a quiz" />
+      </div>
+      <div className={style.card}>
+        <div>
+          <input
+            className={cx(style.quiz__title, 'h2')}
+            type="text"
+            name="title"
+            placeholder="Enter quiz title here..."
+            value={quiz.title}
+            onChange={onQuizChange}
+          />
+          <textarea
+            name="description"
+            placeholder="Enter quiz description here..."
+            className="form-control form-control-solid h-auto py-7 px-6 rounded-lg mt-6"
+            value={quiz.description}
+            rows={3}
+            onChange={onQuizChange}
+          />
 
-        <div className={style.questions}>
-          {questions.map((item, index) => (
-            <QuizQuestion
-              key={index}
-              number={index + 1}
-              onRemove={() => onRemove(index)}
-              value={item}
-              onChange={(value) => onChange(index, value)}
-            />
-          ))}
+          <div className={style.questions}>
+            {questions.map((item, index) => (
+              <QuizQuestion
+                key={index}
+                number={index + 1}
+                onRemove={() => onRemove(index)}
+                value={item}
+                onChange={(value) => onChange(index, value)}
+              />
+            ))}
+          </div>
+
+          <button onClick={onAdd} className="btn btn-success font-weight-bolder my-3 mr-3 mt-6">
+            Add new question
+          </button>
         </div>
 
-        <button onClick={onAdd} className={cx('btn', 'btn-warning', 'mt-3', style.button_addQuestion)}>
-          Add new question
-        </button>
+        <div className={style.buttons_navigation}>
+          <Link to="/" className="btn btn-secondary">
+            Go back
+          </Link>
+          <button
+            onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions })}
+            className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
+            disabled={!questions[0].title && questions.length <= 1}
+          >
+            Publish it!
+          </button>
+        </div>
       </div>
-      <div className={style.buttons_navigation}>
-        <Link to="/" className="btn btn-secondary">
-          Go back
-        </Link>
-        <button
-          onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions })}
-          className="btn btn-warning btn-lg"
-          disabled={!questions[0].title && questions.length <= 1}
-        >
-          Publish it!
-        </button>
-      </div>
-    </PageLayout>
+    </div>
   )
 }
 
 export default CreateQuiz
+
+/*
+<div className="form-group row">
+  <label className="col-3 col-form-label">Success</label>
+  <div className="col-3">
+  <span className="switch switch-outline switch-icon switch-success">
+  <label>
+  <input type="checkbox" checked={true} name="select" />
+  <span></span>
+  </label>
+  </span>
+  </div>
+  </div>*/
