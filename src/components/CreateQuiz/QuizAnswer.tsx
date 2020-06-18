@@ -23,24 +23,27 @@ const QuizAnswer: React.FC<Props> = ({ onRemove, title, onChange, isCorrect }) =
   ])
 
   return (
-    <div className={style.answer}>
-      <button
-        onClick={onToggleIsCorrect}
-        className={cx(style.button, style.button_correct, isCorrect ? style.button_selected : null)}
-      >
-        <i className="fas fa-check" />
-      </button>
-      <input
-        className="form-control w-75 d-inline"
-        type="text"
-        placeholder="Enter answer option"
-        value={title}
-        onChange={onChangeText}
-      />
-      <button onClick={onRemove} className={cx(style.button, style.button_remove)}>
-        <i className="fas fa-times" />
-      </button>
-    </div>
+    <>
+      <div className="input-group">
+        <button
+          onClick={onToggleIsCorrect}
+          className={cx(style.button, style.button_correct, isCorrect ? style.button_selected : null)}
+        >
+          <i className="fas fa-check" />
+        </button>
+        <input
+          className="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
+          type="text"
+          placeholder="Enter answer option"
+          value={title}
+          onChange={onChangeText}
+        />
+
+        <button onClick={onRemove} className={cx(style.button, style.button_remove)}>
+          <i className="fas fa-times" />
+        </button>
+      </div>
+    </>
   )
 }
 

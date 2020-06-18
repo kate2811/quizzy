@@ -50,21 +50,12 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) =>
         <span className={style.question__number}>{number}.</span>
         <div className={style.question__body}>
           <textarea
-            className={cx(style.question__input, 'form-control')}
+            className="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
             name="question"
             placeholder="Enter your question here..."
             value={value.title}
             onChange={onChangeTitle}
           />
-
-          <div className={style.attachments}>
-            <button>
-              <i className="fas fa-image" />
-            </button>
-            <button>
-              <i className="fas fa-video" />
-            </button>
-          </div>
         </div>
 
         <button className={style.question__closeBtn} onClick={onRemove}>
@@ -82,8 +73,8 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) =>
             onChange={(value) => onAnswerChange(index, value)}
           />
         ))}
-        <button onClick={onAddAnswer} className={cx('btn', 'btn-outline-secondary', 'btn-sm', style.button_addOption)}>
-          Add answer option
+        <button onClick={onAddAnswer} className="btn btn-sm font-weight-bolder btn-light-success mt-6">
+          <span>Add option</span>
         </button>
       </div>
     </div>

@@ -1,12 +1,39 @@
 .container {
-  width: 1000px;
-  margin: auto;
-  padding: 45px 50px;
+  display: flex;
+  min-height: 100vh;
+  background: #fff;
 }
+
+.container_question {
+  padding: 20px 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 100vh;
+  flex-basis: 70%;
+  padding: 80px 11%;
+  border: 1px solid #ECF0F3;
+  border-radius: 5px;
+  background: #fff;
+  overflow: scroll;
+}
+
+.info {
+  display: flex;
+  padding: 80px 0;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: 30%;
+  background: #83D2CA;
+}
+
 
 .buttons_navigation {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: baseline;
 }
 
@@ -118,6 +145,10 @@
 
 .button:focus {
   outline: none;
+}
+
+.button_correct {
+  margin-right: 6px;
 }
 
 .button_correct:hover,
