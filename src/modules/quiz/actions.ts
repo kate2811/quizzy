@@ -1,4 +1,4 @@
-import { Quiz, QuizAnswer, QuizQuestion } from './types'
+import { AddedQuizQuestion, Quiz, QuizAnswer, QuizQuestion } from './types'
 import createAction from '../../utils/createAction'
 
 export enum ActionTypes {
@@ -15,7 +15,8 @@ export enum ActionTypes {
   deleteQuiz = 'Remove quiz to archive',
   deleteQuizSuccess = 'Remove quiz to archive success',
   addQuizQuestion = 'Add new question',
-  editQuizQuestion = 'Edit quiz question',
+  addQuizQuestionSuccess = 'Add new question success',
+  updateQuizQuestion = 'Update quiz question',
   deleteQuizQuestion = 'Delete quiz question',
   addQuizOption = 'Add quiz option',
   editQuizOption = 'Edit quiz option',
@@ -37,11 +38,12 @@ export const actions = {
   ),
   deleteQuiz: createAction<ActionTypes.deleteQuiz, string>(ActionTypes.deleteQuiz),
   deleteQuizSuccess: createAction<ActionTypes.deleteQuizSuccess, string>(ActionTypes.deleteQuizSuccess),
-  addQuizQuestion: createAction<ActionTypes.addQuizQuestion, Pick<Quiz, 'uuid' & 'questions'>>(
-    ActionTypes.addQuizQuestion
+  addQuizQuestion: createAction<ActionTypes.addQuizQuestion, AddedQuizQuestion>(ActionTypes.addQuizQuestion),
+  addQuizQuestionSuccess: createAction<ActionTypes.addQuizQuestionSuccess, AddedQuizQuestion>(
+    ActionTypes.addQuizQuestionSuccess
   ),
-  editQuizQuestion: createAction<ActionTypes.editQuizQuestion, Pick<Quiz, 'uuid' & 'questions'>>(
-    ActionTypes.editQuizQuestion
+  updateQuizQuestion: createAction<ActionTypes.updateQuizQuestion, Pick<Quiz, 'uuid' & 'question'>>(
+    ActionTypes.updateQuizQuestion
   ),
   deleteQuizQuestion: createAction<ActionTypes.deleteQuizQuestion, Pick<Quiz, 'uuid'> & Pick<QuizQuestion, 'uuid'>>(
     ActionTypes.deleteQuizQuestion

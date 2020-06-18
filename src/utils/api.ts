@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { UserSignInData, UserSingUpData } from '../modules/auth/types'
-import { Quiz } from '../modules/quiz/types'
+import { AddedQuizQuestion, Quiz } from '../modules/quiz/types'
 
 class Api {
   private readonly apiUrl: string
@@ -81,5 +81,10 @@ export async function updateQuizData(quizData: Omit<Quiz, 'questions'>) {
 export async function removeQuiz(uuid: string) {
   console.log(uuid)
   const response = await api.delete('/admin/quizzes/' + uuid, null)
+  return response.data
+}
+
+export async function addNewQuizQuestion(newQuestion: AddedQuizQuestion) {
+  const response = await api.post('/admin/quizzes/' + newQuestion.quizUuid + '/questions', newQuestion.question)
   return response.data
 }

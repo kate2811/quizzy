@@ -63,6 +63,17 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
+      case ActionTypes.addQuizQuestionSuccess: {
+        draft.quizzes = draft.quizzes.map((item) =>
+          item.uuid === action.payload.quizUuid
+            ? Object.assign({}, item, {
+                questions: item.questions ? [...item.questions, action.payload.question] : [action.payload.question]
+              })
+            : item
+        )
+        return draft
+      }
+
       default:
         return state
     }

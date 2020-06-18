@@ -4,13 +4,14 @@ import QuizQuestion from './QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
-import { Quiz } from '../../modules/quiz/types'
+import { AddedQuizQuestion, Quiz } from '../../modules/quiz/types'
 import img from '../../images/illustration/features.svg'
 
 type Props = {
   onSubmit?: (quiz: Quiz) => void
   editedQuiz?: Quiz
   onEditQuiz?: (quizData: Omit<Quiz, 'questions'>) => void
+  onAddQuestion?: (newQuestion: AddedQuizQuestion) => void
   onDeleteQuiz?: (uuid: string) => void
 }
 
@@ -19,7 +20,7 @@ const emptyQuestion = {
   options: [{ title: '', isCorrect: false }]
 }
 
-const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onEditQuiz, onDeleteQuiz }) => {
+const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onEditQuiz, onDeleteQuiz, onAddQuestion }) => {
   const [questions, setQuestions] = useState(editedQuiz?.questions || [emptyQuestion])
   const [quiz, setQuiz] = useState({ description: editedQuiz?.description || '', title: editedQuiz?.title || '' })
 
@@ -86,11 +87,13 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onEditQuiz, onDelet
           <div className={style.questions}>
             {questions.map((item, index) => (
               <QuizQuestion
+                editedQuiz={editedQuiz}
                 key={index}
                 number={index + 1}
                 onRemove={() => onRemove(index)}
                 value={item}
                 onChange={(value) => onChange(index, value)}
+                onAddQuestion={onAddQuestion}
               />
             ))}
           </div>

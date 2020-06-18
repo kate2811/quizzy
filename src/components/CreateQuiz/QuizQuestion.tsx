@@ -2,13 +2,16 @@ import React, { useCallback } from 'react'
 import style from './CreateQuiz.module.css'
 import QuizAnswer from './QuizAnswer'
 import cx from 'classnames'
-import { QuizQuestion as QuizQuestionType } from '../../modules/quiz/types'
+import { AddedQuizQuestion, Quiz, QuizQuestion as QuizQuestionType } from '../../modules/quiz/types'
+import { boolean } from 'yup'
 
 type Props = {
   value: QuizQuestionType
   onChange: (value: QuizQuestionType) => void
   onRemove(): void
   number: number
+  editedQuiz?: Quiz
+  onAddQuestion?: (newQuestion: AddedQuizQuestion) => void
 }
 
 const newOption = {
@@ -16,7 +19,7 @@ const newOption = {
   isCorrect: false
 }
 
-const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) => {
+const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number, editedQuiz, onAddQuestion }) => {
   const onAddAnswer = useCallback(
     () => onChange(Object.assign({}, value, { options: [...value.options, newOption] })),
     [onChange, value]
@@ -55,6 +58,9 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) =>
             placeholder="Enter your question here..."
             value={value.title}
             onChange={onChangeTitle}
+            onBlur={() =>
+              onAddQuestion ? editedQuiz?.uuid && onAddQuestion({ quizUuid: editedQuiz.uuid, question: value }) : null
+            }
           />
         </div>
 
