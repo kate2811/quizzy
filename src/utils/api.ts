@@ -8,7 +8,7 @@ class Api {
   private config: { headers: { [key: string]: string } }
 
   constructor() {
-    this.apiUrl = 'http://47.56.144.147:5555'
+    this.apiUrl = 'http://localhost:5555'
     this.headers = { headers: { 'Content-Type': 'application/json;charset=utf-8' } }
     this.config = this.headers
   }
@@ -70,5 +70,10 @@ export async function getQuizzes() {
 
 export async function getQuiz(uuid: string) {
   const response = await api.get('/quizzes/' + uuid)
+  return response.data
+}
+
+export async function updateQuizData(quizData: Omit<Quiz, 'questions'>) {
+  const response = await api.put('/admin/quizzes/' + quizData.uuid, quizData)
   return response.data
 }

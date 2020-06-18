@@ -13,7 +13,7 @@ type Props = {
 const QuizCard: React.FC<Props> = ({ title, description, uuid, className }) => {
   const actions = [
     { title: 'Results', to: '/' },
-    { title: 'Edit', to: '/' },
+    { title: 'Edit', to: `/edit/${uuid}` },
     { title: 'Share', to: `/quiz/${uuid}` }
   ]
 

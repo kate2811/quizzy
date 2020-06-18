@@ -8,8 +8,9 @@ import { Quiz } from '../../modules/quiz/types'
 import img from '../../images/illustration/features.svg'
 
 type Props = {
-  onSubmit: (quiz: Quiz) => void
+  onSubmit?: (quiz: Quiz) => void
   editedQuiz?: Quiz
+  onEditQuiz?: (quizData: Omit<Quiz, 'questions'>) => void
 }
 
 const emptyQuestion = {
@@ -17,9 +18,9 @@ const emptyQuestion = {
   options: [{ title: '', isCorrect: false }]
 }
 
-const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
-  const [questions, setQuestions] = useState([emptyQuestion])
-  const [quiz, setQuiz] = useState({ description: '', title: '' })
+const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz, onEditQuiz }) => {
+  const [questions, setQuestions] = useState(editedQuiz?.questions || [emptyQuestion])
+  const [quiz, setQuiz] = useState({ description: editedQuiz?.description || '', title: editedQuiz?.title || '' })
 
   const onAdd = useCallback(() => {
     setQuestions([...questions, emptyQuestion])
@@ -69,6 +70,7 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
             placeholder="Enter quiz title here..."
             value={quiz.title}
             onChange={onQuizChange}
+            onBlur={() => onEditQuiz && editedQuiz && onEditQuiz({ uuid: editedQuiz.uuid, ...quiz })}
           />
           <textarea
             name="description"
@@ -77,6 +79,7 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
             value={quiz.description}
             rows={3}
             onChange={onQuizChange}
+            onBlur={() => onEditQuiz && editedQuiz && onEditQuiz({ uuid: editedQuiz.uuid, ...quiz })}
           />
 
           <div className={style.questions}>
@@ -101,7 +104,9 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
             Go back
           </Link>
           <button
-            onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions })}
+            onClick={() =>
+              onSubmit ? onSubmit({ title: quiz.title, description: quiz.description, questions }) : null
+            }
             className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
             disabled={!questions[0].title && questions.length <= 1}
           >

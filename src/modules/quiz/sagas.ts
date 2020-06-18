@@ -1,6 +1,6 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import { actions, ActionTypes } from './actions'
-import { getQuizzes, getQuiz, addQuiz } from '../../utils/api'
+import { getQuizzes, getQuiz, addQuiz, updateQuizData } from '../../utils/api'
 import { customHistory } from '../../history'
 import { actions as coreActions } from '../core/actions'
 
@@ -32,11 +32,21 @@ function* publishQuiz({ payload }: ReturnType<typeof actions.publishQuiz>) {
   }
 }
 
+function* editQuiz({ payload }: ReturnType<typeof actions.updateQuiz>) {
+  try {
+    const response = yield call(updateQuizData, payload)
+    yield put(actions.updateQuizSuccess(response))
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
 function* quizSaga() {
   yield all([
     takeLatest(ActionTypes.publishQuiz, publishQuiz),
     takeLatest(ActionTypes.loadQuizzes, loadQuizzes),
-    takeLatest(ActionTypes.loadQuizByUuid, loadQuizByUuid)
+    takeLatest(ActionTypes.loadQuizByUuid, loadQuizByUuid),
+    takeLatest(ActionTypes.updateQuiz, editQuiz)
   ])
 }
 

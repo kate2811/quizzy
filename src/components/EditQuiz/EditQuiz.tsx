@@ -9,7 +9,7 @@ type Props = {
 }
 
 const EditQuiz: React.FC<Props> = ({ editedQuiz, onEdit, onDelete }) => {
-  return <CreateQuiz onSubmit={onEdit} editedQuiz={editedQuiz} />
+  return <CreateQuiz onEditQuiz={onEdit} editedQuiz={editedQuiz} />
 }
 
 export default EditQuiz

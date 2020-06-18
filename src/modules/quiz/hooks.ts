@@ -46,8 +46,8 @@ export function useDeleteQuiz() {
 export function useEditQuiz() {
   const dispatch = useDispatch()
   return useCallback(
-    (quiz: Quiz) => {
-      return dispatch(actions.publishQuiz(quiz))
+    (quizData: Omit<Quiz, 'questions'>) => {
+      return dispatch(actions.updateQuiz(quizData))
     },
     [dispatch]
   )

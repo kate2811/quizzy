@@ -15,7 +15,7 @@ export const initialState: State = {
 }
 
 export default function quizReducer(state = initialState, action: ActionType<typeof actions>): State {
-  return produce(state, (draft) => {
+  return <State>produce(state, (draft) => {
     switch (action.type) {
       case ActionTypes.loadQuizzes: {
         draft.isLoading = true
@@ -51,6 +51,16 @@ export default function quizReducer(state = initialState, action: ActionType<typ
 
       case ActionTypes.setFilter: {
         draft.filter = action.payload
+        return draft
+      }
+
+      case ActionTypes.editQuizLocally: {
+        draft.quizzes = draft.quizzes.map((item) =>
+          item.uuid === action.payload.uuid
+            ? Object.assign({}, item, { title: action.payload.title, description: action.payload.description })
+            : item
+        )
+
         return draft
       }
 
