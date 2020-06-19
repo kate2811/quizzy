@@ -68,14 +68,6 @@ const CreateQuiz: React.FC<Props> = ({
 
   return (
     <div className={style.container}>
-      <div className={style.info}>
-        <h3 className="font-weight-bolder text-dark font-size-h1-lg text-center">
-          Create your quiz.
-          <br />
-          It's easy and fun!
-        </h3>
-        <img className={style.background__img} src={img} height={400} alt="create a quiz" />
-      </div>
       <div className={style.card}>
         <div>
           <input

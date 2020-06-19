@@ -1,0 +1,16 @@
+.tab {
+  background: transparent;
+}
+
+.tab:hover {
+  background: transparent;
+}
+
+.active {
+  color: #3699FF;
+}
+
+.content {
+  margin: auto;
+  padding: 30px 200px;
+}
