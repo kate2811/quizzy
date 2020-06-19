@@ -71,28 +71,28 @@ $nav-icon-width: 2rem;
 	.nav-link:hover:not(.disabled),
 	.nav-link.active {
 		transition: $transition-link;
-		color: $primary;
+		color: $success;
 
 		.nav-text {
 			transition: $transition-link;
-			color: $primary;
+			color: $success;
 		}
 
 		.nav-icon {
 			i {
 				transition: $transition-link;
-				color: $primary;
+				color: $success;
 			}
 
 			// Svg icon
 			.svg-icon {
-				@include svg-icon-color($primary);
+				@include svg-icon-color($success);
 			}
 		}
 
 		&:after {
 			transition: $transition-link;
-			color: $primary;
+			color: $success;
 		}
 	}
 }
@@ -159,7 +159,7 @@ $nav-icon-width: 2rem;
 
 		.nav-link {
 			border: 0;
-			border-bottom: 1px solid transparent; 
+			border-bottom: 1px solid transparent;
 			transition: $transition-link;
 			padding: 0.85rem 0;
 			margin: 0 1rem;
@@ -226,7 +226,7 @@ $nav-icon-width: 2rem;
 			.nav-link:hover:not(.disabled),
 			.nav-link.active,
 			.show > .nav-link {
-				border-bottom: 3px solid $primary;
+				border-bottom: 3px solid $success;
 			}
 
 			border-bottom-width: 3px;

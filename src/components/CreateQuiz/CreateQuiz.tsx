@@ -5,7 +5,6 @@ import { produce } from 'immer'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
 import { UpdatedQuizQuestion, Quiz } from '../../modules/quiz/types'
-import img from '../../images/illustration/features.svg'
 
 type Props = {
   onSubmit?: (quiz: Quiz) => void
