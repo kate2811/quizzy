@@ -14,7 +14,6 @@ export type Quiz = {
 export type QuizQuestion = {
   uuid?: string
   title: string
-  image?: string
   options: QuizAnswer[]
 }
 
@@ -22,4 +21,9 @@ export type QuizAnswer = {
   uuid?: string
   title: string
   isCorrect: boolean
+}
+
+export type UpdatedQuizQuestion = {
+  quizUuid: string
+  question: QuizQuestion
 }

@@ -1,6 +1,15 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import { actions, ActionTypes } from './actions'
-import { getQuizzes, getQuiz, addQuiz } from '../../utils/api'
+import {
+  getQuizzes,
+  getQuiz,
+  addQuiz,
+  updateQuizData,
+  removeQuiz,
+  addNewQuizQuestion,
+  editQuizQuestion,
+  removeQuizQuestion
+} from '../../utils/api'
 import { customHistory } from '../../history'
 import { actions as coreActions } from '../core/actions'
 
@@ -32,11 +41,62 @@ function* publishQuiz({ payload }: ReturnType<typeof actions.publishQuiz>) {
   }
 }
 
+function* updateQuiz({ payload }: ReturnType<typeof actions.updateQuiz>) {
+  try {
+    const response = yield call(updateQuizData, payload)
+    yield put(actions.updateQuizSuccess(response))
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
+function* deleteQuiz({ payload }: ReturnType<typeof actions.deleteQuiz>) {
+  try {
+    yield call(removeQuiz, payload)
+    customHistory.push('/')
+    yield put(actions.deleteQuizSuccess(payload))
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
+function* addQuizQuestion({ payload }: ReturnType<typeof actions.addQuizQuestion>) {
+  try {
+    const response = yield call(addNewQuizQuestion, payload)
+    yield put(actions.addQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
+function* updateQuizQuestion({ payload }: ReturnType<typeof actions.updateQuizQuestion>) {
+  try {
+    const response = yield call(editQuizQuestion, payload)
+    yield put(actions.updateQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
+function* deleteQuizQuestion({ payload }: ReturnType<typeof actions.deleteQuizQuestion>) {
+  try {
+    const response = yield call(removeQuizQuestion, payload)
+    yield put(actions.deleteQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
 function* quizSaga() {
   yield all([
     takeLatest(ActionTypes.publishQuiz, publishQuiz),
     takeLatest(ActionTypes.loadQuizzes, loadQuizzes),
-    takeLatest(ActionTypes.loadQuizByUuid, loadQuizByUuid)
+    takeLatest(ActionTypes.loadQuizByUuid, loadQuizByUuid),
+    takeLatest(ActionTypes.updateQuiz, updateQuiz),
+    takeLatest(ActionTypes.deleteQuiz, deleteQuiz),
+    takeLatest(ActionTypes.addQuizQuestion, addQuizQuestion),
+    takeLatest(ActionTypes.updateQuizQuestion, updateQuizQuestion),
+    takeLatest(ActionTypes.deleteQuizQuestion, deleteQuizQuestion)
   ])
 }
 

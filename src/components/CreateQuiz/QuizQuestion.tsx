@@ -1,14 +1,17 @@
 import React, { useCallback } from 'react'
 import style from './CreateQuiz.module.css'
 import QuizAnswer from './QuizAnswer'
-import cx from 'classnames'
-import { QuizQuestion as QuizQuestionType } from '../../modules/quiz/types'
+import { UpdatedQuizQuestion, Quiz, QuizQuestion as QuizQuestionType } from '../../modules/quiz/types'
 
 type Props = {
   value: QuizQuestionType
   onChange: (value: QuizQuestionType) => void
   onRemove(): void
   number: number
+  editedQuiz?: Quiz
+  onAddQuestion?: (newQuestion: UpdatedQuizQuestion) => void
+  onEditQuestion?: (question: UpdatedQuizQuestion) => void
+  onDeleteQuestion?: (question: UpdatedQuizQuestion) => void
 }
 
 const newOption = {
@@ -16,7 +19,16 @@ const newOption = {
   isCorrect: false
 }
 
-const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) => {
+const QuizQuestion: React.FC<Props> = ({
+  value,
+  onChange,
+  onRemove,
+  number,
+  editedQuiz,
+  onAddQuestion,
+  onDeleteQuestion,
+  onEditQuestion
+}) => {
   const onAddAnswer = useCallback(
     () => onChange(Object.assign({}, value, { options: [...value.options, newOption] })),
     [onChange, value]
@@ -55,6 +67,15 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number }) =>
             placeholder="Enter your question here..."
             value={value.title}
             onChange={onChangeTitle}
+            onBlur={() =>
+              value.uuid
+                ? onEditQuestion
+                  ? editedQuiz?.uuid && onEditQuestion({ quizUuid: editedQuiz.uuid, question: value })
+                  : null
+                : onAddQuestion
+                ? editedQuiz?.uuid && onAddQuestion({ quizUuid: editedQuiz.uuid, question: value })
+                : null
+            }
           />
         </div>
 

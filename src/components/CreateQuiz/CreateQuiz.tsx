@@ -4,12 +4,17 @@ import QuizQuestion from './QuizQuestion'
 import { produce } from 'immer'
 import cx from 'classnames'
 import { Link } from 'react-router-dom'
-import { Quiz } from '../../modules/quiz/types'
+import { UpdatedQuizQuestion, Quiz } from '../../modules/quiz/types'
 import img from '../../images/illustration/features.svg'
 
 type Props = {
-  onSubmit: (quiz: Quiz) => void
+  onSubmit?: (quiz: Quiz) => void
   editedQuiz?: Quiz
+  onEditQuiz?: (quizData: Omit<Quiz, 'questions'>) => void
+  onAddQuestion?: (newQuestion: UpdatedQuizQuestion) => void
+  onEditQuestion?: (question: UpdatedQuizQuestion) => void
+  onDeleteQuestion?: (question: UpdatedQuizQuestion) => void
+  onDeleteQuiz?: (uuid: string) => void
 }
 
 const emptyQuestion = {
@@ -17,17 +22,28 @@ const emptyQuestion = {
   options: [{ title: '', isCorrect: false }]
 }
 
-const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
-  const [questions, setQuestions] = useState([emptyQuestion])
-  const [quiz, setQuiz] = useState({ description: '', title: '' })
+const CreateQuiz: React.FC<Props> = ({
+  onSubmit,
+  editedQuiz,
+  onEditQuiz,
+  onDeleteQuiz,
+  onAddQuestion,
+  onDeleteQuestion,
+  onEditQuestion
+}) => {
+  const [questions, setQuestions] = useState(editedQuiz?.questions || [emptyQuestion])
+  const [quiz, setQuiz] = useState({ description: editedQuiz?.description || '', title: editedQuiz?.title || '' })
 
   const onAdd = useCallback(() => {
     setQuestions([...questions, emptyQuestion])
   }, [setQuestions, questions])
 
   const onRemove = useCallback(
-    (index) => {
+    (item, index) => {
       setQuestions(questions.filter((item, itemIndex) => itemIndex !== index))
+      if (editedQuiz?.uuid && onDeleteQuestion) {
+        onDeleteQuestion({ quizUuid: editedQuiz.uuid, question: item })
+      }
     },
     [setQuestions, questions]
   )
@@ -69,6 +85,7 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
             placeholder="Enter quiz title here..."
             value={quiz.title}
             onChange={onQuizChange}
+            onBlur={() => onEditQuiz && editedQuiz && onEditQuiz({ uuid: editedQuiz.uuid, ...quiz })}
           />
           <textarea
             name="description"
@@ -77,16 +94,21 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
             value={quiz.description}
             rows={3}
             onChange={onQuizChange}
+            onBlur={() => onEditQuiz && editedQuiz && onEditQuiz({ uuid: editedQuiz.uuid, ...quiz })}
           />
 
           <div className={style.questions}>
             {questions.map((item, index) => (
               <QuizQuestion
+                editedQuiz={editedQuiz}
                 key={index}
                 number={index + 1}
-                onRemove={() => onRemove(index)}
+                onRemove={() => onRemove(item, index)}
                 value={item}
                 onChange={(value) => onChange(index, value)}
+                onAddQuestion={onAddQuestion}
+                onEditQuestion={onEditQuestion}
+                onDeleteQuestion={onDeleteQuestion}
               />
             ))}
           </div>
@@ -101,12 +123,14 @@ const CreateQuiz: React.FC<Props> = ({ onSubmit, editedQuiz }) => {
             Go back
           </Link>
           <button
-            onClick={() => onSubmit({ title: quiz.title, description: quiz.description, questions })}
+            onClick={() =>
+              onSubmit ? onSubmit({ title: quiz.title, description: quiz.description, questions }) : null
+            }
             className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3"
-            disabled={!questions[0].title && questions.length <= 1}
           >
             Publish it!
           </button>
+          <button onClick={() => (onDeleteQuiz ? onDeleteQuiz(editedQuiz?.uuid as string) : null)}>delete!</button>
         </div>
       </div>
     </div>
