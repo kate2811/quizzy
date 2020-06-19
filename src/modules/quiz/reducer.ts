@@ -74,6 +74,22 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
+      case ActionTypes.updateQuizQuestionSuccess: {
+        let quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        // @ts-ignore
+        draft.quizzes[quiz].questions = draft.quizzes[quiz].questions.map((item) =>
+          item.uuid === action.payload.question.uuid ? action.payload.question : item
+        )
+        return draft
+      }
+
+      case ActionTypes.deleteQuizQuestionSuccess: {
+        let quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        // @ts-ignore
+        draft.quizzes[quiz].questions.filter((item) => item.uuid !== action.payload.question.uuid)
+        return draft
+      }
+
       default:
         return state
     }

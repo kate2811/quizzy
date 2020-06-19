@@ -23,7 +23,7 @@ export type QuizAnswer = {
   isCorrect: boolean
 }
 
-export type AddedQuizQuestion = {
+export type UpdatedQuizQuestion = {
   quizUuid: string
   question: QuizQuestion
 }

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
 import { actions } from './actions'
-import { AddedQuizQuestion, Quiz, QuizQuestion } from './types'
+import { UpdatedQuizQuestion, Quiz, QuizQuestion } from './types'
 import { useSelector } from '../index'
 import { getFilteredQuizzes } from './selectors'
 
@@ -56,8 +56,28 @@ export function useDeleteQuiz() {
 export function useAddQuizQuestion() {
   const dispatch = useDispatch()
   return useCallback(
-    (newQuestion: AddedQuizQuestion) => {
+    (newQuestion: UpdatedQuizQuestion) => {
       return dispatch(actions.addQuizQuestion(newQuestion))
+    },
+    [dispatch]
+  )
+}
+
+export function useEditQuizQuestion() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (question: UpdatedQuizQuestion) => {
+      return dispatch(actions.updateQuizQuestion(question))
+    },
+    [dispatch]
+  )
+}
+
+export function useDeleteQuizQuestion() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (question: UpdatedQuizQuestion) => {
+      return dispatch(actions.deleteQuizQuestion(question))
     },
     [dispatch]
   )

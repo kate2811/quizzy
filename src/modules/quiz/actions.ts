@@ -1,4 +1,4 @@
-import { AddedQuizQuestion, Quiz, QuizAnswer, QuizQuestion } from './types'
+import { UpdatedQuizQuestion, Quiz, QuizAnswer, QuizQuestion } from './types'
 import createAction from '../../utils/createAction'
 
 export enum ActionTypes {
@@ -17,7 +17,9 @@ export enum ActionTypes {
   addQuizQuestion = 'Add new question',
   addQuizQuestionSuccess = 'Add new question success',
   updateQuizQuestion = 'Update quiz question',
+  updateQuizQuestionSuccess = 'Update quiz question success',
   deleteQuizQuestion = 'Delete quiz question',
+  deleteQuizQuestionSuccess = 'Delete quiz question success',
   addQuizOption = 'Add quiz option',
   editQuizOption = 'Edit quiz option',
   deleteQuizOption = 'Delete quiz option'
@@ -38,15 +40,17 @@ export const actions = {
   ),
   deleteQuiz: createAction<ActionTypes.deleteQuiz, string>(ActionTypes.deleteQuiz),
   deleteQuizSuccess: createAction<ActionTypes.deleteQuizSuccess, string>(ActionTypes.deleteQuizSuccess),
-  addQuizQuestion: createAction<ActionTypes.addQuizQuestion, AddedQuizQuestion>(ActionTypes.addQuizQuestion),
-  addQuizQuestionSuccess: createAction<ActionTypes.addQuizQuestionSuccess, AddedQuizQuestion>(
+  addQuizQuestion: createAction<ActionTypes.addQuizQuestion, UpdatedQuizQuestion>(ActionTypes.addQuizQuestion),
+  addQuizQuestionSuccess: createAction<ActionTypes.addQuizQuestionSuccess, UpdatedQuizQuestion>(
     ActionTypes.addQuizQuestionSuccess
   ),
-  updateQuizQuestion: createAction<ActionTypes.updateQuizQuestion, Pick<Quiz, 'uuid' & 'question'>>(
-    ActionTypes.updateQuizQuestion
+  updateQuizQuestion: createAction<ActionTypes.updateQuizQuestion, UpdatedQuizQuestion>(ActionTypes.updateQuizQuestion),
+  updateQuizQuestionSuccess: createAction<ActionTypes.updateQuizQuestionSuccess, UpdatedQuizQuestion>(
+    ActionTypes.updateQuizQuestionSuccess
   ),
-  deleteQuizQuestion: createAction<ActionTypes.deleteQuizQuestion, Pick<Quiz, 'uuid'> & Pick<QuizQuestion, 'uuid'>>(
-    ActionTypes.deleteQuizQuestion
+  deleteQuizQuestion: createAction<ActionTypes.deleteQuizQuestion, UpdatedQuizQuestion>(ActionTypes.deleteQuizQuestion),
+  deleteQuizQuestionSuccess: createAction<ActionTypes.deleteQuizQuestionSuccess, UpdatedQuizQuestion>(
+    ActionTypes.deleteQuizQuestionSuccess
   ),
   addQuizOption: createAction<ActionTypes.addQuizOption, QuizAnswer>(ActionTypes.addQuizOption),
   editQuizOption: createAction<ActionTypes.editQuizOption, QuizAnswer>(ActionTypes.editQuizOption),

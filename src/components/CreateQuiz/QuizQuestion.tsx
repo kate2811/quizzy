@@ -1,9 +1,7 @@
 import React, { useCallback } from 'react'
 import style from './CreateQuiz.module.css'
 import QuizAnswer from './QuizAnswer'
-import cx from 'classnames'
-import { AddedQuizQuestion, Quiz, QuizQuestion as QuizQuestionType } from '../../modules/quiz/types'
-import { boolean } from 'yup'
+import { UpdatedQuizQuestion, Quiz, QuizQuestion as QuizQuestionType } from '../../modules/quiz/types'
 
 type Props = {
   value: QuizQuestionType
@@ -11,7 +9,9 @@ type Props = {
   onRemove(): void
   number: number
   editedQuiz?: Quiz
-  onAddQuestion?: (newQuestion: AddedQuizQuestion) => void
+  onAddQuestion?: (newQuestion: UpdatedQuizQuestion) => void
+  onEditQuestion?: (question: UpdatedQuizQuestion) => void
+  onDeleteQuestion?: (question: UpdatedQuizQuestion) => void
 }
 
 const newOption = {
@@ -19,7 +19,16 @@ const newOption = {
   isCorrect: false
 }
 
-const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number, editedQuiz, onAddQuestion }) => {
+const QuizQuestion: React.FC<Props> = ({
+  value,
+  onChange,
+  onRemove,
+  number,
+  editedQuiz,
+  onAddQuestion,
+  onDeleteQuestion,
+  onEditQuestion
+}) => {
   const onAddAnswer = useCallback(
     () => onChange(Object.assign({}, value, { options: [...value.options, newOption] })),
     [onChange, value]
@@ -59,7 +68,13 @@ const QuizQuestion: React.FC<Props> = ({ value, onChange, onRemove, number, edit
             value={value.title}
             onChange={onChangeTitle}
             onBlur={() =>
-              onAddQuestion ? editedQuiz?.uuid && onAddQuestion({ quizUuid: editedQuiz.uuid, question: value }) : null
+              value.uuid
+                ? onEditQuestion
+                  ? editedQuiz?.uuid && onEditQuestion({ quizUuid: editedQuiz.uuid, question: value })
+                  : null
+                : onAddQuestion
+                ? editedQuiz?.uuid && onAddQuestion({ quizUuid: editedQuiz.uuid, question: value })
+                : null
             }
           />
         </div>
