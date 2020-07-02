@@ -14,7 +14,7 @@ export default function () {
     if (!user && !quiz) {
       loadQuiz()
     }
-  }, [])
+  }, [loadQuiz, quiz, user])
 
   return <QuizTemplate quiz={quiz} user={user} />
 }

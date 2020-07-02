@@ -2,6 +2,10 @@
   background: transparent;
 }
 
+.tab i {
+  margin-right: 5px;
+}
+
 .tab:hover {
   background: transparent;
 }

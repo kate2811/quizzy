@@ -44,7 +44,7 @@ const CreateQuiz: React.FC<Props> = ({
         onDeleteQuestion({ quizUuid: editedQuiz.uuid, question: item })
       }
     },
-    [setQuestions, questions]
+    [setQuestions, questions, onDeleteQuestion, editedQuiz]
   )
 
   const onChange = useCallback(

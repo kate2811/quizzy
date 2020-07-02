@@ -1,4 +1,4 @@
-import { UpdatedQuizQuestion, Quiz, QuizAnswer, QuizQuestion } from './types'
+import { UpdatedQuizQuestion, Quiz, QuizAnswer } from './types'
 import createAction from '../../utils/createAction'
 
 export enum ActionTypes {

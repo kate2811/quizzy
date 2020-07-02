@@ -8,7 +8,6 @@ import Loader from 'react-loader-spinner'
 import Dashboard from '../Dashboard'
 import Protected from '../Protected'
 import SignUpPage from '../SignUpPage'
-import CreateQuiz from '../CreateQuiz'
 import QuizTemplate from '../QuizTemplate'
 import NotProtected from '../NotProtected'
 import EditQuiz from '../EditQuiz'
@@ -63,5 +62,3 @@ function App() {
 }
 
 export default App
-
-// auth one layout

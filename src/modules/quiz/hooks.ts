@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
 import { actions } from './actions'
-import { UpdatedQuizQuestion, Quiz, QuizQuestion } from './types'
+import { UpdatedQuizQuestion, Quiz } from './types'
 import { useSelector } from '../index'
 import { getFilteredQuizzes } from './selectors'
 
