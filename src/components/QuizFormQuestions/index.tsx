@@ -1,21 +1,12 @@
 import React from 'react'
-import {
-  useAddQuizQuestion,
-  useDeleteQuiz,
-  useEditQuiz,
-  useQuizByUuid,
-  useEditQuizQuestion,
-  useDeleteQuizQuestion
-} from '../../modules/quiz/hooks'
+import { useAddQuizQuestion, useQuizByUuid, useEditQuizQuestion, useDeleteQuizQuestion } from '../../modules/quiz/hooks'
 import { useParams } from 'react-router-dom'
-import CreatingQuiz from './CreatingQuiz'
+import QuizFormQuestions from './QuizFormQuestions'
 
 export default function () {
   const { uuid } = useParams()
 
   const quiz = useQuizByUuid(uuid)
-  const onEdit = useEditQuiz()
-  const onDelete = useDeleteQuiz()
   const onAddQuestion = useAddQuizQuestion()
   const onEditQuestion = useEditQuizQuestion()
   const onDeleteQuestion = useDeleteQuizQuestion()
@@ -24,5 +15,12 @@ export default function () {
     throw new Error('Quiz is not found')
   }
 
-  return <CreatingQuiz />
+  return (
+    <QuizFormQuestions
+      onAddQuestion={onAddQuestion}
+      onEditQuestion={onEditQuestion}
+      onDeleteQuestion={onDeleteQuestion}
+      quiz={quiz}
+    />
+  )
 }
