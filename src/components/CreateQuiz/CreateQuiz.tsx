@@ -32,7 +32,6 @@ const CreateQuiz: React.FC<Props> = ({
 }) => {
   const [questions, setQuestions] = useState(editedQuiz?.questions || [emptyQuestion])
   const [quiz, setQuiz] = useState({ description: editedQuiz?.description || '', title: editedQuiz?.title || '' })
-
   const onAdd = useCallback(() => {
     setQuestions([...questions, emptyQuestion])
   }, [setQuestions, questions])

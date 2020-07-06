@@ -4,8 +4,8 @@ import { State } from './types'
 import { actions, ActionTypes } from './actions'
 
 export const initialState: State = {
-  user: { lastName: 'Pavlov', firstName: 'Alex', email: 'jh@kk.ru', uuid: 'mmkrkr3' },
-  //user: null,
+  //user: { lastName: 'Pavlov', firstName: 'Alex', email: 'jh@kk.ru', uuid: 'mmkrkr3' },
+  user: null,
   isLoading: false
 }
 
