@@ -2,18 +2,20 @@ import React from 'react'
 import PageLayout from '../PageLayout'
 import Tabs from '../Tabs'
 import QuizFormGeneral from '../QuizFormGeneral'
+import QuizFormQuestions from '../QuizFormQuestions.tsx'
+import { Quiz } from '../../modules/quiz/types'
 
-const CreatingQuiz: React.FC = () => {
+const CreatingQuiz: React.FC<{ quiz: Quiz }> = ({ quiz }) => {
   const content = [
     {
       title: 'General',
       icon: 'fa-info-circle',
-      content: <QuizFormGeneral />
+      content: <QuizFormGeneral quiz={quiz} />
     },
     {
       title: 'Questions',
       icon: 'fa-file-alt',
-      content: <div />
+      content: <QuizFormQuestions quiz={quiz} />
     },
     { title: 'Settings', icon: 'fa-search', content: <div>sss</div> }
   ]

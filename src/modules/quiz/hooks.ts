@@ -9,6 +9,11 @@ export function useQuizzes() {
   return useSelector(getFilteredQuizzes)
 }
 
+export function useQuizQuestions(uuid: string) {
+  const quiz = useSelector((state) => state.quiz.quizzes.find((item) => item.uuid === uuid))
+  return quiz ? quiz.questions : undefined
+}
+
 export function useSetFilter() {
   const dispatch = useDispatch()
   return useCallback(
@@ -53,6 +58,26 @@ export function useDeleteQuiz() {
   )
 }
 
+export function useAddQuizEmptyQuestion() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quizUuid: string) => {
+      return dispatch(actions.addQuizEmptyQuestion(quizUuid))
+    },
+    [dispatch]
+  )
+}
+
+export function useDeleteQuizEmptyQuestion() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quizUuid: string) => {
+      return dispatch(actions.deleteQuizEmptyQuestion(quizUuid))
+    },
+    [dispatch]
+  )
+}
+
 export function useAddQuizQuestion() {
   const dispatch = useDispatch()
   return useCallback(
@@ -76,8 +101,8 @@ export function useEditQuizQuestion() {
 export function useDeleteQuizQuestion() {
   const dispatch = useDispatch()
   return useCallback(
-    (question: UpdatedQuizQuestion) => {
-      return dispatch(actions.deleteQuizQuestion(question))
+    (quizUuid: string, questionUuid: string) => {
+      return dispatch(actions.deleteQuizQuestion({ quizUuid, questionUuid }))
     },
     [dispatch]
   )

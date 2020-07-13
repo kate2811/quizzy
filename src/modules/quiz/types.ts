@@ -8,7 +8,7 @@ export type Quiz = {
   uuid?: string
   title: string
   description: string
-  questions?: QuizQuestion[]
+  questions: QuizQuestion[]
 }
 
 export type QuizQuestion = {

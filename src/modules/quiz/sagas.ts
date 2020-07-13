@@ -63,7 +63,7 @@ function* deleteQuiz({ payload }: ReturnType<typeof actions.deleteQuiz>) {
 function* addQuizQuestion({ payload }: ReturnType<typeof actions.addQuizQuestion>) {
   try {
     const response = yield call(addNewQuizQuestion, payload)
-    yield put(actions.addQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
+    yield put(actions.addQuizQuestionSuccess({ quizUuid: response.quiz, question: response }))
   } catch (error) {
     yield put(coreActions.handleError(error.response))
   }
@@ -71,8 +71,12 @@ function* addQuizQuestion({ payload }: ReturnType<typeof actions.addQuizQuestion
 
 function* updateQuizQuestion({ payload }: ReturnType<typeof actions.updateQuizQuestion>) {
   try {
-    const response = yield call(editQuizQuestion, payload)
-    yield put(actions.updateQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
+    if (payload.question.title) {
+      const response = yield call(editQuizQuestion, payload)
+      yield put(actions.updateQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
+    } else {
+      yield put(coreActions.getNotification({ text: 'Question must not be empty', type: 'warning' }))
+    }
   } catch (error) {
     yield put(coreActions.handleError(error.response))
   }
@@ -80,8 +84,8 @@ function* updateQuizQuestion({ payload }: ReturnType<typeof actions.updateQuizQu
 
 function* deleteQuizQuestion({ payload }: ReturnType<typeof actions.deleteQuizQuestion>) {
   try {
-    const response = yield call(removeQuizQuestion, payload)
-    yield put(actions.deleteQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
+    yield call(removeQuizQuestion, payload)
+    yield put(actions.deleteQuizQuestionSuccess({ quizUuid: payload.quizUuid, questionUuid: payload.questionUuid }))
   } catch (error) {
     yield put(coreActions.handleError(error.response))
   }

@@ -63,30 +63,43 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
-      case ActionTypes.addQuizQuestionSuccess: {
+      case ActionTypes.addQuizEmptyQuestion: {
+        const emptyQuestion = { title: '', options: [] }
         draft.quizzes = draft.quizzes.map((item) =>
-          item.uuid === action.payload.quizUuid
-            ? Object.assign({}, item, {
-                questions: item.questions ? [...item.questions, action.payload.question] : [action.payload.question]
-              })
+          item.uuid === action.payload
+            ? Object.assign({}, item, { questions: [...item.questions, emptyQuestion] })
             : item
         )
         return draft
       }
 
+      case ActionTypes.deleteQuizEmptyQuestion: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload)
+        draft.quizzes[quiz].questions = draft.quizzes[quiz].questions.filter((item) => item.uuid)
+        return draft
+      }
+
+      case ActionTypes.addQuizQuestionSuccess: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        const editedQuestion = draft.quizzes[quiz].questions.findIndex((item) => !item.uuid)
+        draft.quizzes[quiz].questions[editedQuestion] = action.payload.question
+        return draft
+      }
+
       case ActionTypes.updateQuizQuestionSuccess: {
-        let quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
-        // @ts-ignore
-        draft.quizzes[quiz].questions = draft.quizzes[quiz].questions.map((item) =>
-          item.uuid === action.payload.question.uuid ? action.payload.question : item
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        const editedQuestion = draft.quizzes[quiz].questions.findIndex(
+          (item) => item.uuid === action.payload.question.uuid
         )
+        draft.quizzes[quiz].questions[editedQuestion] = action.payload.question
         return draft
       }
 
       case ActionTypes.deleteQuizQuestionSuccess: {
         let quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
-        // @ts-ignore
-        draft.quizzes[quiz].questions.filter((item) => item.uuid !== action.payload.question.uuid)
+        draft.quizzes[quiz].questions = draft.quizzes[quiz].questions.filter(
+          (item) => item.uuid !== action.payload.questionUuid
+        )
         return draft
       }
 

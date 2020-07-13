@@ -36,15 +36,15 @@ const CreateQuiz: React.FC<Props> = ({
     setQuestions([...questions, emptyQuestion])
   }, [setQuestions, questions])
 
-  const onRemove = useCallback(
-    (item, index) => {
-      setQuestions(questions.filter((item, itemIndex) => itemIndex !== index))
-      if (editedQuiz?.uuid && onDeleteQuestion) {
-        onDeleteQuestion({ quizUuid: editedQuiz.uuid, question: item })
-      }
-    },
-    [setQuestions, questions, onDeleteQuestion, editedQuiz]
-  )
+  // const onRemove = useCallback(
+  //   (item, index) => {
+  //     setQuestions(questions.filter((item, itemIndex) => itemIndex !== index))
+  //     if (editedQuiz?.uuid && onDeleteQuestion) {
+  //       onDeleteQuestion({ quizUuid: editedQuiz.uuid, question: item })
+  //     }
+  //   },
+  //   [setQuestions, questions, onDeleteQuestion, editedQuiz]
+  // )
 
   const onChange = useCallback(
     (index, item) => {
@@ -93,7 +93,7 @@ const CreateQuiz: React.FC<Props> = ({
                 editedQuiz={editedQuiz}
                 key={index}
                 number={index + 1}
-                onRemove={() => onRemove(item, index)}
+                onRemove={() => console.log(index)}
                 value={item}
                 onChange={(value) => onChange(index, value)}
                 onAddQuestion={onAddQuestion}

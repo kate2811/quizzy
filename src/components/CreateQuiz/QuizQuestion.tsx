@@ -60,7 +60,7 @@ const QuizQuestion: React.FC<Props> = ({
     <div>
       <div className={style.question}>
         <span className={style.question__number}>{number}.</span>
-        <div className={style.question__body}>
+        {/*        <div className={style.question__body}>
           <textarea
             className="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
             name="question"
@@ -77,7 +77,7 @@ const QuizQuestion: React.FC<Props> = ({
                 : null
             }
           />
-        </div>
+        </div>*/}
 
         <button className={style.question__closeBtn} onClick={onRemove}>
           <i className="fas fa-times" />

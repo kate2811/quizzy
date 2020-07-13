@@ -96,10 +96,7 @@ export async function editQuizQuestion(question: UpdatedQuizQuestion) {
   return response.data
 }
 
-export async function removeQuizQuestion(question: UpdatedQuizQuestion) {
-  const response = await api.delete(
-    '/admin/quizzes/' + question.quizUuid + '/questions/' + question.question.uuid,
-    null
-  )
+export async function removeQuizQuestion({ quizUuid, questionUuid }) {
+  const response = await api.delete('/admin/quizzes/' + quizUuid + '/questions/' + questionUuid, null)
   return response.data
 }
