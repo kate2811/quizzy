@@ -118,3 +118,8 @@ export function useLoadQuizByUuid(uuid: string) {
     return dispatch(actions.loadQuizByUuid(uuid))
   }, [dispatch, uuid])
 }
+
+export function useIsEmptyQuestion(uuid: string) {
+  const quiz = useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === uuid)
+  return quiz && quiz.questions.some((item) => !item.uuid)
+}

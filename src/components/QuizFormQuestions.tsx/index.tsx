@@ -5,7 +5,8 @@ import {
   useDeleteQuizQuestion,
   useQuizQuestions,
   useAddQuizEmptyQuestion,
-  useDeleteQuizEmptyQuestion
+  useDeleteQuizEmptyQuestion,
+  useIsEmptyQuestion
 } from '../../modules/quiz/hooks'
 import QuizFormQuestions from './QuizFormQuestions'
 
@@ -16,6 +17,7 @@ export default function ({ quiz }) {
   const onEditQuestion = useEditQuizQuestion()
   const onDeleteQuestion = useDeleteQuizQuestion()
   const questions = useQuizQuestions(quiz.uuid)
+  const isEmptyQuestion = useIsEmptyQuestion(quiz.uuid)
 
   return (
     <QuizFormQuestions
@@ -24,6 +26,7 @@ export default function ({ quiz }) {
       onEditQuestion={onEditQuestion}
       onDeleteQuestion={onDeleteQuestion}
       onDeleteEmptyQuestion={onDeleteEmptyQuestion}
+      isEmptyQuestion={isEmptyQuestion}
       questions={questions}
       quiz={quiz}
     />

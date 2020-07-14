@@ -10,9 +10,10 @@ type Props = {
   onDeleteQuestion: (quizUuid: string, questionUuid: string) => void
   onDeleteEmptyQuestion: (quizUuid: string) => void
   onAddEmptyQuestion: (quizUuid: string) => void
+  isEmptyQuestion: boolean | undefined
 }
 
-const QuizFormQuestions: React.FC<Props> = ({ quiz, questions, onAddEmptyQuestion, ...props }) => {
+const QuizFormQuestions: React.FC<Props> = ({ quiz, questions, onAddEmptyQuestion, isEmptyQuestion, ...props }) => {
   const onAddQuestionClick = useCallback(() => {
     onAddEmptyQuestion(quiz.uuid)
   }, [quiz])
@@ -24,7 +25,11 @@ const QuizFormQuestions: React.FC<Props> = ({ quiz, questions, onAddEmptyQuestio
           <QuizFormQuestion key={index} question={item} quizUuid={quiz.uuid} {...props} />
         ))}
 
-      <button className="btn btn-success font-weight-bolder my-3 mr-3 mt-6" onClick={onAddQuestionClick}>
+      <button
+        className="btn btn-success font-weight-bolder my-3 mr-3 mt-6"
+        onClick={onAddQuestionClick}
+        disabled={isEmptyQuestion}
+      >
         Add new question
       </button>
     </div>
