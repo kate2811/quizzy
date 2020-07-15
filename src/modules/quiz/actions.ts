@@ -1,4 +1,4 @@
-import { UpdatedQuizQuestion, Quiz, QuizAnswer } from './types'
+import { UpdatedQuizQuestion, Quiz, UpdateQuizOption } from './types'
 import createAction from '../../utils/createAction'
 
 export enum ActionTypes {
@@ -22,9 +22,14 @@ export enum ActionTypes {
   updateQuizQuestionSuccess = 'Update quiz question success',
   deleteQuizQuestion = 'Delete quiz question',
   deleteQuizQuestionSuccess = 'Delete quiz question success',
+  addQuizEmptyOption = 'Add quiz empty option',
+  deleteQuizEmptyOption = 'Delete quiz empty option',
   addQuizOption = 'Add quiz option',
-  editQuizOption = 'Edit quiz option',
-  deleteQuizOption = 'Delete quiz option'
+  addQuizOptionSuccess = 'Add quiz option success',
+  updateQuizOption = 'Edit quiz option',
+  updateQuizOptionSuccess = 'Edit quiz option success',
+  deleteQuizOption = 'Delete quiz option',
+  deleteQuizOptionSuccess = 'Delete quiz option success'
 }
 
 export const actions = {
@@ -61,7 +66,26 @@ export const actions = {
     ActionTypes.deleteQuizQuestionSuccess,
     { quizUuid: string; questionUuid: string }
   >(ActionTypes.deleteQuizQuestionSuccess),
-  addQuizOption: createAction<ActionTypes.addQuizOption, QuizAnswer>(ActionTypes.addQuizOption),
-  editQuizOption: createAction<ActionTypes.editQuizOption, QuizAnswer>(ActionTypes.editQuizOption),
-  deleteQuizOption: createAction<ActionTypes.deleteQuizOption, QuizAnswer>(ActionTypes.deleteQuizOption)
+  addQuizEmptyOption: createAction<ActionTypes.addQuizEmptyOption, { quizUuid: string; questionUuid: string }>(
+    ActionTypes.addQuizEmptyOption
+  ),
+  deleteQuizEmptyOption: createAction<ActionTypes.deleteQuizEmptyOption, { quizUuid: string; questionUuid: string }>(
+    ActionTypes.deleteQuizEmptyOption
+  ),
+  addQuizOption: createAction<ActionTypes.addQuizOption, UpdateQuizOption>(ActionTypes.addQuizOption),
+  addQuizOptionSuccess: createAction<ActionTypes.addQuizOptionSuccess, UpdateQuizOption>(
+    ActionTypes.addQuizOptionSuccess
+  ),
+  updateQuizOption: createAction<ActionTypes.updateQuizOption, UpdateQuizOption>(ActionTypes.updateQuizOption),
+  updateQuizOptionSuccess: createAction<ActionTypes.updateQuizOptionSuccess, UpdateQuizOption>(
+    ActionTypes.updateQuizOptionSuccess
+  ),
+  deleteQuizOption: createAction<
+    ActionTypes.deleteQuizOption,
+    { quizUuid: string; questionUuid: string; optionUuid: string }
+  >(ActionTypes.deleteQuizOption),
+  deleteQuizOptionSuccess: createAction<
+    ActionTypes.deleteQuizOptionSuccess,
+    { quizUuid: string; questionUuid: string; optionUuid: string }
+  >(ActionTypes.deleteQuizOptionSuccess)
 }

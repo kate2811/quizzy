@@ -10,7 +10,7 @@ export const initialState: State = {
 }
 
 export default function quizReducer(state = initialState, action: ActionType<typeof actions>): State {
-  return <State>produce(state, (draft) => {
+  return produce(state, (draft) => {
     switch (action.type) {
       case ActionTypes.loadQuizzes: {
         draft.isLoading = true
@@ -96,9 +96,55 @@ export default function quizReducer(state = initialState, action: ActionType<typ
       }
 
       case ActionTypes.deleteQuizQuestionSuccess: {
-        let quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
         draft.quizzes[quiz].questions = draft.quizzes[quiz].questions.filter(
           (item) => item.uuid !== action.payload.questionUuid
+        )
+        return draft
+      }
+
+      case ActionTypes.addQuizEmptyOption: {
+        const emptyOption = { title: '', isCorrect: false }
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        draft.quizzes[quiz].questions.map((item) =>
+          item.uuid === action.payload.questionUuid ? item.options.push(emptyOption) : item
+        )
+        return draft
+      }
+
+      case ActionTypes.deleteQuizEmptyOption: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        const question = draft.quizzes[quiz].questions.findIndex((item) => item.uuid === action.payload.questionUuid)
+        draft.quizzes[quiz].questions[question].options = draft.quizzes[quiz].questions[question].options.filter(
+          (item) => item.uuid
+        )
+        return draft
+      }
+
+      case ActionTypes.addQuizOptionSuccess: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        const question = draft.quizzes[quiz].questions.findIndex((item) => item.uuid === action.payload.questionUuid)
+        const editedOption = draft.quizzes[quiz].questions[question].options.findIndex((item) => !item.uuid)
+        draft.quizzes[quiz].questions[question].options[editedOption] = action.payload.option
+
+        return draft
+      }
+
+      case ActionTypes.updateQuizOptionSuccess: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        const question = draft.quizzes[quiz].questions.findIndex((item) => item.uuid === action.payload.questionUuid)
+        const editedOption = draft.quizzes[quiz].questions[question].options.findIndex(
+          (item) => item.uuid === action.payload.option.uuid
+        )
+        draft.quizzes[quiz].questions[question].options[editedOption] = action.payload.option
+        return draft
+      }
+
+      case ActionTypes.deleteQuizOptionSuccess: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        const question = draft.quizzes[quiz].questions.findIndex((item) => item.uuid === action.payload.questionUuid)
+        draft.quizzes[quiz].questions[question].options = draft.quizzes[quiz].questions[question].options.filter(
+          (item) => item.uuid !== action.payload.optionUuid
         )
         return draft
       }

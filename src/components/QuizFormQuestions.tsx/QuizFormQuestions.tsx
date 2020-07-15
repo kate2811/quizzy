@@ -7,8 +7,7 @@ type Props = {
   questions: QuizQuestion[] | undefined
   onAddQuestion: (newQuestion: UpdatedQuizQuestion) => void
   onEditQuestion: (question: UpdatedQuizQuestion) => void
-  onDeleteQuestion: (quizUuid: string, questionUuid: string) => void
-  onDeleteEmptyQuestion: (quizUuid: string) => void
+  onDeleteQuestion: (quizUuid: string, questionUuid: string | undefined) => void
   onAddEmptyQuestion: (quizUuid: string) => void
   isEmptyQuestion: boolean | undefined
 }
@@ -16,7 +15,7 @@ type Props = {
 const QuizFormQuestions: React.FC<Props> = ({ quiz, questions, onAddEmptyQuestion, isEmptyQuestion, ...props }) => {
   const onAddQuestionClick = useCallback(() => {
     onAddEmptyQuestion(quiz.uuid)
-  }, [quiz])
+  }, [quiz, onAddEmptyQuestion])
 
   return (
     <div>

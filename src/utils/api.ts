@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { UserSignInData, UserSingUpData } from '../modules/auth/types'
-import { UpdatedQuizQuestion, Quiz } from '../modules/quiz/types'
+import { UpdatedQuizQuestion, Quiz, UpdateQuizOption } from '../modules/quiz/types'
 
 class Api {
   private readonly apiUrl: string
@@ -83,8 +83,8 @@ export async function removeQuiz(uuid: string) {
   return response.data
 }
 
-export async function addNewQuizQuestion(newQuestion: UpdatedQuizQuestion) {
-  const response = await api.post('/admin/quizzes/' + newQuestion.quizUuid + '/questions', newQuestion.question)
+export async function addNewQuizQuestion(question: UpdatedQuizQuestion) {
+  const response = await api.post('/admin/quizzes/' + question.quizUuid + '/questions', question.question)
   return response.data
 }
 
@@ -98,5 +98,29 @@ export async function editQuizQuestion(question: UpdatedQuizQuestion) {
 
 export async function removeQuizQuestion({ quizUuid, questionUuid }) {
   const response = await api.delete('/admin/quizzes/' + quizUuid + '/questions/' + questionUuid, null)
+  return response.data
+}
+
+export async function addNewQuizOption(option: UpdateQuizOption) {
+  const response = await api.post(
+    '/admin/quizzes/' + option.quizUuid + '/questions/' + option.questionUuid + '/options',
+    option.option
+  )
+  return response.data
+}
+
+export async function editQuizOption(option: UpdateQuizOption) {
+  const response = await api.put(
+    '/admin/quizzes/' + option.quizUuid + '/questions/' + option.questionUuid + '/options/' + option.option.uuid,
+    option.option
+  )
+  return response.data
+}
+
+export async function removeQuizOption({ quizUuid, questionUuid, optionUuid }) {
+  const response = await api.delete(
+    '/admin/quizzes/' + quizUuid + '/questions/' + questionUuid + '/options/' + optionUuid,
+    null
+  )
   return response.data
 }

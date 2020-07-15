@@ -18,7 +18,6 @@ function* handleError({ payload }: ReturnType<typeof actions.handleError>) {
   const status = payload.status
   const token = localStorage.getItem('accessToken')
   let errorMessage = 'Something went wrong'
-  console.log(payload)
 
   if (status === 401 && token) {
     yield put(authActions.signInFailure())

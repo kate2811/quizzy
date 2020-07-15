@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { useCallback } from 'react'
 import { actions } from './actions'
-import { UpdatedQuizQuestion, Quiz } from './types'
+import { UpdatedQuizQuestion, Quiz, UpdateQuizOption } from './types'
 import { useSelector } from '../index'
 import { getFilteredQuizzes } from './selectors'
 
@@ -68,16 +68,6 @@ export function useAddQuizEmptyQuestion() {
   )
 }
 
-export function useDeleteQuizEmptyQuestion() {
-  const dispatch = useDispatch()
-  return useCallback(
-    (quizUuid: string) => {
-      return dispatch(actions.deleteQuizEmptyQuestion(quizUuid))
-    },
-    [dispatch]
-  )
-}
-
 export function useAddQuizQuestion() {
   const dispatch = useDispatch()
   return useCallback(
@@ -101,11 +91,72 @@ export function useEditQuizQuestion() {
 export function useDeleteQuizQuestion() {
   const dispatch = useDispatch()
   return useCallback(
-    (quizUuid: string, questionUuid: string) => {
-      return dispatch(actions.deleteQuizQuestion({ quizUuid, questionUuid }))
+    (quizUuid: string, questionUuid: string | undefined) => {
+      return questionUuid
+        ? dispatch(actions.deleteQuizQuestion({ quizUuid, questionUuid }))
+        : dispatch(actions.deleteQuizEmptyQuestion(quizUuid))
     },
     [dispatch]
   )
+}
+
+export function useIsEmptyQuestion(uuid: string) {
+  const quiz = useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === uuid)
+  return quiz && quiz.questions.some((item) => !item.uuid)
+}
+
+export function useQuizOptions(quizUuid: string, questionUuid: string) {
+  const quiz = useSelector((state) => state.quiz.quizzes.find((item) => item.uuid === quizUuid))
+  const question = quiz ? quiz.questions.find((item) => item.uuid === questionUuid) : undefined
+  return question && question.options
+}
+
+export function useAddQuizEmptyOption() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quizUuid: string, questionUuid: string) => {
+      return dispatch(actions.addQuizEmptyOption({ quizUuid, questionUuid }))
+    },
+    [dispatch]
+  )
+}
+
+export function useEditQuizOption() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (option: UpdateQuizOption) => {
+      return dispatch(actions.updateQuizOption(option))
+    },
+    [dispatch]
+  )
+}
+
+export function useAddQuizOption() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (option: UpdateQuizOption) => {
+      return dispatch(actions.addQuizOption(option))
+    },
+    [dispatch]
+  )
+}
+
+export function useDeleteQuizOption() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quizUuid: string, questionUuid: string, optionUuid: string | undefined) => {
+      return optionUuid
+        ? dispatch(actions.deleteQuizOption({ quizUuid, questionUuid, optionUuid }))
+        : dispatch(actions.deleteQuizEmptyOption({ quizUuid, questionUuid }))
+    },
+    [dispatch]
+  )
+}
+
+export function useIsEmptyOption(quizUuid: string, questionUuid: string) {
+  const quiz = useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === quizUuid)
+  const question = quiz && quiz.questions.find((item) => item.uuid === questionUuid)
+  return question && question.options.some((item) => !item.uuid)
 }
 
 export function useQuizByUuid(uuid: string) {
@@ -117,9 +168,4 @@ export function useLoadQuizByUuid(uuid: string) {
   return useCallback(() => {
     return dispatch(actions.loadQuizByUuid(uuid))
   }, [dispatch, uuid])
-}
-
-export function useIsEmptyQuestion(uuid: string) {
-  const quiz = useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === uuid)
-  return quiz && quiz.questions.some((item) => !item.uuid)
 }

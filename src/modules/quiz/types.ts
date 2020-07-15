@@ -27,3 +27,9 @@ export type UpdatedQuizQuestion = {
   quizUuid: string
   question: QuizQuestion
 }
+
+export type UpdateQuizOption = {
+  quizUuid: string
+  questionUuid: string
+  option: QuizAnswer
+}

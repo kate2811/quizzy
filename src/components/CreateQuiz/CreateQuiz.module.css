@@ -81,6 +81,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .question__input {
@@ -89,6 +90,9 @@
 }
 
 .question__closeBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
   width: 30px;
   height: 30px;
   font-size: 20px;
@@ -97,6 +101,11 @@
   background: none;
   border: none;
 }
+
+.question__closeBtn_hidden {
+  display: none;
+}
+
 
 .question__closeBtn:hover {
   color: #e16f60;
@@ -163,4 +172,9 @@
 
 .button_remove:hover {
   color: #e16f60;
+}
+
+.option {
+  position: relative;
+  margin-top: 22px;
 }

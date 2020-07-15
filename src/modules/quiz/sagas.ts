@@ -8,7 +8,10 @@ import {
   removeQuiz,
   addNewQuizQuestion,
   editQuizQuestion,
-  removeQuizQuestion
+  removeQuizQuestion,
+  addNewQuizOption,
+  editQuizOption,
+  removeQuizOption
 } from '../../utils/api'
 import { customHistory } from '../../history'
 import { actions as coreActions } from '../core/actions'
@@ -91,6 +94,51 @@ function* deleteQuizQuestion({ payload }: ReturnType<typeof actions.deleteQuizQu
   }
 }
 
+function* addQuizOption({ payload }: ReturnType<typeof actions.addQuizOption>) {
+  try {
+    const response = yield call(addNewQuizOption, payload)
+    yield put(
+      actions.addQuizOptionSuccess({ quizUuid: payload.quizUuid, questionUuid: payload.questionUuid, option: response })
+    )
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
+function* updateQuizOption({ payload }: ReturnType<typeof actions.updateQuizOption>) {
+  try {
+    if (payload.option.title) {
+      const response = yield call(editQuizOption, payload)
+      yield put(
+        actions.updateQuizOptionSuccess({
+          quizUuid: payload.quizUuid,
+          questionUuid: payload.questionUuid,
+          option: response
+        })
+      )
+    } else {
+      yield put(coreActions.getNotification({ text: 'Option must not be empty', type: 'warning' }))
+    }
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
+function* deleteQuizOption({ payload }: ReturnType<typeof actions.deleteQuizOption>) {
+  try {
+    yield call(removeQuizOption, payload)
+    yield put(
+      actions.deleteQuizOptionSuccess({
+        questionUuid: payload.questionUuid,
+        quizUuid: payload.quizUuid,
+        optionUuid: payload.optionUuid
+      })
+    )
+  } catch (error) {
+    yield put(coreActions.handleError(error.response))
+  }
+}
+
 function* quizSaga() {
   yield all([
     takeLatest(ActionTypes.publishQuiz, publishQuiz),
@@ -100,7 +148,10 @@ function* quizSaga() {
     takeLatest(ActionTypes.deleteQuiz, deleteQuiz),
     takeLatest(ActionTypes.addQuizQuestion, addQuizQuestion),
     takeLatest(ActionTypes.updateQuizQuestion, updateQuizQuestion),
-    takeLatest(ActionTypes.deleteQuizQuestion, deleteQuizQuestion)
+    takeLatest(ActionTypes.deleteQuizQuestion, deleteQuizQuestion),
+    takeLatest(ActionTypes.addQuizOption, addQuizOption),
+    takeLatest(ActionTypes.updateQuizOption, updateQuizOption),
+    takeLatest(ActionTypes.deleteQuizOption, deleteQuizOption)
   ])
 }
 
