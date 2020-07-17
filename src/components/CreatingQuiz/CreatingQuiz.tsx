@@ -4,6 +4,7 @@ import Tabs from '../Tabs'
 import QuizFormGeneral from '../QuizFormGeneral'
 import QuizFormQuestions from '../QuizFormQuestions.tsx'
 import { Quiz } from '../../modules/quiz/types'
+import QuizFormSettings from '../QuizFormSettings'
 
 const CreatingQuiz: React.FC<{ quiz: Quiz }> = ({ quiz }) => {
   const content = [
@@ -17,7 +18,7 @@ const CreatingQuiz: React.FC<{ quiz: Quiz }> = ({ quiz }) => {
       icon: 'fa-file-alt',
       content: <QuizFormQuestions quiz={quiz} />
     },
-    { title: 'Settings', icon: 'fa-search', content: <div>sss</div> }
+    { title: 'Settings', icon: 'fa-search', content: <QuizFormSettings quiz={quiz} /> }
   ]
 
   return (
