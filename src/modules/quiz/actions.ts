@@ -4,8 +4,8 @@ import createAction from '../../utils/createAction'
 export enum ActionTypes {
   loadQuizzes = 'Load quizzes',
   loadQuizzesSuccess = 'Load quizzes success',
-  publishQuiz = 'Quiz is published',
-  addQuiz = 'Quiz is added to store',
+  addQuiz = 'Quiz is added',
+  addQuizSuccess = 'Quiz is added success',
   clearQuizzes = 'Clear quizzes',
   loadQuizByUuid = 'Load a quiz',
   loadQuizByUuidSuccess = 'Load a quiz success',
@@ -35,8 +35,8 @@ export enum ActionTypes {
 export const actions = {
   loadQuizzes: createAction<ActionTypes.loadQuizzes, void>(ActionTypes.loadQuizzes),
   loadQuizzesSuccess: createAction<ActionTypes.loadQuizzesSuccess, Quiz[]>(ActionTypes.loadQuizzesSuccess),
-  publishQuiz: createAction<ActionTypes.publishQuiz, Omit<Quiz, 'uuid'>>(ActionTypes.publishQuiz),
-  addQuiz: createAction<ActionTypes.addQuiz, Quiz>(ActionTypes.addQuiz),
+  addQuiz: createAction<ActionTypes.addQuiz, Omit<Quiz, 'uuid'>>(ActionTypes.addQuiz),
+  addQuizSuccess: createAction<ActionTypes.addQuizSuccess, Quiz>(ActionTypes.addQuizSuccess),
   clearQuizzes: createAction<ActionTypes.clearQuizzes, void>(ActionTypes.clearQuizzes),
   loadQuizByUuid: createAction<ActionTypes.loadQuizByUuid, string>(ActionTypes.loadQuizByUuid),
   loadQuizByUuidSuccess: createAction<ActionTypes.loadQuizByUuidSuccess, Quiz>(ActionTypes.loadQuizByUuidSuccess),

@@ -28,11 +28,11 @@ export function useIsQuizzesLoading() {
   return useSelector((state) => state.quiz.isLoading)
 }
 
-export function usePublishQuiz() {
+export function useAddQuiz() {
   const dispatch = useDispatch()
   return useCallback(
     (quiz: Quiz) => {
-      return dispatch(actions.publishQuiz(quiz))
+      return dispatch(actions.addQuiz(quiz))
     },
     [dispatch]
   )

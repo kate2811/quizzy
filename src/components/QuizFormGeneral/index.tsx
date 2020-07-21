@@ -1,9 +1,10 @@
 import React from 'react'
-import { useEditQuiz } from '../../modules/quiz/hooks'
+import { useEditQuiz, useAddQuiz } from '../../modules/quiz/hooks'
 import QuizFormGeneral from './QuizFormGeneral'
 
 export default function ({ quiz }) {
   const onEditQuiz = useEditQuiz()
+  const onAddQuiz = useAddQuiz()
 
-  return <QuizFormGeneral onEditQuiz={onEditQuiz} editedQuiz={quiz} />
+  return <QuizFormGeneral onEditQuiz={onEditQuiz} onAddQuiz={onAddQuiz} editedQuiz={quiz} />
 }

@@ -34,7 +34,7 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
-      case ActionTypes.addQuiz: {
+      case ActionTypes.addQuizSuccess: {
         draft.quizzes.push(action.payload)
         return draft
       }

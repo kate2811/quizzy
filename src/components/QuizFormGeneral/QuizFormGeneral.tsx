@@ -5,11 +5,14 @@ import { Quiz } from '../../modules/quiz/types'
 
 type Props = {
   onEditQuiz: (quiz: Omit<Quiz, 'questions'>) => void
+  onAddQuiz: (quiz: Quiz) => void
   editedQuiz: Quiz
 }
 
-const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz }) => {
-  const [quiz, setQuiz] = useState({ description: editedQuiz.description, title: editedQuiz?.title })
+const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz, onAddQuiz }) => {
+  const [quiz, setQuiz] = useState(
+    editedQuiz ? { title: editedQuiz.title, description: editedQuiz.description } : { title: '', description: '' }
+  )
 
   const onQuizChange = useCallback(
     (e) => {
@@ -17,6 +20,10 @@ const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz }) => {
     },
     [setQuiz, quiz]
   )
+
+  const onClick = useCallback(() => {
+    onAddQuiz({ ...quiz, questions: [] })
+  }, [onAddQuiz, quiz])
 
   return (
     <>
@@ -38,6 +45,11 @@ const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz }) => {
         quiz={quiz}
         onEdit={onEditQuiz}
       />
+      {!editedQuiz && (
+        <button onClick={onClick} disabled={!quiz.description || !quiz.title}>
+          create
+        </button>
+      )}
     </>
   )
 }

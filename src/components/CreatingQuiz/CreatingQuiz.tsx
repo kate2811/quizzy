@@ -6,7 +6,7 @@ import QuizFormQuestions from '../QuizFormQuestions.tsx'
 import { Quiz } from '../../modules/quiz/types'
 import QuizFormSettings from '../QuizFormSettings'
 
-const CreatingQuiz: React.FC<{ quiz: Quiz }> = ({ quiz }) => {
+const CreatingQuiz: React.FC<{ quiz?: Quiz }> = ({ quiz }) => {
   const content = [
     {
       title: 'General',

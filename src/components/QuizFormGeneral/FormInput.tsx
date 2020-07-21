@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useCallback } from 'react'
 import { Quiz } from '../../modules/quiz/types'
 
 type Props = {
@@ -13,6 +13,10 @@ type Props = {
 }
 
 const FormInput: React.FC<Props> = ({ label, type = 'text', name, id, quiz, onChange, onEdit, editedQuiz }) => {
+  const onBlur = useCallback(() => {
+    editedQuiz && onEdit({ uuid: editedQuiz.uuid, ...quiz })
+  }, [editedQuiz, onEdit, quiz])
+
   return (
     <div className="form-group row">
       <label htmlFor={id} className="col-form-label col-3 text-lg-right text-left">
@@ -26,7 +30,7 @@ const FormInput: React.FC<Props> = ({ label, type = 'text', name, id, quiz, onCh
           id={id}
           value={quiz.title}
           onChange={onChange}
-          onBlur={() => onEdit({ uuid: editedQuiz.uuid, ...quiz })}
+          onBlur={onBlur}
         />
       </div>
     </div>

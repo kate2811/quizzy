@@ -34,11 +34,10 @@ function* loadQuizByUuid({ payload }: ReturnType<typeof actions.loadQuizByUuid>)
   }
 }
 
-function* publishQuiz({ payload }: ReturnType<typeof actions.publishQuiz>) {
+function* addNewQuiz({ payload }: ReturnType<typeof actions.addQuiz>) {
   try {
     const response = yield call(addQuiz, payload)
-    yield put(actions.addQuiz(response))
-    customHistory.push('/')
+    yield put(actions.addQuizSuccess(response))
   } catch (error) {
     yield put(coreActions.handleError(error.response))
   }
@@ -141,7 +140,7 @@ function* deleteQuizOption({ payload }: ReturnType<typeof actions.deleteQuizOpti
 
 function* quizSaga() {
   yield all([
-    takeLatest(ActionTypes.publishQuiz, publishQuiz),
+    takeLatest(ActionTypes.addQuiz, addNewQuiz),
     takeLatest(ActionTypes.loadQuizzes, loadQuizzes),
     takeLatest(ActionTypes.loadQuizByUuid, loadQuizByUuid),
     takeLatest(ActionTypes.updateQuiz, updateQuiz),
