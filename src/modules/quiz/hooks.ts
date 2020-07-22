@@ -102,7 +102,7 @@ export function useDeleteQuizQuestion() {
 
 export function useIsEmptyQuestion(uuid: string) {
   const quiz = useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === uuid)
-  return quiz && quiz.questions.some((item) => !item.uuid)
+  return quiz && quiz.questions.some((item) => !item.uuid || !item.title)
 }
 
 export function useQuizOptions(quizUuid: string, questionUuid: string) {
@@ -156,7 +156,7 @@ export function useDeleteQuizOption() {
 export function useIsEmptyOption(quizUuid: string, questionUuid: string) {
   const quiz = useSelector((state) => state.quiz.quizzes).find((item) => item.uuid === quizUuid)
   const question = quiz && quiz.questions.find((item) => item.uuid === questionUuid)
-  return question && question.options.some((item) => !item.uuid)
+  return question && question.options.some((item) => !item.uuid || !item.title)
 }
 
 export function useQuizByUuid(uuid: string) {

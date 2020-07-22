@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import style from '../CreateQuiz/CreateQuiz.module.css'
+import style from './QuizFormQuestions.module.css'
 import { QuizQuestion, UpdatedQuizQuestion } from '../../modules/quiz/types'
 import cx from 'classnames'
 import QuizFormOptions from '../QuizFormOptions'
@@ -10,9 +10,17 @@ type Props = {
   question: QuizQuestion
   onAddQuestion: (newQuestion: UpdatedQuizQuestion) => void
   onEditQuestion: (question: UpdatedQuizQuestion) => void
+  number: number
 }
 
-const QuizFormQuestion: React.FC<Props> = ({ quizUuid, onDeleteQuestion, question, onAddQuestion, onEditQuestion }) => {
+const QuizFormQuestion: React.FC<Props> = ({
+  quizUuid,
+  number,
+  onDeleteQuestion,
+  question,
+  onAddQuestion,
+  onEditQuestion
+}) => {
   const [isVisible, setIsVisible] = useState(false)
 
   const onMouseEnter = useCallback(() => setIsVisible(true), [setIsVisible])
@@ -37,26 +45,29 @@ const QuizFormQuestion: React.FC<Props> = ({ quizUuid, onDeleteQuestion, questio
 
   return (
     <div>
-      <div className={style.question}>
-        <div className={style.question__body} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          <textarea
-            className="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
-            name="question"
-            placeholder="Enter your question here..."
-            value={question.title}
-            onChange={onTitleChange}
-            rows={4}
-          />
+      <div className={cx(style.question, 'form-group row')}>
+        <label htmlFor={question.uuid} className="col-form-label col-2 text-lg-right text-left">
+          {number}.
+        </label>
+        <div className="col-10">
+          <div className={style.question__body} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <textarea
+              id={question.uuid}
+              className="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
+              name="question"
+              placeholder="Enter your question here..."
+              value={question.title}
+              onChange={onTitleChange}
+              rows={4}
+            />
 
-          <button
-            className={cx(style.question__closeBtn, !isVisible && style.question__closeBtn_hidden)}
-            onClick={onQuestionDelete}
-          >
-            <i className="fas fa-times" />
-          </button>
+            <button className={cx(style.btnClose, !isVisible && style.btnClose_hidden)} onClick={onQuestionDelete}>
+              <i className="fas fa-times" />
+            </button>
+          </div>
+          <QuizFormOptions quiz={quizUuid} question={question.uuid} />
         </div>
       </div>
-      <QuizFormOptions quiz={quizUuid} question={question.uuid} />
     </div>
   )
 }

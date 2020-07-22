@@ -1,9 +1,9 @@
 import React from 'react'
 import { Quiz } from '../../modules/quiz/types'
-import CreatingQuiz from '../CreatingQuiz/CreatingQuiz'
+import CreateQuiz from '../CreateQuiz/CreateQuiz'
 
 const EditQuiz: React.FC<{ quiz: Quiz }> = ({ quiz }) => {
-  return <CreatingQuiz quiz={quiz} />
+  return <CreateQuiz quiz={quiz} />
 }
 
 export default EditQuiz

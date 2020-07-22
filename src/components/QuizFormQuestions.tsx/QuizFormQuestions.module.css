@@ -1,0 +1,35 @@
+.question {
+  display: flex;
+  margin-top: 30px;
+}
+
+.question__body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.question__number {
+  color: #A6A6A6;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.btnClose {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  margin-left: 15px;
+  color: #A6A6A6;
+  background: none;
+  border: none;
+}
+
+.btnClose_hidden {
+  display: none;
+}

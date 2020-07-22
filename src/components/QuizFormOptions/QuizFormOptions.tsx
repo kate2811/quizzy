@@ -1,7 +1,6 @@
 import React from 'react'
 import { QuizAnswer, UpdateQuizOption } from '../../modules/quiz/types'
 import QuizFormOption from './QuizFormOption'
-import style from '../CreateQuiz/CreateQuiz.module.css'
 
 type Props = {
   quiz: string
@@ -16,7 +15,7 @@ type Props = {
 
 const QuizFormOptions: React.FC<Props> = ({ options, question, onAddEmptyOptions, isEmptyOption, ...props }) => {
   return (
-    <div className={style.options}>
+    <div>
       {options &&
         options.map((item, index) => <QuizFormOption key={index} option={item} question={question} {...props} />)}
       <button

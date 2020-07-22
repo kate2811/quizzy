@@ -1,31 +1,23 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import cx from 'classnames'
 import style from './Tabs.module.css'
 
 type Props = {
   title: string
   icon: string
-  index: number
-  selectedTab: number
-  setSelectedTab: (index: number) => void
+  isSwitched?: boolean
 }
 
-const Tab: React.FC<Props> = ({ title, selectedTab, setSelectedTab, index, icon }) => {
-  const isSelected = selectedTab === index
-
-  const onClick = useCallback(() => {
-    setSelectedTab(index)
-  }, [setSelectedTab, index])
-
+const Tab: React.FC<Props> = ({ children }) => {
   return (
-    <li className="nav-item mr-3">
-      <button className={cx('nav-link', style.tab, isSelected && 'active')} onClick={onClick}>
-        <span className={cx('nav-icon', style.tab, isSelected && 'active')}>
-          <i className={cx('fas', icon)} />
-        </span>
-        <span className="nav-text font-size-lg">{title}</span>
-      </button>
-    </li>
+    <>
+      <div className="card-body">
+        <div className={cx('row', style.content)}>
+          <div className="col-xl-2" />
+          <div className="col-xl-7 my-2">{children}</div>
+        </div>
+      </div>
+    </>
   )
 }
 

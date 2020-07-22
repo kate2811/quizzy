@@ -38,6 +38,7 @@ function* addNewQuiz({ payload }: ReturnType<typeof actions.addQuiz>) {
   try {
     const response = yield call(addQuiz, payload)
     yield put(actions.addQuizSuccess(response))
+    yield customHistory.push('/edit/' + response.uuid)
   } catch (error) {
     yield put(coreActions.handleError(error.response))
   }
@@ -56,6 +57,7 @@ function* deleteQuiz({ payload }: ReturnType<typeof actions.deleteQuiz>) {
   try {
     yield call(removeQuiz, payload)
     customHistory.push('/')
+    yield put(coreActions.getNotification({ text: 'Quiz has been archived', type: 'success' }))
     yield put(actions.deleteQuizSuccess(payload))
   } catch (error) {
     yield put(coreActions.handleError(error.response))
@@ -78,6 +80,7 @@ function* updateQuizQuestion({ payload }: ReturnType<typeof actions.updateQuizQu
       yield put(actions.updateQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: response }))
     } else {
       yield put(coreActions.getNotification({ text: 'Question must not be empty', type: 'warning' }))
+      yield put(actions.updateQuizQuestionSuccess({ quizUuid: payload.quizUuid, question: payload.question }))
     }
   } catch (error) {
     yield put(coreActions.handleError(error.response))
@@ -117,6 +120,13 @@ function* updateQuizOption({ payload }: ReturnType<typeof actions.updateQuizOpti
       )
     } else {
       yield put(coreActions.getNotification({ text: 'Option must not be empty', type: 'warning' }))
+      yield put(
+        actions.updateQuizOptionSuccess({
+          quizUuid: payload.quizUuid,
+          questionUuid: payload.questionUuid,
+          option: payload.option
+        })
+      )
     }
   } catch (error) {
     yield put(coreActions.handleError(error.response))

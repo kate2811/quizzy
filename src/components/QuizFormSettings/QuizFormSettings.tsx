@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 
 type Props = {
   onDelete: (uuid: string) => void
@@ -6,12 +6,21 @@ type Props = {
 }
 
 const QuizFormSettings: React.FC<Props> = ({ onDelete, quizUuid }) => {
-  const onClick = useCallback(() => onDelete(quizUuid), [onDelete, quizUuid])
+  const [isChecked, setIsChecked] = useState(false)
+
+  const onChange = useCallback(() => {
+    setIsChecked(!isChecked)
+    !isChecked && onDelete(quizUuid)
+  }, [isChecked, setIsChecked, onDelete, isChecked])
 
   return (
-    <button onClick={onClick} className="btn btn-success font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">
-      Delete
-    </button>
+    <span className="switch switch-success">
+      <label>
+        Add quiz to archive
+        <input type="checkbox" checked={isChecked} onChange={onChange} name="select" />
+        <span />
+      </label>
+    </span>
   )
 }
 

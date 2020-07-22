@@ -10,7 +10,7 @@ import Protected from '../Protected'
 import SignUpPage from '../SignUpPage'
 import QuizTemplate from '../QuizTemplate'
 import NotProtected from '../NotProtected'
-import CreatingQuiz from '../CreatingQuiz'
+import CreateQuiz from '../CreateQuiz'
 import EditQuiz from '../EditQuiz'
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
             </Route>
             <Route path="/create">
               <Protected>
-                <CreatingQuiz />
+                <CreateQuiz />
               </Protected>
             </Route>
             <Route path="/edit/:uuid">

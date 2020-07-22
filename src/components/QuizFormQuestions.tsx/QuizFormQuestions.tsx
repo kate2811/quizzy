@@ -21,7 +21,7 @@ const QuizFormQuestions: React.FC<Props> = ({ quiz, questions, onAddEmptyQuestio
     <div>
       {questions &&
         questions.map((item, index) => (
-          <QuizFormQuestion key={index} question={item} quizUuid={quiz.uuid} {...props} />
+          <QuizFormQuestion key={index} question={item} quizUuid={quiz.uuid} {...props} number={index + 1} />
         ))}
 
       <button

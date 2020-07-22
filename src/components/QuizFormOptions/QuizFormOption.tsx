@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import { QuizAnswer, UpdateQuizOption } from '../../modules/quiz/types'
 import cx from 'classnames'
-import style from '../CreateQuiz/CreateQuiz.module.css'
+import style from './QuizFormOptions.module.css'
 
 type Props = {
   option: QuizAnswer
@@ -18,34 +18,51 @@ const QuizFormOption: React.FC<Props> = ({ option, onEditOption, onAddOption, qu
   const onMouseEnter = useCallback(() => setIsVisible(true), [setIsVisible])
   const onMouseLeave = useCallback(() => setIsVisible(false), [setIsVisible])
 
+  const editedOption = useMemo(() => {
+    return { quizUuid: quiz, questionUuid: question }
+  }, [question, quiz])
+
   const onChange = useCallback(
     (e) =>
       option.uuid
         ? onEditOption({
-            quizUuid: quiz,
-            questionUuid: question,
-            option: { title: e.target.value, uuid: option.uuid, isCorrect: false }
+            ...editedOption,
+            option: { ...option, title: e.target.value }
           })
-        : onAddOption({ quizUuid: quiz, questionUuid: question, option: { title: e.target.value, isCorrect: false } }),
-    [onEditOption, question, quiz, onAddOption, option]
+        : onAddOption({ ...editedOption, option: { title: e.target.value, isCorrect: false } }),
+    [onEditOption, onAddOption, option, editedOption]
   )
+
+  const onCorrectChange = useCallback(() => {
+    onEditOption({
+      ...editedOption,
+      option: { ...option, isCorrect: !option.isCorrect }
+    })
+  }, [onEditOption, option, editedOption])
 
   const onQuestionDelete = useCallback(() => onDelete(quiz, question, option.uuid), [question, onDelete, quiz, option])
 
   return (
-    <div onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter} className={style.option}>
-      <input
-        type="text"
-        value={option.title}
-        onChange={onChange}
-        className="form-control form-control-lg form-control-solid"
-      />
-      <button
-        className={cx(style.question__closeBtn, !isVisible && style.question__closeBtn_hidden)}
-        onClick={onQuestionDelete}
-      >
-        <i className="fas fa-times" />
-      </button>
+    <div onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter} className={cx('input-group', style.option)}>
+      <div className="input-group-prepend w-100">
+        <button
+          className={cx('btn btn-light-success', style.option__button_isCorrect)}
+          onClick={onCorrectChange}
+          disabled={!option.uuid}
+        >
+          <i className={cx('far', option.isCorrect ? 'fa-check-circle' : 'fa-times-circle')} />
+        </button>
+
+        <input
+          type="text"
+          value={option.title}
+          onChange={onChange}
+          className={cx('form-control form-control-lg form-control-solid', style.option__field)}
+        />
+        <button className={cx(style.btnClose, !isVisible && style.btnClose_hidden)} onClick={onQuestionDelete}>
+          <i className="fas fa-times" />
+        </button>
+      </div>
     </div>
   )
 }
