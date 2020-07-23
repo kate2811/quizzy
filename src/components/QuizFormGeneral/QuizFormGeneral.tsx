@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import FormInput from './FormInput'
 import FormTextarea from './FormTextarea'
 import { Quiz } from '../../modules/quiz/types'
+import Autocomplete from '../Autocomplete'
 
 type Props = {
   onEditQuiz: (quiz: Omit<Quiz, 'questions'>) => void
@@ -45,6 +46,7 @@ const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz, onAddQuiz })
         quiz={quiz}
         onEdit={onEditQuiz}
       />
+      <Autocomplete />
       {!editedQuiz && (
         <div className="d-flex justify-content-end">
           <button
