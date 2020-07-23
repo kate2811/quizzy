@@ -45,13 +45,17 @@ const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz, onAddQuiz })
         quiz={quiz}
         onEdit={onEditQuiz}
       />
-      <button
-        onClick={onClick}
-        disabled={!quiz.description || !quiz.title}
-        className="btn btn-light-success font-weight-bolder font-size-h6 px-8 py-4 my-3"
-      >
-        Create!
-      </button>
+      {!editedQuiz && (
+        <div className="d-flex justify-content-end">
+          <button
+            onClick={onClick}
+            disabled={!quiz.description || !quiz.title}
+            className="btn btn-light-success font-weight-bolder font-size-h6 px-8 py-4 my-3"
+          >
+            Create!
+          </button>
+        </div>
+      )}
     </>
   )
 }

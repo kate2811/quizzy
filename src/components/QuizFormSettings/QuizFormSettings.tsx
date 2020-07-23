@@ -16,13 +16,18 @@ const QuizFormSettings: React.FC<Props> = ({ onDelete, quizUuid }) => {
 
   return (
     <div className="d-flex flex-column">
-      <span className="switch switch-success">
-        <label>
-          Archive it
-          <input type="checkbox" checked={isChecked} onChange={onChange} name="select" />
-          <span />
-        </label>
-      </span>
+      <div className="row mb-2">
+        <label className="col-2 col-form-label">Archive it</label>
+        <div className="col-3">
+          <span className="switch switch-success">
+            <label>
+              <input type="checkbox" checked={isChecked} onChange={onChange} name="select" />
+              <span />
+            </label>
+          </span>
+        </div>
+      </div>
+
       <span>
         {`You can find your archived quizzes... `}
         <Link to="/archive" className="text-success">

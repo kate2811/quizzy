@@ -44,29 +44,27 @@ const QuizFormQuestion: React.FC<Props> = ({
   ])
 
   return (
-    <div>
-      <div className={cx(style.question, 'form-group row')}>
-        <label htmlFor={question.uuid} className="col-form-label col-2 text-lg-right text-left">
-          {number}.
-        </label>
-        <div className="col-10">
-          <div className={style.question__body} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <textarea
-              id={question.uuid}
-              className="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
-              name="question"
-              placeholder="Enter your question here..."
-              value={question.title}
-              onChange={onTitleChange}
-              rows={4}
-            />
+    <div className={cx('form-group row', style.question)}>
+      <label htmlFor={question.uuid} className="col-form-label col-2 text-lg-right text-left">
+        Question {number}
+      </label>
+      <div className="col-10">
+        <div className={style.question__body} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          <textarea
+            id={question.uuid}
+            className="form-control form-control-solid h-auto py-7 px-6 rounded-lg"
+            name="question"
+            placeholder="Enter your question here..."
+            value={question.title}
+            onChange={onTitleChange}
+            rows={4}
+          />
 
-            <button className={cx(style.btnClose, !isVisible && style.btnClose_hidden)} onClick={onQuestionDelete}>
-              <i className="fas fa-times" />
-            </button>
-          </div>
-          <QuizFormOptions quiz={quizUuid} question={question.uuid} />
+          <button className={cx(style.btnClose, !isVisible && style.btnClose_hidden)} onClick={onQuestionDelete}>
+            <i className="fas fa-times" />
+          </button>
         </div>
+        <QuizFormOptions quiz={quizUuid} question={question.uuid} />
       </div>
     </div>
   )

@@ -3,6 +3,10 @@
   margin-top: 30px;
 }
 
+.question:first-child {
+  margin-top: 0;
+}
+
 .question__body {
   width: 100%;
   display: flex;

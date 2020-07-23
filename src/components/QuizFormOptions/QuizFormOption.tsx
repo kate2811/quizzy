@@ -29,7 +29,7 @@ const QuizFormOption: React.FC<Props> = ({ option, onEditOption, onAddOption, qu
             ...editedOption,
             option: { ...option, title: e.target.value }
           })
-        : onAddOption({ ...editedOption, option: { title: e.target.value, isCorrect: false } }),
+        : onAddOption({ ...editedOption, option: { title: e.target.value, isCorrect: true } }),
     [onEditOption, onAddOption, option, editedOption]
   )
 
@@ -46,7 +46,11 @@ const QuizFormOption: React.FC<Props> = ({ option, onEditOption, onAddOption, qu
     <div onMouseLeave={onMouseLeave} onMouseEnter={onMouseEnter} className={cx('input-group', style.option)}>
       <div className="input-group-prepend w-100">
         <button
-          className={cx('btn btn-light-success', style.option__button_isCorrect)}
+          className={cx(
+            'btn',
+            option.isCorrect ? 'btn-light-success' : 'btn-light-danger',
+            style.option__button_isCorrect
+          )}
           onClick={onCorrectChange}
           disabled={!option.uuid}
         >

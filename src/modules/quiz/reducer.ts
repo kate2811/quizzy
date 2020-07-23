@@ -104,7 +104,7 @@ export default function quizReducer(state = initialState, action: ActionType<typ
       }
 
       case ActionTypes.addQuizEmptyOption: {
-        const emptyOption = { title: '', isCorrect: false }
+        const emptyOption = { title: '', isCorrect: true }
         const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
         draft.quizzes[quiz].questions.map((item) =>
           item.uuid === action.payload.questionUuid ? item.options.push(emptyOption) : item

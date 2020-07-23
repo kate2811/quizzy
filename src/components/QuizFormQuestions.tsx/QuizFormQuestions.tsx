@@ -18,20 +18,25 @@ const QuizFormQuestions: React.FC<Props> = ({ quiz, questions, onAddEmptyQuestio
   }, [quiz, onAddEmptyQuestion])
 
   return (
-    <div>
+    <>
       {questions &&
         questions.map((item, index) => (
           <QuizFormQuestion key={index} question={item} quizUuid={quiz.uuid} {...props} number={index + 1} />
         ))}
 
-      <button
-        className="btn btn-success font-weight-bolder my-3 mr-3 mt-6"
-        onClick={onAddQuestionClick}
-        disabled={isEmptyQuestion}
-      >
-        Add new question
-      </button>
-    </div>
+      <div className="row form-group">
+        <div className="col-2" />
+        <div className="col-10">
+          <button
+            className="btn btn-success font-weight-bolder my-3 mr-3 mt-0"
+            onClick={onAddQuestionClick}
+            disabled={isEmptyQuestion}
+          >
+            Add new question
+          </button>
+        </div>
+      </div>
+    </>
   )
 }
 
