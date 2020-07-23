@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback, useState } from 'react'
 import TabTitle from './TabTitle'
-import cx from 'classnames'
 import style from './Tabs.module.css'
+import { Link } from 'react-router-dom'
 
 type Props = {
   children: ReactElement[]
@@ -38,26 +38,25 @@ const Tabs: React.FC<Props> = ({ children }) => {
 
       {children[selectedTab]}
 
-      <div className={cx('card-footer pb-0', style.footer)}>
-        <div className="row">
-          <div className="col-xl-2" />
-          <div className="col-xl-7 my-2">
-            {selectedTab > 0 && (
-              <button className="btn btn-light-success" onClick={onPreviousTab}>
-                Previous
-              </button>
-            )}
-            {selectedTab < children.length - 1 && (
-              <button
-                className="btn btn-light-success"
-                onClick={onNextTab}
-                disabled={children[selectedTab].props.isSwitched || false}
-              >
-                Next
-              </button>
-            )}
-          </div>
-        </div>
+      <div className={style.footer}>
+        {selectedTab < children.length - 1 ? (
+          <button
+            className="btn btn-light-success"
+            onClick={onNextTab}
+            disabled={children[selectedTab].props.isSwitched || false}
+          >
+            Next
+          </button>
+        ) : (
+          <Link to="/" className="btn btn-success">
+            Done
+          </Link>
+        )}
+        {selectedTab > 0 && (
+          <button className="btn btn-light-success" onClick={onPreviousTab}>
+            Previous
+          </button>
+        )}
       </div>
     </div>
   )

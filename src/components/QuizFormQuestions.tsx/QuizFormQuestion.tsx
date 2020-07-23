@@ -28,7 +28,7 @@ const QuizFormQuestion: React.FC<Props> = ({
 
   const onTitleChange = useCallback(
     (e) =>
-      !question.title
+      !question.uuid
         ? onAddQuestion({ quizUuid: quizUuid, question: { title: e.target.value, options: question.options } })
         : onEditQuestion({
             quizUuid: quizUuid,

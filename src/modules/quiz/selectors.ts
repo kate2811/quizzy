@@ -11,6 +11,5 @@ export const getFilteredQuizzes = createSelector(quizzes, filter, (quizzes, filt
       [item.title, item.description].map((item) => item.toLowerCase()).some((item) => item.includes(query))
     )
   }
-
   return quizzes
 })

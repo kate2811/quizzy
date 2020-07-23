@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 type Props = {
   onDelete: (uuid: string) => void
@@ -11,16 +12,24 @@ const QuizFormSettings: React.FC<Props> = ({ onDelete, quizUuid }) => {
   const onChange = useCallback(() => {
     setIsChecked(!isChecked)
     !isChecked && onDelete(quizUuid)
-  }, [isChecked, setIsChecked, onDelete, isChecked])
+  }, [isChecked, setIsChecked, onDelete, quizUuid])
 
   return (
-    <span className="switch switch-success">
-      <label>
-        Add quiz to archive
-        <input type="checkbox" checked={isChecked} onChange={onChange} name="select" />
-        <span />
-      </label>
-    </span>
+    <div className="d-flex flex-column">
+      <span className="switch switch-success">
+        <label>
+          Archive it
+          <input type="checkbox" checked={isChecked} onChange={onChange} name="select" />
+          <span />
+        </label>
+      </span>
+      <span>
+        {`You can find your archived quizzes... `}
+        <Link to="/archive" className="text-success">
+          Here!
+        </Link>
+      </span>
+    </div>
   )
 }
 

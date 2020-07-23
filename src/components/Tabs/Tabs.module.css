@@ -17,3 +17,16 @@
 .content {
   padding: 40px 0;
 }
+
+.footer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  padding: 26px 146px;
+  border-top: 1px solid #ECF0F3;
+}
+
+.footer button,
+.footer a {
+  min-width: 86px;
+}
