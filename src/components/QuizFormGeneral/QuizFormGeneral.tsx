@@ -2,15 +2,17 @@ import React, { useCallback, useState } from 'react'
 import FormInput from './FormInput'
 import FormTextarea from './FormTextarea'
 import { Quiz } from '../../modules/quiz/types'
-import Autocomplete from '../Autocomplete'
+import FormAutocomplete from './FormAutocomplete'
 
 type Props = {
   onEditQuiz: (quiz: Omit<Quiz, 'questions'>) => void
   onAddQuiz: (quiz: Quiz) => void
   editedQuiz: Quiz
+  onAddQuizTags: (quizUuid: string, tag: string) => void
+  onRemoveQuizTags: (quizUuid: string, tag: string) => void
 }
 
-const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz, onAddQuiz }) => {
+const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz, onAddQuiz, onAddQuizTags, onRemoveQuizTags }) => {
   const [quiz, setQuiz] = useState(
     editedQuiz ? { title: editedQuiz.title, description: editedQuiz.description } : { title: '', description: '' }
   )
@@ -23,7 +25,7 @@ const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz, onAddQuiz })
   )
 
   const onClick = useCallback(() => {
-    !editedQuiz && onAddQuiz({ ...quiz, questions: [] })
+    !editedQuiz && onAddQuiz({ ...quiz, questions: [], tags: [] })
   }, [onAddQuiz, quiz, editedQuiz])
 
   return (
@@ -46,7 +48,12 @@ const QuizFormGeneral: React.FC<Props> = ({ editedQuiz, onEditQuiz, onAddQuiz })
         quiz={quiz}
         onEdit={onEditQuiz}
       />
-      <Autocomplete />
+      <FormAutocomplete
+        tags={[]}
+        onAddQuizTags={onAddQuizTags}
+        onRemoveQuizTags={onRemoveQuizTags}
+        editedQuiz={editedQuiz}
+      />
       {!editedQuiz && (
         <div className="d-flex justify-content-end">
           <button

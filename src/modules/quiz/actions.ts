@@ -12,6 +12,10 @@ export enum ActionTypes {
   setFilter = 'Set filter',
   updateQuiz = 'Update quiz',
   updateQuizSuccess = 'Update quiz success',
+  addQuizTags = 'Add quiz tags',
+  addQuizTagsSuccess = 'Add quiz tags success',
+  removeQuizTags = 'Remove quiz tags',
+  removeQuizTagsSuccess = 'Remove quiz tags success',
   deleteQuiz = 'Remove quiz to archive',
   deleteQuizSuccess = 'Remove quiz to archive success',
   addQuizEmptyQuestion = 'Add quiz empty question',
@@ -44,6 +48,16 @@ export const actions = {
   updateQuiz: createAction<ActionTypes.updateQuiz, Omit<Quiz, 'questions'>>(ActionTypes.updateQuiz),
   updateQuizSuccess: createAction<ActionTypes.updateQuizSuccess, Omit<Quiz, 'questions'>>(
     ActionTypes.updateQuizSuccess
+  ),
+  addQuizTags: createAction<ActionTypes.addQuizTags, { quizUuid: string; tag: string }>(ActionTypes.addQuizTags),
+  addQuizTagsSuccess: createAction<ActionTypes.addQuizTagsSuccess, { quizUuid: string; tag: string }>(
+    ActionTypes.addQuizTagsSuccess
+  ),
+  removeQuizTags: createAction<ActionTypes.removeQuizTags, { quizUuid: string; tag: string }>(
+    ActionTypes.removeQuizTags
+  ),
+  removeQuizTagsSuccess: createAction<ActionTypes.removeQuizTagsSuccess, { quizUuid: string; tag: string }>(
+    ActionTypes.removeQuizTagsSuccess
   ),
   deleteQuiz: createAction<ActionTypes.deleteQuiz, string>(ActionTypes.deleteQuiz),
   deleteQuizSuccess: createAction<ActionTypes.deleteQuizSuccess, string>(ActionTypes.deleteQuizSuccess),

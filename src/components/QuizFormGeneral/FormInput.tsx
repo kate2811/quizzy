@@ -6,9 +6,9 @@ type Props = {
   type?: string
   name: string
   id: string
-  quiz: Omit<Quiz, 'questions'>
+  quiz: { title: string; description: string }
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
-  onEdit: (quiz: Omit<Quiz, 'questions'>) => void
+  onEdit: any
   editedQuiz: Quiz
 }
 

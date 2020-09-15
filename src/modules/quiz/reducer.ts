@@ -63,6 +63,19 @@ export default function quizReducer(state = initialState, action: ActionType<typ
         return draft
       }
 
+      case ActionTypes.addQuizTags: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        console.log(draft.quizzes[quiz].tags)
+        draft.quizzes[quiz].tags.push(action.payload.tag)
+        return draft
+      }
+
+      case ActionTypes.removeQuizTags: {
+        const quiz = draft.quizzes.findIndex((item) => item.uuid === action.payload.quizUuid)
+        draft.quizzes[quiz].tags = draft.quizzes[quiz].tags.filter((item) => item !== action.payload.tag)
+        return draft
+      }
+
       case ActionTypes.addQuizEmptyQuestion: {
         const emptyQuestion = { title: '', options: [] }
         draft.quizzes = draft.quizzes.map((item) =>

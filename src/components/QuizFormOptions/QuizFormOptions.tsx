@@ -21,7 +21,7 @@ const QuizFormOptions: React.FC<Props> = ({ options, question, onAddEmptyOptions
       <button
         onClick={onAddEmptyOptions}
         disabled={isEmptyOption || !question}
-        className="btn btn-sm btn-light-success font-weight-bolder my-3 mr-3 mt-6"
+        className="btn btn-sm btn-success font-weight-bolder my-3 mr-3 mt-6"
       >
         Add new option
       </button>

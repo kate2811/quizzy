@@ -48,6 +48,26 @@ export function useEditQuiz() {
   )
 }
 
+export function useAddQuizTags() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quizUuid: string, tag: string) => {
+      return dispatch(actions.addQuizTags({ quizUuid, tag }))
+    },
+    [dispatch]
+  )
+}
+
+export function useRemoveQuizTags() {
+  const dispatch = useDispatch()
+  return useCallback(
+    (quizUuid: string, tag: string) => {
+      return dispatch(actions.removeQuizTags({ quizUuid, tag }))
+    },
+    [dispatch]
+  )
+}
+
 export function useDeleteQuiz() {
   const dispatch = useDispatch()
   return useCallback(
